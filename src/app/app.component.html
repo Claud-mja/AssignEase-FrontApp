@@ -1,28 +1,63 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row>
-    <span><a routerLink="/home">My First App</a></span>
-    <span class="example-fill-remaining-space"></span>
-    <span class="align-center"></span>
-    <span class="example-spacer"></span>
-    <button mat-button routerLink="/login">Login</button>
-    <button mat-button>Contact</button>
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>
-        <mat-icon>dialpad</mat-icon>
-        <span>Redial</span>
+<div class="wrapper d-flex align-items-stretch">
+  <nav id="sidebar" >
+    <div class="custom-menu">
+      <button type="button"  id="sidebarCollapse" class="btn btn-primary" >
+        <i class="fa fa-bars"></i>
+        <span class="sr-only">Toggle Menu</span>
       </button>
-      <button mat-menu-item disabled>
-        <mat-icon>voicemail</mat-icon>
-        <span>Check voicemail</span>
-      </button>
-      <button mat-menu-item>
-        <mat-icon>notifications_off</mat-icon>
-        <span>Disable alerts</span>
-      </button>
-    </mat-menu>
-  </mat-toolbar-row>
-</mat-toolbar>
-<router-outlet />
+    </div>
+    <div class="p-4 pt-5 d-flex flex-column justify-content-between" style="height: 100%;">
+      <div class="head-side-bar">
+        <h1><a href="index.html" class="logo">Assign-E</a></h1>
+        <hr>
+        <ul class="list-unstyled components mb-auto">
+          <li class="active" *ngFor="let menu of menuList; let i = index">
+            <a 
+              [href]="'#menu'+i" data-bs-toggle="collapse" aria-expanded="false"
+              (click)="toggleCollapse(i)"
+              [ngClass]="{ 'active-menu-parent': i === currentlyOpenItemIndex }"
+              [attr.aria-controls]="'menu'+i" 
+              [class]="menu.children ? 'dropdown-toggle' : ''"
+              style="position: relative;"
+              ><span class="mr-3"><i [class]="'fa-solid fa-'+menu.icon"></i></span>{{menu.title}}</a
+            >
+            <ul  class="collapse list-unstyled" [id]="'menu'+i" *ngIf="menu.children" [class.show]="i === currentlyOpenItemIndex">
+              <li *ngFor="let subMenu of menu.children">
+                <a 
+                  [ngClass]="{ 'active-menu': isActive('/user-space' + subMenu.routerLink) }" 
+                  [routerLink]="'/user-space/'+subMenu.routerLink"><span class="mr-3">
+                    <i [class]="'fa-solid fa-'+subMenu.icon"></i></span>
+                    {{subMenu.title}}
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="bottom-side-bar">
+        <hr>
+        <div class="content-log-out " (click)="onLogOut()" style="position: relative;">
+          <a type="button" class="btn d-flex justify-content-around">
+            <span><i class="fas fa-sign-out" aria-hidden="true"></i></span>
+            Se deconnecter
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="content">
+    <div class="content-tool-bar">
+      <mat-toolbar class="tool-bar" style="padding: 0 40px;">
+        <span>Assign-E</span>
+        <span class="example-spacer"></span>
+        <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
+          <i class="fas fa-user"></i>
+        </button>
+      </mat-toolbar>
+    </div>
+    <div class="content-body" style="padding: 40px;">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

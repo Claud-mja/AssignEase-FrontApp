@@ -17,7 +17,17 @@ export const routes: Routes = [
     },
     {
         path : 'assignment',
-        component : AssignmentComponent
+        component : AssignmentComponent,
+        // children : [
+        //     {
+        //         path : "edit:id",
+        //         component : 
+        //     },
+        //     {
+        //         path : 'add',
+        //         component: 
+        //     }
+        // ]
     },
     {
         path : 'teacher',
@@ -33,7 +43,7 @@ export const routes: Routes = [
     },
     {
         path : '',
-        redirectTo : 'home',
+        redirectTo : 'assignment',
         pathMatch : 'full'
     }
 ];

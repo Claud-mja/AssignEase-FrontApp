@@ -4,10 +4,10 @@ import { MatToolbar, MatToolbarModule } from "@angular/material/toolbar";
 import { MatIconModule } from "@angular/material/icon";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatButtonModule } from "@angular/material/button";
-import { CardAssignmentComponent } from './shared/card-assignment/card-assignment.component';
-import { IMenu } from './interfaces/IMenu';
+import { CardAssignmentComponent } from './shared/components/card-assignment/card-assignment.component';
+import { IMenu } from './shared/interfaces/IMenu';
 import { CommonModule } from '@angular/common';
-import { sideBarMenu } from './config/side-menu.config';
+import { sideBarMenu } from './shared/config/side-menu.config';
 @Component({
   selector: 'app-root',
   standalone: true,

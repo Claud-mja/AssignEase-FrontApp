@@ -6,7 +6,12 @@
             <mat-card-title>Liste des Assignment</mat-card-title>
         </mat-card-header>
     </mat-card>
-    <div class="item-assignment col-md-3" *ngFor="let item of [1,2,3,4,5,6,7]">
-        <app-card-assignment></app-card-assignment>
-    </div>
+    <cdk-virtual-scroll-viewport itemSize="50" class="example-viewport" #scroller>
+        <div class="row">
+            <div class="item-assignment" *cdkVirtualFor="let assignment of assignments">
+                <app-card-assignment [assignment]="assignment"></app-card-assignment>
+            </div>
+
+        </div>
+    </cdk-virtual-scroll-viewport>
 </div>

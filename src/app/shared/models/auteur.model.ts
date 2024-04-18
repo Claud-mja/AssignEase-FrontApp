@@ -1,6 +1,5 @@
 export class Auteur {
-    _id ?: string;
-    id !: number;
+    _id !: number;
     nom !: string;
     photo !: string;
 }

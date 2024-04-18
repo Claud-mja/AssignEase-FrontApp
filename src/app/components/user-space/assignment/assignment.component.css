@@ -4,9 +4,9 @@
 } 
 */
 .item-assignment {
-    padding: 10px;
+    padding: 5px;
     width: 400px;
-    height: 250px;
+    /* height: 250px; */
 }
 
 
@@ -21,4 +21,32 @@
   }
   
 
+.item-assignment::ng-deep article{
+  height: 110px;
+  
+}
+
+::ng-deep .info-prof .text-right{
+  font-size: 16px;
+}
+
+  
+  
+::ng-deep .info-prof .fonction{
+    font-size: 14px;
+    font-style: italic;
+  }
+
+  ::ng-deep  .info-assign h2{
+    font-size: 18px;
+  }
+
+  ::ng-deep  .info-assign p{
+    margin-top: 6px;
+  }
+
+
+  ::ng-deep .content-info-etu h3{
+    font-size: 14px;
+  }
   

@@ -1,52 +1,13 @@
-/* .content-list-assignment {
-   
-    width: 100%;
-} 
-*/
-.item-assignment {
-    padding: 5px;
-    width: 400px;
-    /* height: 250px; */
+
+   .header-card{
+    position: sticky;
+    top: -5%;
+    z-index: 1;
+    background: #fff;
+   }
+
+.icon-add-fixed{
+  position: fixed;
+  bottom: 3%;
+  right: 2%;
 }
-
-
-.example-viewport {
-    height: calc(100vh - 170px);
-    width: calc(100vw - 306px);
-    border: 1px solid black;
-  }
-  
-  .example-item {
-    height: 50px;
-  }
-  
-
-.item-assignment::ng-deep article{
-  height: 110px;
-  
-}
-
-::ng-deep .info-prof .text-right{
-  font-size: 16px;
-}
-
-  
-  
-::ng-deep .info-prof .fonction{
-    font-size: 14px;
-    font-style: italic;
-  }
-
-  ::ng-deep  .info-assign h2{
-    font-size: 18px;
-  }
-
-  ::ng-deep  .info-assign p{
-    margin-top: 6px;
-  }
-
-
-  ::ng-deep .content-info-etu h3{
-    font-size: 14px;
-  }
-  

@@ -7,5 +7,6 @@ export class Assignment {
     dateDeRendu!: Date;
     matiere! : Matiere;
     auteur !: Auteur;
+    note ! : number;
     remarques !: string;
 }

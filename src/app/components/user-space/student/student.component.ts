@@ -1,12 +1,41 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
+
+import { Auteur } from '../../../shared/models/auteur.model';
+
+import { AuteurService } from '../../../shared/services/auteur/auteur.service';
+
 
 @Component({
   selector: 'app-student',
-  standalone: true,
-  imports: [],
   templateUrl: './student.component.html',
-  styleUrl: './student.component.css'
+  styleUrls: ['./student.component.css']
 })
 export class StudentComponent {
+  auteurs: Auteur[] = []; // Initialisez auteurs avec un tableau vide
 
+
+  constructor(private auteurService: AuteurService) { }
+
+  ngOnInit():void{
+
+    this.getAll();
+  }
+
+  async getAll(): Promise<void> {
+    try {
+      const auteursData = await this.auteurService.getStudents().toPromise();
+      if (auteursData) {
+        this.auteurs = auteursData;
+      } else {
+        console.error('Les données renvoyées par le service sont null ou undefined');
+      }
+      console.log("Données récupérées :", this.auteurs);
+
+    } catch (error) {
+      console.error('Erreur lors de la récupération des étudiants :', error);
+    }
+  }
 }
+

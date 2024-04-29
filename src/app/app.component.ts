@@ -8,7 +8,7 @@ import { CardAssignmentComponent } from './shared/components/card-assignment/car
 import { IMenu } from './shared/interfaces/IMenu';
 import { CommonModule } from '@angular/common';
 import { sideBarMenu } from './shared/config/side-menu.config';
-
+import { MatPaginator } from '@angular/material/paginator';
 
 
 @Component({
@@ -18,7 +18,9 @@ import { sideBarMenu } from './shared/config/side-menu.config';
             CommonModule,
             RouterOutlet ,
             RouterLink,
-            MatToolbarModule,MatIconModule,MatMenuModule,MatButtonModule
+            MatToolbarModule,MatIconModule,MatMenuModule,MatButtonModule,
+            MatPaginator
+
       ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'

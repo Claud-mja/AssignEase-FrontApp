@@ -24,7 +24,7 @@ import { Router } from '@angular/router';
     CardAssignmentComponent,
     HeaderComponent,
     ScrollingModule,
-    
+
   ],
   templateUrl: './assignment.component.html',
   styleUrl: './assignment.component.css'
@@ -33,10 +33,10 @@ export class AssignmentComponent implements OnInit {
 
   @ViewChild('scroller') scroller!: CdkVirtualScrollViewport;
   assignments !: Assignment[];
-  currentData !: Assignment[]; 
-  pageSize: number = 20; 
-  totalPages: number = 0; 
-  currentPage: number = 1; 
+  currentData !: Assignment[];
+  pageSize: number = 20;
+  totalPages: number = 0;
+  currentPage: number = 1;
   page = 0;
 
   constructor(private assignmentService : AssignmentService,private router : Router){}
@@ -47,7 +47,7 @@ export class AssignmentComponent implements OnInit {
       this.totalPages = Math.ceil(this.assignments.length / this.pageSize);
     this.updateCurrentData();
       console.log(this.assignments[0]);
-      
+
     });
   }
 

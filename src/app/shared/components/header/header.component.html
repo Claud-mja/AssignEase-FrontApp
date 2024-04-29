@@ -1,0 +1,21 @@
+<div class="card-header border-0 d-flex justify-content-between w-100">
+    <div class="content-title">
+        <h3 fxlayout="column" class="card-title align-items-start" style="flex-direction: column; box-sizing: border-box; display: flex;">
+            <span class="card-label font-weight-bolder text-dark">List assignment</span>
+            <span class="text-muted mt-0 font-weight-bold font-size-sm" *ngIf="haveSubTitle">4 project(s)</span>
+        </h3>
+    </div>
+    <div class="content-search" *ngIf="haveSearch">
+        <div class="content-input input-group">
+            <input type="text" class="form-control" placeholder="Search date de rendu">
+            <div class="input-group-append">
+                <span class="mt-1">
+                    <mat-icon>filter_list</mat-icon>
+                </span>
+            </div>
+        </div>
+        <button mat-icon-button aria-label="Search assignment icon">
+            <mat-icon>search</mat-icon>
+        </button>
+    </div>
+</div>

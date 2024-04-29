@@ -4,6 +4,146 @@
     background-size: cover;
   }
 
-  img{
-    height: auto;
+  article{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    clip-path: inset(0 0px 83px 0);
   }
+
+  article img{
+    height: 100%;
+    width: 100%;
+  }
+
+
+  .content-img-head{
+    position: relative;
+    border-radius: 20px;
+    height: 100px;
+  }
+
+  .content-name-matiere{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(95, 94, 94, 0.5); /* couleur de fond avec opacité */
+    pointer-events: none;
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    text-transform: uppercase;
+    color: #fff;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+  }
+
+  .content-name-matiere h1{
+    font-size: 28px;
+  }
+
+.info-prof{
+  display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.info-prof .name-prof .text-right{
+  text-align: right;
+}
+
+.content-card{
+  padding: 10px;
+}
+
+.content-head-info{
+  display: flex;
+  justify-content: space-between;
+}
+
+.info-assign{
+  position: relative;
+}
+
+.info-assign::after{
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 1px;
+  width: 100%;
+  background-color: #cecdcd;
+  border-radius: 8px;
+}
+
+.info-assign h2{
+  font-size: 18px;
+}
+
+.content-info-etu{
+  width: 100%;
+}
+
+.content-info-etu h3{
+  margin: 0;
+  font-size: 14px;
+}
+
+.content-info-etu img{
+  width: 44px;
+  height: 36px;
+  border-radius: 50%;
+} 
+
+.info-etu{
+  display: flex;
+}
+
+.info-etu p{
+  font-style: italic;
+  font-size: 13px;
+}
+
+.content-body-info{
+  display: flex;
+  margin-top: 10px;
+}
+
+.content-rendu-stat{
+  /* width: 21%; */
+      /* background: antiquewhite; */
+      display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rounded-circle-stat{
+  position: relative;
+  background-color: rgb(55, 238, 31);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.rounded-circle-stat::after{
+  content: "";
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  background-color: #fff;
+  top: 10%;
+  left: 10%;
+  border-radius: 50%;
+}
+
+.name-prof .mat-mdc-card-title{
+  font-size: 16px;
+}
+
+.name-prof .mat-mdc-card-subtitle{
+  font-size: 12px;
+}

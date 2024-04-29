@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet,NavigationEnd } from '@angular/router';
 import { MatToolbar, MatToolbarModule } from "@angular/material/toolbar";
 import { MatIconModule } from "@angular/material/icon";
 import { MatMenuModule } from "@angular/material/menu";
@@ -8,12 +8,15 @@ import { CardAssignmentComponent } from './shared/components/card-assignment/car
 import { IMenu } from './shared/interfaces/IMenu';
 import { CommonModule } from '@angular/common';
 import { sideBarMenu } from './shared/config/side-menu.config';
+
+
+
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
             CommonModule,
-            RouterOutlet , 
+            RouterOutlet ,
             RouterLink,
             MatToolbarModule,MatIconModule,MatMenuModule,MatButtonModule
       ],
@@ -27,6 +30,8 @@ export class AppComponent implements OnInit,AfterViewInit {
   showSideBar : boolean = false;
   currentlyOpenItemIndex: number = -1;
   currentUrl !:string;
+  name !:string;
+  showNavbar: boolean = true;
 
   constructor(private router : Router) {
     this.currentUrl = this.router.url;
@@ -34,24 +39,33 @@ export class AppComponent implements OnInit,AfterViewInit {
   ngAfterViewInit(): void {
     this.sideBarEvent();
   }
-  
+
   ngOnInit(): void {
     this.menuList = sideBarMenu;
     this.currentUrl = this.router.url;
+    this.name = ""+localStorage.getItem("name");
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        // Vérifiez si l'URL actuelle est '/login'
+        this.showNavbar = event.url !== '/login';
+      }
+    });
+
+
   }
 
   sideBarEvent(){
     const sidebarCollapse = document.getElementById('sidebarCollapse');
-    
+
     if (sidebarCollapse) {
         sidebarCollapse.addEventListener('click', () => {
-        
+
         this.showSideBar = !this.showSideBar;
         const sidebar = document.getElementById('sidebar');
         if (sidebar) {
           const toolbar = document.querySelector('.tool-bar') as HTMLElement;
           const body = document.querySelector('.content-body') as HTMLElement
-          
+
           if (this.showSideBar) {
             sidebar.classList.add('active');
             toolbar.style.padding="0 60px";
@@ -69,8 +83,9 @@ export class AppComponent implements OnInit,AfterViewInit {
 
 
   onLogOut(){
-    // this.authService.logOut();
-    // this.router.navigate(['/auth']);
+    localStorage.removeItem('token');
+    localStorage.removeItem('name');
+    this.router.navigate(['/login']);
   }
 
   toggleCollapse(index: number) {

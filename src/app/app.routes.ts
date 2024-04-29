@@ -7,6 +7,8 @@ import { MatiereComponent } from './components/user-space/matiere/matiere.compon
 import { StudentComponent } from './components/user-space/student/student.component';
 import { AddEditAssignmentComponent } from './components/user-space/assignment/add-edit-assignment/add-edit-assignment.component';
 
+import { AuthGuard } from './auth.guard';
+
 export const routes: Routes = [
     {
         path : 'login',
@@ -14,34 +16,34 @@ export const routes: Routes = [
     },
     {
         path : 'home',
-        component : HomeComponent,
+        component : HomeComponent, canActivate: [AuthGuard]
     },
     {
         path : 'assignment',
-        component : AssignmentComponent,
+        component : AssignmentComponent, canActivate: [AuthGuard]
     },
     {
         path : 'add-assignment',
-        component : AddEditAssignmentComponent,
+        component : AddEditAssignmentComponent, canActivate: [AuthGuard]
     },
     {
-        path : "edit-assignment:id",
-        component : AddEditAssignmentComponent
+        path : "edit-assignment/:id", // Corriger la syntaxe des paramètres de route
+        component : AddEditAssignmentComponent, canActivate: [AuthGuard]
     },
     {
         path : 'teacher',
-        component : TeacherComponent
+        component : TeacherComponent, canActivate: [AuthGuard]
     },
     {
         path : 'matiere',
-        component : MatiereComponent
+        component : MatiereComponent, canActivate: [AuthGuard]
     },
     {
         path : 'student',
-        component : StudentComponent
+        component : StudentComponent, canActivate: [AuthGuard]
     },
     {
-        path : '',
+        path : '', // Retirer canActivate de cette route
         redirectTo : 'assignment',
         pathMatch : 'full'
     }

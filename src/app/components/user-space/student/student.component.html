@@ -1,4 +1,4 @@
-<table>
+<!--<table>
     <thead>
       <tr>
         <th>ID</th>
@@ -7,10 +7,38 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let item of auteurs">
-        <td>{{ auteurs.length }}</td>
-        <td>{{  auteurs.length}}</td>
-        <td>{{  auteurs.length }}</td>
+        @for(item of auteurs; track item.nom) {
+      <tr>
+        <td>{{ item._id }}</td>
+        <td>{{  item.nom}}</td>
+        <td>{{  item.photo }}</td>
       </tr>
+    }
     </tbody>
+  </table> -->
+
+  <table mat-table [dataSource]="auteurs" class="mat-elevation-z8 demo-table">
+    <!-- Position Column -->
+    <ng-container matColumnDef="demo-position">
+      <th mat-header-cell *matHeaderCellDef> ID </th>
+      <td mat-cell *matCellDef="let element"> {{element._id}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="demo-name">
+      <th mat-header-cell *matHeaderCellDef> Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="demo-weight">
+      <th mat-header-cell *matHeaderCellDef> Profile </th>
+      <td mat-cell *matCellDef="let element"> {{element.photo}} </td>
+    </ng-container>
+
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
+

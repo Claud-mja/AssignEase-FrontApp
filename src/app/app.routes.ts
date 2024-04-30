@@ -6,6 +6,7 @@ import { TeacherComponent } from './components/user-space/teacher/teacher.compon
 import { MatiereComponent } from './components/user-space/matiere/matiere.component';
 import { StudentComponent } from './components/user-space/student/student.component';
 import { AddEditAssignmentComponent } from './components/user-space/assignment/add-edit-assignment/add-edit-assignment.component';
+import { DetailsAssignmentComponent } from './components/user-space/assignment/details-assignment/details-assignment.component';
 
 export const routes: Routes = [
     {
@@ -21,12 +22,16 @@ export const routes: Routes = [
         component : AssignmentComponent,
     },
     {
+        path : "edit-assignment/:id",
+        component : AddEditAssignmentComponent
+    },
+    {
         path : 'add-assignment',
         component : AddEditAssignmentComponent,
     },
     {
-        path : "edit-assignment:id",
-        component : AddEditAssignmentComponent
+        path : 'details-assignment/:id',
+        component : DetailsAssignmentComponent,
     },
     {
         path : 'teacher',

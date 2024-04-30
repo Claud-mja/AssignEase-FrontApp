@@ -1,6 +1,6 @@
 
   .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    /* background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg'); */
     background-size: cover;
   }
 
@@ -43,7 +43,7 @@
   }
 
   .content-name-matiere h1{
-    font-size: 28px;
+    font-size: 24px;
   }
 
 .info-prof{
@@ -94,9 +94,10 @@
 }
 
 .content-info-etu img{
-  width: 44px;
+  width: 36px;
   height: 36px;
   border-radius: 50%;
+  margin-right: 8px;
 } 
 
 .info-etu{
@@ -114,16 +115,14 @@
 }
 
 .content-rendu-stat{
-  /* width: 21%; */
-      /* background: antiquewhite; */
-      display: flex;
+    display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;;
 }
 
 .rounded-circle-stat{
   position: relative;
-  background-color: rgb(55, 238, 31);
+  background-color: #0bb613;
   width: 50px;
   height: 50px;
   border-radius: 50%;
@@ -146,4 +145,15 @@
 
 .name-prof .mat-mdc-card-subtitle{
   font-size: 12px;
+}
+
+.content-card-info{
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+}
+
+.content-card:hover .content-card-info{
+  box-shadow: 0px 0px 12px 0px #248dca;
+-webkit-box-shadow: 0px 0px 12px 0px #248dca;
+-moz-box-shadow: 0px 0px 12px 0px #248dca;
 }

@@ -1,7 +1,7 @@
 import { Professeur } from "./professeur.model";
 
 export class Matiere {
-    _id?: number;
+    id !: number;
     nom !: string;
     image !: string;
     prof !: Professeur;

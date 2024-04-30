@@ -1,0 +1,10 @@
+[{"id":1,"nom":"Hadoop & Spark","image":"hdfs.jpg","prof":7},
+{"id":2,"nom":"Base de données","image":"bdd.jpg","prof":2},
+{"id":3,"nom":"Web Avancé","image":"network.jpg","prof":4},
+{"id":4,"nom":"Cloud et Deployement","image":"cloud.jpg","prof":3},
+{"id":5,"nom":"Ingénierie Logicielle","image":"inge.jpg","prof":4},
+{"id":6,"nom":"Technologies Web","image":"techno.jpg","prof":3},
+{"id":7,"nom":"Intelligence Artificielle","image":"ia.jpg","prof":2},
+{"id":8,"nom":"Programmation","image":"prog.jpg","prof":5},
+{"id":9,"nom":"Développement Mobile","image":"mobile.jpg","prof":1},
+{"id":10,"nom":"Grails","image":"grails.jpg","prof":6}]

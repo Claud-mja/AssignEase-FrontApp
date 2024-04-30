@@ -5,19 +5,26 @@
                 <app-header [haveSearch]="true" style="width: 100%;"></app-header>
         </mat-card-header>
         <mat-card-content>
-            <div class="row">
-                @for (assignment of currentData; track $index) {
-                    <div class="item-assignment col-md-3">
-                        <app-card-assignment [assignment]="assignment" ></app-card-assignment>
-                    </div>
-                }
-            </div>
+            @if (!loading['data']) {
+                <div class="row">
+                    @for (assignment of assignments; track $index) {
+                        <div class="item-assignment col-md-3">
+                            <app-card-assignment [assignment]="assignment" ></app-card-assignment>
+                        </div>
+                    }
+                </div>
+            }
+            @else{
+                <div class="spin-content">
+                    <app-spinner></app-spinner>
+                </div>
+            }
         </mat-card-content>
     </mat-card>
     <div class="icon-add-fixed">
-        <button (click)="onAdd()" mat-fab style="background-color: #1766af;" aria-label="Example icon button with a delete icon">
+        <a type="button" [routerLink]="[ '/add-assignment' ]" mat-fab style="background-color: #1766af;" aria-label="Example icon button with a delete icon">
             <i style="font-size: 20px;" class="fas fa-plus"></i>
-        </button>
+        </a>
     </div>
 </div>
 

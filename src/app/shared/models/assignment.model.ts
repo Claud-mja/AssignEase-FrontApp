@@ -2,11 +2,12 @@ import { Matiere } from "./matiere.model";
 import { Auteur } from "./auteur.model";
 
 export class Assignment {
-    _id !: number;
+    id !: number;
     nom!: string;
     dateDeRendu!: Date;
-    matiere! : Matiere;
-    auteur !: Auteur;
     note ! : number;
+    rendu ! : boolean;
+    matiere ! : Matiere;
+    auteur !: Auteur;
     remarques !: string;
 }

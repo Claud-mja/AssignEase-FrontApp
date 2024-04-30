@@ -8,7 +8,7 @@
     </div>
     <div class="p-4 pt-5 d-flex flex-column justify-content-between" style="height: 100%;">
       <div class="head-side-bar">
-        <h1><a href="index.html" class="logo">Assign-E</a></h1>
+        <h1><a [routerLink]="'/assignment/'" class="logo">Assign-E</a></h1>
         <hr>
         <ul class="list-unstyled components mb-auto">
           <li class="active" *ngFor="let menu of menuList; let i = index">

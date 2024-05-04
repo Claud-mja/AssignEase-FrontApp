@@ -1,6 +1,11 @@
 
 export const sideBarMenu =  [
     {
+        "title" : "Auteur",
+        "icon": "gauge-high",
+        "routerLink": "/student"
+    },
+    {
         "title" : "Biens",
         "icon": "gauge-high",
         "children": [

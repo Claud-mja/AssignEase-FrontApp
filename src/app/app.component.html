@@ -13,6 +13,7 @@
         <ul class="list-unstyled components mb-auto">
           <li class="active" *ngFor="let menu of menuList; let i = index">
             <a
+            [routerLink]="'/user-space/'+menu.routerLink"
               [href]="'#menu'+i" data-bs-toggle="collapse" aria-expanded="false"
               (click)="toggleCollapse(i)"
               [ngClass]="{ 'active-menu-parent': i === currentlyOpenItemIndex }"
@@ -21,6 +22,7 @@
               style="position: relative;"
               ><span class="mr-3"><i [class]="'fa-solid fa-'+menu.icon"></i></span>{{menu.title}}</a
             >
+
             <ul  class="collapse list-unstyled" [id]="'menu'+i" *ngIf="menu.children" [class.show]="i === currentlyOpenItemIndex">
               <li *ngFor="let subMenu of menu.children">
                 <a

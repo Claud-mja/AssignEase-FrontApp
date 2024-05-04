@@ -1,0 +1,19 @@
+<div ngIf="student">
+  <h4>Modification de l'étudiant '{{ student.nom }}'</h4>
+  <form (ngSubmit)="submit()" [formGroup]="studentForm">
+    <mat-form-field>
+      <mat-label>Nom</mat-label>
+      <input  [(ngModel)]="student.nom" matInput type="text" formControlName="nom">
+      <mat-error *ngIf="studentForm.get('nom').invalid && studentForm.get('nom').touched">
+        Nom est invalide.
+      </mat-error>
+    </mat-form-field>
+
+
+    <button class="submit" type="submit" mat-raised-button [disabled]="studentForm.invalid">
+      Modifier l'étudiant
+    </button>
+  </form>
+  <div ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+
+</div>

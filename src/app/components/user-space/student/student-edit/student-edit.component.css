@@ -1,0 +1,17 @@
+
+
+   input{
+    margin-right: 22px;
+
+    padding: 4px;
+    width: auto;
+    border: 1px solid #6dabe4;
+   }
+
+   .error {
+    color: red;
+  }
+
+  .submit{
+    margin-left: 10px;
+  }

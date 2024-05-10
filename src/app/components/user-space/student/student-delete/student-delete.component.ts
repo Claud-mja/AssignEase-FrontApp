@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
-import { ActivatedRoute,Router,RouterModule } from '@angular/router';
+import { ActivatedRoute,Router,RouterLink,RouterModule } from '@angular/router';
 import { AuteurService } from '../../../../shared/services/auteur/auteur.service';
 
 import { Auteur } from '../../../../shared/models/auteur.model';
@@ -10,12 +10,13 @@ import { Auteur } from '../../../../shared/models/auteur.model';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
   selector: 'app-student-delete',
   standalone: true,
-  imports: [RouterModule,FormsModule,ReactiveFormsModule,MatFormFieldModule, MatInputModule, MatButtonModule],
+  imports: [CommonModule,FormsModule,ReactiveFormsModule,MatFormFieldModule, MatInputModule, MatButtonModule , RouterLink],
   templateUrl: './student-delete.component.html',
   styleUrl: './student-delete.component.css'
 })

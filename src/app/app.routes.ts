@@ -23,11 +23,11 @@ export const routes: Routes = [
     },
     {
         path : 'home',
-        component : HomeComponent, canActivate: [AuthGuard]
+        component : HomeComponent
     },
     {
         path : 'assignment',
-        component : AssignmentComponent, canActivate: [AuthGuard]
+        component : AssignmentComponent
     },
     {
         path : "edit-assignment/:id",
@@ -35,7 +35,7 @@ export const routes: Routes = [
     },
     {
         path : 'add-assignment',
-        component : AddEditAssignmentComponent, canActivate: [AuthGuard]
+        component : AddEditAssignmentComponent,
     },
     {
         path : 'details-assignment/:id',

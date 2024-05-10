@@ -4,7 +4,7 @@
     <mat-form-field>
       <mat-label>Nom</mat-label>
       <input  [(ngModel)]="student.nom" matInput type="text" formControlName="nom">
-      <mat-error *ngIf="studentForm.get('nom').invalid && studentForm.get('nom').touched">
+      <mat-error *ngIf="studentForm.get('nom')?.invalid && studentForm.get('nom')?.touched">
         Nom est invalide.
       </mat-error>
     </mat-form-field>

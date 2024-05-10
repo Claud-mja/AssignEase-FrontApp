@@ -10,11 +10,12 @@ import { Auteur } from '../../../../shared/models/auteur.model';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-student-edit',
   standalone: true,
-  imports: [FormsModule,ReactiveFormsModule,MatFormFieldModule, MatInputModule, MatButtonModule],
+  imports: [CommonModule,FormsModule,ReactiveFormsModule,MatFormFieldModule, MatInputModule, MatButtonModule],
   templateUrl: './student-edit.component.html',
   styleUrl: './student-edit.component.css'
 })

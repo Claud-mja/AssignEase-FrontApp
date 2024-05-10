@@ -1,4 +1,6 @@
-import { Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+
 import { LoginComponent } from './components/auth/login/login.component';
 import { HomeComponent } from './components/user-space/home/home.component';
 import { AssignmentComponent } from './components/user-space/assignment/assignment.component';
@@ -8,6 +10,12 @@ import { StudentComponent } from './components/user-space/student/student.compon
 import { AddEditAssignmentComponent } from './components/user-space/assignment/add-edit-assignment/add-edit-assignment.component';
 import { DetailsAssignmentComponent } from './components/user-space/assignment/details-assignment/details-assignment.component';
 
+import { StudentEditComponent } from './components/user-space/student/student-edit/student-edit.component';
+import { StudentCreateComponent } from './components/user-space/student/student-create/student-create.component';
+import { StudentDeleteComponent } from './components/user-space/student/student-delete/student-delete.component';
+
+import { AuthGuard } from './auth.guard';
+
 export const routes: Routes = [
     {
         path : 'login',
@@ -15,11 +23,11 @@ export const routes: Routes = [
     },
     {
         path : 'home',
-        component : HomeComponent,
+        component : HomeComponent, canActivate: [AuthGuard]
     },
     {
         path : 'assignment',
-        component : AssignmentComponent,
+        component : AssignmentComponent, canActivate: [AuthGuard]
     },
     {
         path : "edit-assignment/:id",
@@ -27,7 +35,7 @@ export const routes: Routes = [
     },
     {
         path : 'add-assignment',
-        component : AddEditAssignmentComponent,
+        component : AddEditAssignmentComponent, canActivate: [AuthGuard]
     },
     {
         path : 'details-assignment/:id',
@@ -35,18 +43,30 @@ export const routes: Routes = [
     },
     {
         path : 'teacher',
-        component : TeacherComponent
+        component : TeacherComponent, canActivate: [AuthGuard]
     },
     {
         path : 'matiere',
-        component : MatiereComponent
+        component : MatiereComponent, canActivate: [AuthGuard]
     },
     {
         path : 'student',
-        component : StudentComponent
+        component : StudentComponent, canActivate: [AuthGuard]
     },
     {
-        path : '',
+        path : 'edit-student/:id',
+        component : StudentEditComponent, canActivate: [AuthGuard]
+    },
+    {
+        path : 'delete-student/:id',
+        component : StudentDeleteComponent, canActivate: [AuthGuard]
+    },
+    {
+        path : 'create-student',
+        component : StudentCreateComponent, canActivate: [AuthGuard]
+    },
+    {
+        path : '', // Retirer canActivate de cette route
         redirectTo : 'assignment',
         pathMatch : 'full'
     }

@@ -7,6 +7,9 @@ import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
 import { MatInputModule } from "@angular/material/input";
 import { MatButtonModule } from "@angular/material/button";
 
+import { Router } from '@angular/router';
+import { AuthService } from '../../../auth.service';
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -22,9 +25,37 @@ export class LoginComponent {
   username : string = '';
   password !: string;
   showSpinner : boolean = false;
+  errorMessage!: string;
 
-  constructor(){}
+  constructor(private authService: AuthService, private router: Router) { }
 
-  login(){}
+  ngOnInit(): void {
+    // Vérifiez si l'utilisateur est déjà connecté au chargement du composant
+    if (this.authService.isLoggedIn()) {
+      this.router.navigate(['/home']); // Redirigez vers la page d'accueil si l'utilisateur est déjà connecté
+    }
+  }
+
+  login(): void {
+    if(this.username.length>2 && this.password.length>1){
+      this.showSpinner=true;
+      this.authService.login(this.username, this.password)
+        .subscribe(success => {
+          this.showSpinner=false;
+          if (success) {
+            this.router.navigate(['/home']);
+          } else {
+            this.errorMessage = 'Identifiants incorrects';
+          }
+        }, error => {
+          this.showSpinner=false;
+          console.error('Erreur lors de la connexion : ', error);
+          this.errorMessage = 'Une erreur s\'est produite, veuillez réessayer.';
+        });
+    } else {
+      this.errorMessage = 'Champs invalide';
+    }
+
+  }
 
 }

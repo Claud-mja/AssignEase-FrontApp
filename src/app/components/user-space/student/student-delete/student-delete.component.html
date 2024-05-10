@@ -1,0 +1,14 @@
+<div ngIf="student">
+    <h4>Supréssion de l'étudiant '{{ student.nom }}'</h4>
+    <form (ngSubmit)="submit()" >
+        <h5>Voulez vous vraiment supprimez cette d'étudiant?</h5>
+        <h5>Tous les données relier sur cette étudiant sera suppriez</h5>
+        <a [routerLink]="'/student'" title="Create Student">
+           Anuller
+          </a>
+        <button class="submit" type="submit" mat-raised-button>
+       Oui
+      </button>
+    </form>
+
+  </div>

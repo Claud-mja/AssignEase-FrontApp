@@ -29,6 +29,6 @@ export class CardAssignmentComponent implements OnInit {
   }
 
   onDetails(){
-    this.router.navigate(['details-assignment' , this.assignment?.id])
+    this.router.navigate(['details-assignment' , this.assignment?._id])
   }
 }

@@ -72,8 +72,6 @@ export class AssignmentComponent implements OnInit {
       this.hasNextPage = response.hasNextPage;
       this.hasPrevPage = response.hasPrevPage;
       this.loading['data'] = false;
-
-      console.log("Assignments ==> ", this.assignments);
       
       this.notif.showSuccess('Assignments Chargé avec succes !', 'Liste assignment');
     }
@@ -90,6 +88,8 @@ export class AssignmentComponent implements OnInit {
   onAdd(){
     this.router.navigate(['add-assignment'] , { relativeTo: this.route })
   }
+
+  
 
    // Pour la pagination
    pagePrecedente() {

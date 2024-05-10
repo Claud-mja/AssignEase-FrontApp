@@ -4,6 +4,7 @@ import { Assignment } from '../../models/assignment.model';
 import { Observable, catchError, of } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { LogginService } from '../utils/loggin.service';
+import { ResponseListPaginate } from '../../interfaces/ResponseListPaginate';
 
 @Injectable({
   providedIn: 'root'
@@ -25,7 +26,7 @@ export class AssignmentService implements OnInit {
   }
 
   getAssignmentsPagines(page:number, limit:number):Observable<any> {
-    return this.http.get<Assignment[]>(`${this.assigment_uri}` + "?page=" + page + "&limit=" + limit);
+    return this.http.get<ResponseListPaginate>(`${this.assigment_uri}` + "?page=" + page + "&limit=" + limit);
   }
 
   // renvoie un assignment par son id, renvoie undefined si pas trouvé

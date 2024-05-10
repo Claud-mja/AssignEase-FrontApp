@@ -1,27 +1,31 @@
 <div class="content-form">
+    <form [formGroup]="assignmentForm" (ngSubmit)="saveAssignment()">
     <mat-card>
         <mat-card-header class="header-card">
             <app-header style="width: 100;"></app-header>
         </mat-card-header>
         <mat-card-content>
-            <form ngForm>
                 <div class="w-100 pb-3">
                         <div class="row mt-3">
                             <div mat-form-field class="form-group w-50 mr-5">
                                 <label class="my-2">Titre</label>
-                                <input class="form-control" placeholder="titre de l'assignment" [(ngModel)]="assignment.nom" name="nom"/>
+                                <input class="form-control" placeholder="titre de l'assignment" formControlName="nom" />
                                 <span class="form-text text-muted">Titre de l'assignement</span>
                             </div> 
                             <div mat-form-field class="form-group w-50 ml-5">
                                 <label class="my-2">Date de rendue</label>
                                 <!-- <input class="form-control" placeholder="date de rendue" type="date" [(ngModel)]="assignment.dateDeRendu" name="date"/> -->
-                                <input  
-                                    class="form-control" 
-                                    placeholder="matiere"
-                                    [matDatepicker]="picker"
-                                    name="dateDeRendu" >
-                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-datepicker #picker></mat-datepicker>
+                                <div class="content-input">
+                                    <input  
+                                        class="form-control"
+                                        placeholder="matiere"
+                                        [matDatepicker]="picker"
+                                        formControlName="dateDeRendu" >
+                                    <div class="content-mat-date">
+                                        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                    </div>
+                                </div>
                                 <span class="form-text text-muted">Date de rendue de l'assignement</span>
                             </div> 
                         </div>
@@ -33,11 +37,13 @@
                                     placeholder="matiere" 
                                     [matAutocomplete]="autoCompleteMatiere" 
                                     (input)="onFilterMatiere($event)" 
-                                    [value]="selectedMatiere"
-                                    name="matiere" />
-                                <mat-autocomplete #autoCompleteMatiere="matAutocomplete">
+                                    formControlName="matiere" />
+                                <mat-autocomplete #autoCompleteMatiere="matAutocomplete" [displayWith]="displayMatiere">
                                     @for (item of filtredMatiere; track $index) {
-                                    <mat-option [value]="item">{{item}}</mat-option>
+                                    <mat-option [value]="item">
+                                        <img alt="" class="example-option-img" [src]="img_uri+'/matiere/'+item.image" height="25" width="50" />
+                                        <span>{{item.nom}}</span>
+                                    </mat-option>
                                     }
                                 </mat-autocomplete>
                                 <span class="form-text text-muted">Matiere de l'assignment</span>
@@ -49,11 +55,13 @@
                                     placeholder="auteur" 
                                     [matAutocomplete]="autoCompleteAuteur" 
                                     (input)="onFilterAuteur($event)" 
-                                    [value]="selectdAuteur" 
-                                    name="auteur" />
-                                <mat-autocomplete #autoCompleteAuteur="matAutocomplete">
-                                    @for (item of filtredAuteur; track $index) {
-                                    <mat-option [value]="item">{{item}}</mat-option>
+                                    formControlName="auteur" />
+                                <mat-autocomplete #autoCompleteAuteur="matAutocomplete"  [displayWith]="displayAuteur">
+                                    @for (auteur of filtredAuteur; track $index) {
+                                    <mat-option [value]="auteur">
+                                        <img alt="" class="example-option-img" src="assets/images/etu.jpg" height="25" />
+                                        <span>{{auteur.nom}}</span>
+                                    </mat-option>
                                     }
                                 </mat-autocomplete>
                                 <span class="form-text text-muted">Auteur atribué à l'assignment</span>
@@ -62,22 +70,22 @@
                         <div class="row mt-3">
                             <div mat-form-field class="form-group mr-5" style="width: 15%;">
                                 <label class="my-2">Note</label>
-                                <input type="number" value="0" placeholder="note de l'assignment" class="form-control" name="note"  [(ngModel)]="assignment.note" >
+                                <input type="number" value="0" placeholder="note de l'assignment" class="form-control" formControlName="note" >
                             </div>
                             <span class="form-text text-muted">Note de l'assignement /20 </span>
                         </div>
                         <div class="row mt-3">
                             <div mat-form-field class="form-group  w-75 mr-5">
                                 <label class="my-2">Remarque</label>
-                                <textarea rows="6" name="Remarque sur l'assignment" placeholder="remarque sur l'assignment" class="form-control" [(ngModel)]="assignment.remarques" ></textarea>
+                                <textarea rows="6" formControlName="remarques" placeholder="remarque sur l'assignment" class="form-control" ></textarea>
                                 <span class="form-text text-muted">Remarque sur l'assignement </span>
                             </div>
                         </div>
-                    </div>
-            </form>
-        </mat-card-content>
-        <mat-card-actions>
-            <button mat-raised-button style="background-color: #2a7cc9; color: #fff;" >Ajouter</button>
-        </mat-card-actions>
-    </mat-card>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button style="background-color: #2a7cc9; color: #fff;" [disabled]="!assignmentForm.valid" >Ajouter</button>
+            </mat-card-actions>
+        </mat-card>
+    </form>
 </div>

@@ -1,1 +1,50 @@
-<p>teacher works!</p>
+<a [routerLink]="'/create-teacher'" title="Créez un professeur">
+    <i class="fa fa-plus"></i> Nouveau Professeur
+  </a>
+    <table mat-table [dataSource]="teachers" class="mat-elevation-z8 demo-table">
+      <!-- Position Column -->
+      <ng-container matColumnDef="demo-position">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element._id}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="demo-name">
+        <th mat-header-cell *matHeaderCellDef> Nom </th>
+        <td mat-cell *matCellDef="let element"> {{element.nom}} </td>
+      </ng-container>
+
+        <!-- Name Column -->
+      <ng-container matColumnDef="demo-firstname">
+        <th mat-header-cell *matHeaderCellDef> Prenom </th>
+        <td mat-cell *matCellDef="let element"> {{element.prenom}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="demo-weight">
+        <th mat-header-cell *matHeaderCellDef> Profile </th>
+        <td mat-cell *matCellDef="let element">  <img [src]="baseUrl+'/'+element.photo" alt="Profile Photo" width="50" height="50"> </td>
+      </ng-container>
+
+      <ng-container matColumnDef="demo-actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+          <a [routerLink]="['/edit-teacher', element._id]" title="Modifiez le Professeur">
+            <i class="fa fa-edit"></i>
+          </a>
+
+          <a [routerLink]="['/delete-teacher', element._id]" class="text-danger" title="Suprimez le Professeur">
+            <i class="fa fa-trash"></i>
+          </a>
+
+        </td>
+      </ng-container>
+
+
+
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+

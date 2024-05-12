@@ -45,7 +45,10 @@ export class AppComponent implements OnInit,AfterViewInit {
   ngOnInit(): void {
     this.menuList = sideBarMenu;
     this.currentUrl = this.router.url;
-    this.name = ""+localStorage.getItem("name");
+    if(localStorage.getItem("name")){
+
+      this.name = ""+localStorage.getItem("name");
+    }
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         // Vérifiez si l'URL actuelle est '/login'

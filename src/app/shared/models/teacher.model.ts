@@ -1,4 +1,4 @@
-export class Professeur {
+export class Teacher {
     _id !: number;
     nom !: string;
     prenom !: string;

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -7,8 +7,9 @@ import { HeaderComponent } from '../../../../shared/components/header/header.com
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { Assignment } from '../../../../shared/models/assignment.model';
-import { provideNativeDateAdapter } from '@angular/material/core';
+import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { Matiere } from '../../../../shared/models/matiere.model';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -19,6 +20,7 @@ import { Auteur } from '../../../../shared/models/auteur.model';
 import { ResponseListPaginate } from '../../../../shared/interfaces/ResponseListPaginate';
 import { environment } from '../../../../../environments/environment';
 import { AssignmentService } from '../../../../shared/services/assignment/assignment.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-add-edit-assignment',
@@ -31,16 +33,22 @@ import { AssignmentService } from '../../../../shared/services/assignment/assign
     HeaderComponent,
     MatFormFieldModule,
     MatDatepickerModule,
+    MatCheckboxModule,
     MatInputModule,
     MatAutocompleteModule,
     ReactiveFormsModule
   ],
   templateUrl: './add-edit-assignment.component.html',
   styleUrl: './add-edit-assignment.component.css',
-  providers : [provideNativeDateAdapter()]
+  providers : [
+    provideNativeDateAdapter(),
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+    DatePipe 
+  ]
 })
 export class AddEditAssignmentComponent implements OnInit {
   assignment : Assignment = new Assignment();
+  assignmentTemp : any;
   assignmentForm !: FormGroup;
   matiers !: Matiere[];
   auteurs !: Auteur[];
@@ -62,11 +70,36 @@ export class AddEditAssignmentComponent implements OnInit {
               private auteurService : AuteurService , 
               private notif : NotificationService, 
               private fb: FormBuilder,
-              private assignmentService : AssignmentService ){
-    this.img_uri = environment.baseUrlImg
+              private assignmentService : AssignmentService,
+              private datePipe: DatePipe,
+              private activeRoute : ActivatedRoute  ){
+    this.img_uri = environment.baseUrlImg;
   }
 
   ngOnInit(): void {
+    const id = this.activeRoute.snapshot.params['id'];
+    this.initData();
+    if (id) {
+      this.getAssignment(id)
+    }
+  }
+
+  getAssignment(id : string){
+    const succes = (response : Assignment | undefined)=>{
+      if(response){
+        this.assignment = response;
+        this.initForm();
+      }
+    }
+
+    const error = (error : HttpErrorResponse)=>{
+      this.notif.showWarning(error.message , "Get Assignment Error !");
+    }
+
+    this.assignmentService.getAssignment(id).subscribe(succes , error);
+  }
+
+  initData(){
     this.initForm();
     this.getMatieres();
     this.getAuteurs();
@@ -75,7 +108,7 @@ export class AddEditAssignmentComponent implements OnInit {
   initForm(){
     this.assignmentForm = this.fb.group({
       nom: [this.assignment ? this.assignment.nom : '', Validators.required],
-      dateDeRendu: [this.assignment ? this.assignment.dateDeRendu : '', Validators.required],
+      dateDeRendu: [this.assignment ?  this.datePipe.transform(this.assignment.dateDeRendu, 'yyyy-MM-dd') : '', Validators.required],
       note: [this.assignment.note ? this.assignment.note : 0 , [Validators.required, Validators.min(0), Validators.max(20)]],
       rendu: [this.assignment.rendu ? this.assignment.rendu : false],
       matiere: [this.assignment.matiere ? this.assignment.matiere : '', Validators.required],
@@ -182,6 +215,21 @@ export class AddEditAssignmentComponent implements OnInit {
       return auteur;
   }
 
+  isFormDirty(): boolean {
+    return !this.assignmentForm.pristine && !this.isFormValueEqualToAssignment();
+  }
+  
+  private isFormValueEqualToAssignment(): boolean {
+    const formValue = this.assignmentForm.value;
+    return formValue.nom === this.assignment.nom
+      && formValue.dateDeRendu === this.assignment.dateDeRendu
+      && formValue.note === this.assignment.note
+      && formValue.rendu === this.assignment.rendu
+      && formValue.matiere === this.assignment.matiere._id
+      && formValue.auteur === this.assignment.auteur._id
+      && formValue.remarques === this.assignment.remarques;
+  }
+
   saveAssignment(){
     if(this.assignmentForm.valid){
       this.assignment = this.assignmentForm.value;
@@ -197,5 +245,26 @@ export class AddEditAssignmentComponent implements OnInit {
       this.assignmentService.addAssignment(this.assignment).subscribe(success , error);
     }
   }
+
+  updateAssignment(){
+    if(this.assignmentForm.valid){
+      const success = (response : any)=>{
+        this.notif.showSuccess("Assignment modifié avec success ! ", 'Modification d\'assignment ');
+      }
+
+      const error = (responseError : HttpErrorResponse) =>{
+        const httpError = responseError.error;
+        const message = "Modification "+httpError.error
+        this.notif.showWarning(message,"Erreur de modification d'Assignment")
+      } 
+      
+      this.assignment = {_id : this.assignment._id ,... this.assignmentForm.value};
+      
+      console.log("Assignment ==> ", this.assignment);
+      
+      this.assignmentService.updateAssignment(this.assignment).subscribe(success , error);
+    }
+  }
+
 
 }

@@ -1,13 +1,100 @@
-
-<mat-card>
-    <mat-card-header>
-        <app-header></app-header>
-    </mat-card-header>
-    <mat-card-content>
-    
-    </mat-card-content>
-    <mat-card-actions>
-        <!-- <a [routerLink]="['edit-assignment', assignment.id]"></a> -->
-        <button mat-button (click)="onEdit()">Edit</button>
-    </mat-card-actions>
-</mat-card>
+<div cdkDropListGroup>
+    <mat-card>
+        <mat-card-header>
+            <app-header></app-header>
+        </mat-card-header>
+        <mat-card-content>
+            @if (!loading) {
+            <div class="content-details row">
+                <div class="content-img-matiere col-md-6">
+                    <div class="content-image">
+                        <div class="block-img" [ngStyle]="{ 'background-image' : 'url('+img_uri + '/matiere/' + assignment.matiere.image+')' }" >
+                        </div>
+                    </div>
+                </div>
+                <div class="info-assignment col-md-6">
+                    <div class="head-info row">
+                        <div class="assignment col">
+                            <h1 class="text">{{ assignment.nom }}</h1>
+                            <div class="content-date d-flex">
+                                <i class="fas fa-calendar text-muted"></i>
+                                <span class="mx-2">
+                                    <p class="text-muted">22-09-2000</p>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="matiere col">
+                            <div class="content-title-icon d-flex">
+                                <i class="fas fa-book text-muted mt-1"></i>
+                                <h3 class="text mx-2">{{ assignment.matiere.nom }}</h3>
+                            </div>
+                            <div class="content-prof d-flex">
+                                <div class="rounded">
+                                    <img [src]="img_uri + '/professeur/' + assignment.matiere.prof.photo" alt="professeur">
+                                </div>
+                                <span class="mx-2">
+                                    <p >{{assignment.matiere.prof.nom}}</p>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="body-info row " #assign="cdkDropList" cdkDropList [cdkDropListConnectedTo]="[rend]" >
+                        <div class="block-info col-md-10 example-box" [cdkDragData]="assignment"  cdkDrag>
+                            <div class="litle-title d-flex">
+                                <i class="fas fa-user text-muted"></i>
+                                <span class="mx-2">
+                                    <p class="m-0">Etudiant informations : </p>
+                                </span>
+                            </div>
+                            <div class="info-etudiant">
+                                <div class="info-row d-flex">
+                                    <p>Nom : </p>
+                                    <p class="text-muted mx-2">{{assignment.auteur.nom}}</p>
+                                </div>
+                                <div class="info-row d-flex">
+                                    <p>Statue : </p>
+                                    <p class="text-muted mx-2">{{assignment.rendu ? "Rendue" : "Non rendue"}}</p>
+                                </div>
+                                <div class="info-row d-flex">
+                                    <p>Note : </p>
+                                    <p class="text-muted mx-2">{{assignment.note ? assignment.note+' /20' : 'Non définie'}}</p>
+                                </div>
+                                <div class="info-row">
+                                    <p class="m-0">Remarques : </p><br/>
+                                    <div class="remark-content">
+                                        <p>{{assignment.remarques}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="content-drag-drop">
+                    <div #rend="cdkDropList" id="dropContent" cdkDropList class="drop-content"  (cdkDropListDropped)="drop($event)">
+                        <img src="assets/images/drag-drop-tool.jpg" alt="">
+                    </div>
+                </div>
+                <div class="icon-survol">
+                    <i class="fas fa-edit" (click)="onEdit()"></i>
+                </div>
+            </div>
+            }
+            @else{
+            <div class="d-flex justify-content-center">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            }
+        </mat-card-content>
+    </mat-card>
+    <!-- <mat-card >
+        <mat-card-header>
+            <app-header></app-header>
+        </mat-card-header>
+        <mat-card-content>
+            
+        </mat-card-content>
+    </mat-card> -->
+</div>

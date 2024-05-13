@@ -39,7 +39,7 @@ export class TeacherService {
     return this.http.post<any>(`${environment.baseUrl}/teacher`,formdata, { headers });
   }
 
-  updateProfilTeacher(idTeacher:Number,formdata: FormData): Observable<any> {
+  updateProfilTeacher(idTeacher:string,formdata: FormData): Observable<any> {
     const jwt = localStorage.getItem('token');
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${jwt}`

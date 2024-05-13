@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-spinner',
+  selector: 'app-spin',
   standalone: true,
   imports: [],
   templateUrl: './spinner.component.html',

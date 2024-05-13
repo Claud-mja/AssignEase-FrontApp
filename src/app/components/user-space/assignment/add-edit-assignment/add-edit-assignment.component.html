@@ -1,5 +1,5 @@
 <div class="content-form">
-    <form [formGroup]="assignmentForm" (ngSubmit)="saveAssignment()">
+    <form [formGroup]="assignmentForm" (submit)="assignment._id ? updateAssignment() : saveAssignment()">
     <mat-card>
         <mat-card-header class="header-card">
             <app-header style="width: 100;"></app-header>
@@ -18,7 +18,7 @@
                                 <div class="content-input">
                                     <input  
                                         class="form-control"
-                                        placeholder="matiere"
+                                        placeholder="dd/MM/yyyy"
                                         [matDatepicker]="picker"
                                         formControlName="dateDeRendu" >
                                     <div class="content-mat-date">
@@ -67,24 +67,32 @@
                                 <span class="form-text text-muted">Auteur atribué à l'assignment</span>
                             </div>
                         </div>
-                        <div class="row mt-3">
-                            <div mat-form-field class="form-group mr-5" style="width: 15%;">
-                                <label class="my-2">Note</label>
-                                <input type="number" value="0" placeholder="note de l'assignment" class="form-control" formControlName="note" >
+                        @if (assignment._id && assignment.rendu) {
+                            <!-- <div class="row mt-3">
+                                <div mat-form-field class="form-group mr-5">
+                                    <label class="my-2">Rendue</label>
+                                    <mat-checkbox [checked]="assignment.rendu" class="example-margin" formControlName="rendu"></mat-checkbox>
+                                </div>
+                            </div> -->
+                            <div class="row mt-3">
+                                <div mat-form-field class="form-group mr-5" style="width: 15%;">
+                                    <label class="my-2">Note</label>
+                                    <input type="number" value="0" placeholder="note de l'assignment" class="form-control" formControlName="note" >
+                                </div>
+                                <span class="form-text text-muted">Note de l'assignement /20 </span>
                             </div>
-                            <span class="form-text text-muted">Note de l'assignement /20 </span>
-                        </div>
-                        <div class="row mt-3">
-                            <div mat-form-field class="form-group  w-75 mr-5">
-                                <label class="my-2">Remarque</label>
-                                <textarea rows="6" formControlName="remarques" placeholder="remarque sur l'assignment" class="form-control" ></textarea>
-                                <span class="form-text text-muted">Remarque sur l'assignement </span>
+                            <div class="row mt-3">
+                                <div mat-form-field class="form-group  w-75 mr-5">
+                                    <label class="my-2">Remarque</label>
+                                    <textarea rows="6" formControlName="remarques" placeholder="remarque sur l'assignment" class="form-control" ></textarea>
+                                    <span class="form-text text-muted">Remarque sur l'assignement </span>
+                                </div>
                             </div>
-                        </div>
+                        }
                 </div>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-raised-button style="background-color: #2a7cc9; color: #fff;" [disabled]="!assignmentForm.valid" >Ajouter</button>
+                <button mat-raised-button style="background-color: #2a7cc9; color: #fff;" [disabled]="!assignmentForm.valid || !isFormDirty()" >{{assignment._id ? 'Modifer' : 'Ajouter'}}</button>
             </mat-card-actions>
         </mat-card>
     </form>

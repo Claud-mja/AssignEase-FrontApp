@@ -1,0 +1,180 @@
+.content-img-matiere{
+    padding: 10px;
+}
+
+.block-img{
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.content-image{
+    height: 500px;
+    width: 100%;
+    padding: 50px;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+}
+
+.head-info , .body-info{
+    padding: 30px 35px;
+    height: fit-content;
+}
+
+.head-info .assignment h1{
+    color: #141824;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.fas{
+    margin-top: 2px;
+}
+
+.assignment{
+    border-right: 1px solid #ddd;
+}
+
+.assignment .text{
+    margin-bottom: 8px;
+}
+
+.matiere{
+    margin: 40px 0;
+}
+
+.matiere h3{
+    color: #141824;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.rounded{
+    height: 50px;
+}
+
+.rounded img{
+    height: 100%;
+    border-radius: 50%;
+    border: 2px solid #dddd ;
+}
+
+.body-info{
+    border-top: 1px solid #ddd;
+    height: 397px;
+}
+
+.block-info{
+    margin-bottom: 20px;
+
+}
+
+.info-etudiant{
+    /* display: flex;
+    align-items: center;
+    justify-content: flex-end; */
+    margin-top: 6px;
+    padding: 2px 20px;
+}
+
+.info-etudiant .info-row{
+    font-size: 13px;
+}
+
+.litle-title span{
+    color: #141824;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.info-row .remark-content{
+    padding: 4px;
+    border-radius: 8px;
+    height: 150px;
+    width: 80%;
+    border: 1px solid #dedede;
+}
+
+
+.example-box {
+    /* border: solid 1px #ccc; */
+    /* color: rgba(0, 0, 0, 0.87); */
+    cursor: move;
+    /* display: flex; */
+    /* justify-content: center;
+    align-items: center;
+    text-align: center; */
+    background: #fff;
+    border-radius: 4px;
+    position: relative;
+    z-index: 1;
+    transition: box-shadow 200ms cubic-bezier(0, 0, 0.2, 1);
+    /* box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+                0 2px 2px 0 rgba(0, 0, 0, 0.14),
+                0 1px 5px 0 rgba(0, 0, 0, 0.12); */
+  }
+  
+  .example-box:active {
+    padding: 20px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+                0 8px 10px 1px rgba(0, 0, 0, 0.14),
+                0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+
+  .cdk-drag-preview{
+    padding: 20px;
+    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+                0 8px 10px 1px rgba(0, 0, 0, 0.14),
+                0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  }
+
+  #dropContent.cdk-drop-list-dragging{
+    background-color: #007592be;
+  }
+
+  #dropContent.cdk-drop-list-dragging:first-child{
+    padding: 20px;
+  }
+
+  .drop-content{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    border: 2px dashed #dedede;
+    border-radius: 8px;
+  }
+  
+  #dropContent{
+    position: relative;
+  }
+
+  #dropContent img{
+   position: absolute;
+   width: 150px;
+  }
+  
+  .content-details{
+    position: relative;
+  }
+
+  .content-details .icon-survol{
+    position: absolute;
+    top: -40px;
+    right: 10px;
+    width: max-content;
+
+}
+
+.content-details .icon-survol i{
+    font-size: 18px;
+    color: #4b9ce9;
+    cursor: pointer;
+}
+
+.content-details .icon-survol i:hover{
+    color: rgb(247, 67, 67);
+}

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Assignment } from '../../models/assignment.model';
 import { Observable, catchError, of } from 'rxjs';
@@ -30,7 +30,7 @@ export class AssignmentService implements OnInit {
   }
 
   // renvoie un assignment par son id, renvoie undefined si pas trouvé
-  getAssignment(id:number):Observable<Assignment|undefined> {
+  getAssignment(id:string):Observable<Assignment|undefined> {
     return this.http.get<Assignment>(`${this.assigment_uri}/${id}`)
     .pipe(
            catchError(this.handleError<any>('### catchError: getAssignments by id avec id=' + id))
@@ -75,7 +75,12 @@ export class AssignmentService implements OnInit {
    // il faudra faire une requête HTTP pour envoyer l'objet modifié
     this.logService.log(assignment.nom, "modifié");
     //return of("Assignment modifié avec succès");
-    return this.http.put<Assignment>(`${this.assigment_uri}`, assignment);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${token}`
+    );
+    return this.http.put<Assignment>(`${this.assigment_uri}/`, assignment , {headers : headers});
   }
 
   deleteAssignment(assignment:Assignment):Observable<any> {

@@ -1,9 +1,12 @@
 <div class="card-header border-0 d-flex justify-content-between w-100">
-    <div class="content-title">
+    <div class="content-title d-flex">
         <h3 fxlayout="column" class="card-title align-items-start" style="flex-direction: column; box-sizing: border-box; display: flex;">
             <span class="card-label font-weight-bolder text-dark">List assignment</span>
             <span class="text-muted mt-0 font-weight-bold font-size-sm" *ngIf="haveSubTitle">4 project(s)</span>
         </h3>
+        <!-- @if (btnData.name) {
+            <button color="primary" mat-raised-button (click)="btnData.functionCall()">{{btnData.name}}</button>
+        } -->
     </div>
     <div class="content-search" *ngIf="haveSearch">
         <div class="content-input input-group">

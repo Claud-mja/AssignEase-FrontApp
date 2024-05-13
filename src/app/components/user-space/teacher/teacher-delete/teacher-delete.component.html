@@ -1,9 +1,9 @@
 <div ngIf="student">
-    <h4>Supréssion de l'étudiant '{{ student.nom }}'</h4>
+    <h4>Supréssion de Professeur '{{ teacher.nom }}'</h4>
     <form (ngSubmit)="submit()" >
-        <h5>Voulez vous vraiment supprimez cette d'étudiant?</h5>
+        <h5>Voulez vous vraiment supprimez cet professeur?</h5>
         <h5>Tous les données relier sur cette étudiant sera supprimez</h5>
-        <a [routerLink]="'/student'" title="Suprimez l' Étudiant">
+        <a [routerLink]="'/teacher'" title="Suprimez le Professeur">
            Anuller
           </a>
         <button class="submit" type="submit" mat-raised-button>

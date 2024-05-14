@@ -5,6 +5,7 @@ import { Observable, catchError, of } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { LogginService } from '../utils/loggin.service';
 import { ResponseListPaginate } from '../../interfaces/ResponseListPaginate';
+import { HeaderConfig } from '../../interfaces/Header-config';
 
 @Injectable({
   providedIn: 'root'
@@ -25,8 +26,13 @@ export class AssignmentService implements OnInit {
     return this.http.get<Assignment[]>(`${this.assigment_uri}`);
   }
 
-  getAssignmentsPagines(page:number, limit:number):Observable<any> {
-    return this.http.get<ResponseListPaginate>(`${this.assigment_uri}` + "?page=" + page + "&limit=" + limit);
+  getAssignmentsPagines(page:number, limit:number , config : any = null):Observable<any> {
+    const body = {
+      filters : config!=null && config.filters!=null ? config.filters : [],
+      sorts : config!=null && config.sorts!=null ? config.sorts : [],
+
+    }
+    return this.http.post<ResponseListPaginate>(`${this.assigment_uri}` + "?page=" + page + "&limit=" + limit , body);
   }
 
   // renvoie un assignment par son id, renvoie undefined si pas trouvé

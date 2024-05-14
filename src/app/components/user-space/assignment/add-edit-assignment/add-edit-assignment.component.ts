@@ -42,7 +42,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './add-edit-assignment.component.css',
   providers : [
     provideNativeDateAdapter(),
-    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' },
+    { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
     DatePipe 
   ]
 })
@@ -58,6 +58,8 @@ export class AddEditAssignmentComponent implements OnInit {
 
   selectedMatiere : string = '';
   selectdAuteur : string = '';
+
+  headTitle : any;
 
   loading : any = {
     matiere : false,
@@ -77,9 +79,15 @@ export class AddEditAssignmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.headTitle = {
+      title : "Ajout d'assignment"
+    }
     const id = this.activeRoute.snapshot.params['id'];
     this.initData();
     if (id) {
+      this.headTitle = {
+        title : "Modifié un assignment"
+      }
       this.getAssignment(id)
     }
   }
@@ -108,13 +116,27 @@ export class AddEditAssignmentComponent implements OnInit {
   initForm(){
     this.assignmentForm = this.fb.group({
       nom: [this.assignment ? this.assignment.nom : '', Validators.required],
-      dateDeRendu: [this.assignment ?  this.datePipe.transform(this.assignment.dateDeRendu, 'yyyy-MM-dd') : '', Validators.required],
+      dateDeRendu: [this.assignment ?   this.constructDate(this.assignment.dateDeRendu) : '', Validators.required],
       note: [this.assignment.note ? this.assignment.note : 0 , [Validators.required, Validators.min(0), Validators.max(20)]],
       rendu: [this.assignment.rendu ? this.assignment.rendu : false],
       matiere: [this.assignment.matiere ? this.assignment.matiere : '', Validators.required],
       auteur: [this.assignment.auteur ? this.assignment.auteur : '', Validators.required],
       remarques: [this.assignment.remarques ? this.assignment.remarques : '']
     });
+  }
+
+  constructDate(dateStr : string){
+    if (dateStr) {
+      console.log(dateStr);
+      
+      const dateParts = dateStr.split('-');
+      const year = parseInt(dateParts[2]);
+      const month = parseInt(dateParts[1]) - 1; // Les mois dans JavaScript sont 0-indexés, donc on soustrait 1
+      const day = parseInt(dateParts[0]);
+      const date = new Date(year, month, day);
+      return this.datePipe.transform(date, 'yyyy-MM-dd')
+    }
+    return new Date();
   }
 
 

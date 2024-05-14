@@ -2,7 +2,7 @@
     <form [formGroup]="assignmentForm" (submit)="assignment._id ? updateAssignment() : saveAssignment()">
     <mat-card>
         <mat-card-header class="header-card">
-            <app-header style="width: 100;"></app-header>
+            <app-header [headTitle]="headTitle" style="width: 100;"></app-header>
         </mat-card-header>
         <mat-card-content>
                 <div class="w-100 pb-3">
@@ -18,7 +18,7 @@
                                 <div class="content-input">
                                     <input  
                                         class="form-control"
-                                        placeholder="dd/MM/yyyy"
+                                        placeholder="dd-mm-yyyy"
                                         [matDatepicker]="picker"
                                         formControlName="dateDeRendu" >
                                     <div class="content-mat-date">

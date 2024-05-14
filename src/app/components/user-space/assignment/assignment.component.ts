@@ -15,6 +15,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { NotificationService } from '../../../shared/services/utils/notification.service';
 import { environment } from '../../../../environments/environment';
 import { SpinnerComponent } from '../../../shared/components/spinner/spinner.component';
+import { PaginatorModule } from 'primeng/paginator'
+import { HeaderConfig } from '../../../shared/interfaces/Header-config';
 
 @Component({
   selector: 'app-assignment',
@@ -30,20 +32,25 @@ import { SpinnerComponent } from '../../../shared/components/spinner/spinner.com
     CardAssignmentComponent,
     SpinnerComponent,
     HeaderComponent,
+    PaginatorModule
   ],
   templateUrl: './assignment.component.html',
   styleUrl: './assignment.component.css'
 })
 export class AssignmentComponent implements OnInit {
 
-  @ViewChild('scroller') scroller!: CdkVirtualScrollViewport;
   assignments !: Assignment[];
   loading : any = {
     data : false
   }
 
+  headerConfig !: HeaderConfig;
+  headTitle : any;
+
   //pagination
   page = 1;
+  rows = 12;
+  first =0;
   limit = 12;
   totalDocs!: number;
   totalPages!: number;
@@ -58,6 +65,10 @@ export class AssignmentComponent implements OnInit {
               private notif : NotificationService){ }
 
   ngOnInit(): void {
+    this.headTitle = {
+      title : "Liste des assignments"
+    }
+    this.initHeaderConfig();
     this.getAssignments();
   }
 
@@ -72,8 +83,8 @@ export class AssignmentComponent implements OnInit {
       this.hasNextPage = response.hasNextPage;
       this.hasPrevPage = response.hasPrevPage;
       this.loading['data'] = false;
-      
-      this.notif.showSuccess('Assignments Chargé avec succes !', 'Liste assignment');
+    
+      // this.notif.showSuccess('Assignments Chargé avec succes !', 'Liste assignment');
     }
 
     const error = (error : HttpErrorResponse) => {
@@ -81,7 +92,7 @@ export class AssignmentComponent implements OnInit {
       this.notif.showWarning(error.message, 'Liste assignment erreur');
     }
 
-    this.assignmentService.getAssignmentsPagines(this.page , this.limit).subscribe(success , error);
+    this.assignmentService.getAssignmentsPagines(this.page , this.limit , this.headerConfig).subscribe(success , error);
   }
 
 
@@ -93,9 +104,10 @@ export class AssignmentComponent implements OnInit {
 
    // Pour la pagination
    pagePrecedente() {
-    this.page = this.prevPage;
-    this.getAssignments();
+      this.page = this.prevPage;
+      this.getAssignments();
   }
+
   pageSuivante() {
     this.page = this.nextPage;
     this.getAssignments();
@@ -111,5 +123,36 @@ export class AssignmentComponent implements OnInit {
     this.getAssignments();
   }
 
+  onPageChange(event: any) {
+    this.first = event.first;
+    this.rows = event.rows;
+    this.limit = event.rows;
+    this.page = event.page+1;
+    this.getAssignments();
+    
+  }
+
+  initHeaderConfig(){
+    this.headerConfig = {
+      fields : [
+        { name : 'nom' , type : 'string'  },
+        { name : 'rendu' , type : 'boolean'  },
+        { name : 'note' , type : 'number'  },
+        { name : 'dateDeRendu' , type : 'date'  }
+      ],
+      sorts : [],
+      labels : {
+        nom :  'Nom',
+        rendu : 'Est Rendu',
+        note : "Note",
+        dateDeRendu : "Date de Rendue"
+      },
+      filters : []
+    }
+  }
+
+  onFilter(event : HeaderConfig){
+    this.getAssignments();
+  }
 
 }

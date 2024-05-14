@@ -5,7 +5,7 @@ export class Assignment {
     _id !: string;
     id !: number;
     nom!: string;
-    dateDeRendu!: Date;
+    dateDeRendu!: string;
     note ! : number;
     rendu ! : boolean;
     matiere ! : Matiere;

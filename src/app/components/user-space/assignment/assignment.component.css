@@ -15,3 +15,10 @@
 .spin-content{
   height: 300px;
 }
+
+
+.content-paginator{
+  width: 82%;
+  position: fixed;
+  bottom: 0;
+}

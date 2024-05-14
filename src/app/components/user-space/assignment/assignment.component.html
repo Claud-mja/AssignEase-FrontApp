@@ -2,7 +2,7 @@
 <div class="content-list-assignment">
     <mat-card>
         <mat-card-header class="header-card">
-                <app-header [haveSearch]="true" style="width: 100%;"></app-header>
+                <app-header [headTitle]="headTitle" [haveSearch]="true" style="width: 100%;" [config]="headerConfig" (filterClickEvent)="onFilter($event)"></app-header>
         </mat-card-header>
         <mat-card-content>
             @if (!loading['data']) {
@@ -21,6 +21,19 @@
             }
         </mat-card-content>
     </mat-card>
+    <div class="content-paginator">
+        <div class="flex-auto">
+            <p-paginator 
+                locale="en-US" 
+                (onPageChange)="onPageChange($event)" 
+                [first]="first"
+                [rows]="rows" 
+                [totalRecords]="totalDocs" 
+                [rowsPerPageOptions]="[12, 24 , 48]"
+                [showCurrentPageReport]="true"
+                currentPageReportTemplate="Vue de {first} à {last} des {totalRecords} docs" />
+        </div>
+    </div>
     <div class="icon-add-fixed">
         <a type="button" [routerLink]="[ '/add-assignment' ]" mat-fab style="background-color: #1766af;" aria-label="Example icon button with a delete icon">
             <i style="font-size: 20px;" class="fas fa-plus"></i>

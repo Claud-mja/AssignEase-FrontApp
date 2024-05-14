@@ -1,24 +1,44 @@
 <div class="card-header border-0 d-flex justify-content-between w-100">
-    <div class="content-title d-flex">
+    <div class="content-title d-flex align-items-center">
         <h3 fxlayout="column" class="card-title align-items-start" style="flex-direction: column; box-sizing: border-box; display: flex;">
-            <span class="card-label font-weight-bolder text-dark">List assignment</span>
-            <span class="text-muted mt-0 font-weight-bold font-size-sm" *ngIf="haveSubTitle">4 project(s)</span>
+            <span class="card-label font-weight-bolder text-dark">{{headTitle.title}}</span>
+            <span class="text-muted mt-0 font-weight-bold font-size-sm" *ngIf="haveSubTitle">{{headTitle.subTitle}}</span>
         </h3>
-        <!-- @if (btnData.name) {
-            <button color="primary" mat-raised-button (click)="btnData.functionCall()">{{btnData.name}}</button>
-        } -->
     </div>
+    <form ngForm>
     <div class="content-search" *ngIf="haveSearch">
-        <div class="content-input input-group">
-            <input type="text" class="form-control" placeholder="Search date de rendu">
-            <div class="input-group-append">
-                <span class="mt-1">
+            <div class="content-input input-group">
+                @if (currentField.type=='string') {
+                    <mat-form-field>
+                        <mat-label>{{config.labels && config.labels[currentField.name] ? config.labels[currentField.name] : currentField.name}}</mat-label>
+                        <input matInput type="text" [(ngModel)]="valueFilter" name="text">
+                    </mat-form-field>
+                }
+                @else {
+                    <mat-form-field>
+                        <mat-label>{{config.labels && config.labels[currentField.name] ? config.labels[currentField.name] : currentField.name}}</mat-label>
+                        <mat-select [(ngModel)]="valueFilter" (selectionChange)="onMakeFilter()" name="select">
+                                <mat-option [value]="null">Tous</mat-option>
+                            @for (item of selectOption[currentField.type]; track $index) {
+                                <mat-option [value]="item.value">{{item.label}}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                }
+                <button mat-icon-button id="btnFilter" aria-label="Example icon button with a vertical three dot icon">
                     <mat-icon>filter_list</mat-icon>
-                </span>
+                </button>
+                <div class="content-field choice-filter" [ngStyle]="{ 'display': isChoiceFilterVisible ? 'block' : 'none' }">
+                    <ul class="p-0">
+                        @for (field of config.fields; track $index) {
+                            <li (click)="onChoiseFilter(field)" style="list-style: none;" [ngClass]="{'activeFilter' : currentField.name === field.name}" >{{config.labels && config.labels[field.name] ? config.labels[field.name] : field.name }}</li>
+                        }
+                    </ul>
+                </div>
             </div>
+            <button *ngIf="currentField.type=='string'" [disabled]="valueFilter==''" (click)="onMakeFilter()" mat-icon-button aria-label="Search assignment icon">
+                <mat-icon>search</mat-icon>
+            </button>
         </div>
-        <button mat-icon-button aria-label="Search assignment icon">
-            <mat-icon>search</mat-icon>
-        </button>
-    </div>
+    </form>
 </div>

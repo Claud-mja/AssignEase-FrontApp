@@ -21,3 +21,39 @@
         font-weight: 400;
         color: #000 !important;
    }
+
+   .input-group-append{
+     position: relative;
+   }
+
+   .content-field{
+     padding: 10px;
+     position: absolute;
+     top: 48px;
+     right: -3px;
+     height: 200px;
+     width: 180px;
+     overflow-y: auto;
+     background-color: white;
+     border-radius: 8px;
+     border: 1px solid #dedede;
+   }
+
+   .content-field ul>li{
+     padding: 8px;
+     cursor: pointer;
+     border-radius: 6px;
+   }
+
+   .content-field ul>li:hover{
+     background-color: #e0e0e0bb;
+   }
+
+   .activeFilter{
+     background-color: #1766AF;
+     color: #fff;
+   }
+
+   .activeFilter:hover{
+     background-color: #1766AF !important;
+   }

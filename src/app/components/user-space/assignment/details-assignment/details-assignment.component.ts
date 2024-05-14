@@ -37,6 +37,8 @@ export class DetailsAssignmentComponent implements OnInit {
   loading : boolean = false;
   btnEdit : any;
 
+  headTitle : any;
+
   constructor(
     private router : Router ,
     private route : ActivatedRoute ,
@@ -47,6 +49,9 @@ export class DetailsAssignmentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.headTitle = {
+      title : "Détails Assignment"
+    }
     this.idAssigmnent =  this.route.snapshot.params['id'];
     this.btnEdit = {
       functionCall :  this.onEdit.bind(this),

@@ -160,9 +160,9 @@ export class AddEditAssignmentComponent implements OnInit {
 
   getAuteurs(){
     this.loading.auteur = true;
-    const success = (reponse : ResponseListPaginate)=>{
-      this.filtredAuteur = reponse.docs as Auteur[];
-      this.auteurs = reponse.docs as Auteur[];
+    const success = (reponse : Auteur[])=>{
+      this.filtredAuteur = reponse;
+      this.auteurs = reponse;
       this.loading.auteur = false;
     }
 
@@ -171,7 +171,7 @@ export class AddEditAssignmentComponent implements OnInit {
       this.loading.auteur = false;
     }
 
-    this.auteurService.getAuteurs().subscribe(success, error);
+    this.auteurService.getStudents().subscribe(success, error);
   }
 
   onFilterMatiere(event: Event){

@@ -32,7 +32,7 @@ export class LoginComponent {
   ngOnInit(): void {
     // Vérifiez si l'utilisateur est déjà connecté au chargement du composant
     if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/home']); // Redirigez vers la page d'accueil si l'utilisateur est déjà connecté
+      this.router.navigate(['/']); // Redirigez vers la page d'accueil si l'utilisateur est déjà connecté
     }
   }
 
@@ -43,7 +43,7 @@ export class LoginComponent {
         .subscribe(success => {
           this.showSpinner=false;
           if (success) {
-            this.router.navigate(['/home']);
+            this.router.navigate(['/']);
           } else {
             this.errorMessage = 'Identifiants incorrects';
           }

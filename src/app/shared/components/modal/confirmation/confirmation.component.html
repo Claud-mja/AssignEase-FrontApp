@@ -1,0 +1,19 @@
+<div class="content-elment">
+    <h1 mat-dialog-title>{{data.title}}</h1>
+    <div mat-dialog-content>
+      <span> {{ data.message }} </span>
+    </div>
+    <div mat-dialog-actions align="end">
+      <button mat-raised-button tabindex="-1" [mat-dialog-close]="false">
+        Annuler
+      </button>
+      <button
+        mat-raised-button
+        tabindex="-1"
+        color="warn"
+        [mat-dialog-close]="true"
+      >
+        Confirmer
+      </button>
+    </div>
+  </div>

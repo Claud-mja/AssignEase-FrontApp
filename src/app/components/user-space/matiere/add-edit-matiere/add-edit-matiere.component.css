@@ -1,0 +1,32 @@
+.mat-mdc-card-content{
+    padding: 1rem 2.2rem 0 2.2rem;
+}
+
+.mat-mdc-card-actions{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.example-option-img {
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+  
+  [dir='rtl'] .example-option-img {
+    margin-right: 0;
+    margin-left: 8px;
+  }
+
+  .content-input{
+    position: relative;
+  }
+
+  .content-input input{
+    padding-right: 38px;
+  }
+
+  .content-mat-date{
+    position: absolute;
+    top: -6px;
+    right: 0;
+  }

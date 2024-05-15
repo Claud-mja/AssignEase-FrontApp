@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './auth.guard';
 
 import { LoginComponent } from './components/auth/login/login.component';
-import { HomeComponent } from './components/user-space/home/home.component';
 import { AssignmentComponent } from './components/user-space/assignment/assignment.component';
 import { TeacherComponent } from './components/user-space/teacher/teacher.component';
 import { TeacherDeleteComponent } from './components/user-space/teacher/teacher-delete/teacher-delete.component';
@@ -18,16 +17,13 @@ import { DetailsAssignmentComponent } from './components/user-space/assignment/d
 import { StudentEditComponent } from './components/user-space/student/student-edit/student-edit.component';
 import { StudentCreateComponent } from './components/user-space/student/student-create/student-create.component';
 import { StudentDeleteComponent } from './components/user-space/student/student-delete/student-delete.component';
+import { AddEditMatiereComponent } from './components/user-space/matiere/add-edit-matiere/add-edit-matiere.component';
 
 
 export const routes: Routes = [
     {
         path : 'login',
         component : LoginComponent
-    },
-    {
-        path : 'home',
-        component : HomeComponent
     },
     {
         path : 'assignment',
@@ -46,16 +42,20 @@ export const routes: Routes = [
         component : DetailsAssignmentComponent,
     },
     {
-        path : 'teacher',
-        component : TeacherComponent, canActivate: [AuthGuard]
+        path : 'matiere',
+        component : MatiereComponent,
     },
     {
-        path : 'matiere',
-        component : MatiereComponent, canActivate: [AuthGuard]
+        path : 'edit-matiere/:id',
+        component : AddEditMatiereComponent,
+    },
+    {
+        path : 'add-matiere',
+        component : AddEditMatiereComponent,
     },
     {
         path : 'student',
-        component : StudentComponent, canActivate: [AuthGuard]
+        component : StudentComponent,
     },
     {
         path : 'edit-student/:id',
@@ -67,7 +67,7 @@ export const routes: Routes = [
     },
     {
         path : 'create-student',
-        component : StudentCreateComponent, canActivate: [AuthGuard]
+        component : StudentCreateComponent, 
     },
     {
         path : 'teacher',

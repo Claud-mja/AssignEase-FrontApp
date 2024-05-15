@@ -5,7 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { HeaderComponent } from '../../../../shared/components/header/header.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatDatepickerModule } from "@angular/material/datepicker";
+import { MatDatepickerModule  } from "@angular/material/datepicker";
 import { Assignment } from '../../../../shared/models/assignment.model';
 import { MAT_DATE_FORMATS, MAT_DATE_LOCALE, provideNativeDateAdapter } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input';
@@ -48,7 +48,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AddEditAssignmentComponent implements OnInit {
   assignment : Assignment = new Assignment();
-  assignmentTemp : any;
   assignmentForm !: FormGroup;
   matiers !: Matiere[];
   auteurs !: Auteur[];
@@ -127,8 +126,6 @@ export class AddEditAssignmentComponent implements OnInit {
 
   constructDate(dateStr : string){
     if (dateStr) {
-      console.log(dateStr);
-      
       const dateParts = dateStr.split('-');
       const year = parseInt(dateParts[2]);
       const month = parseInt(dateParts[1]) - 1; // Les mois dans JavaScript sont 0-indexés, donc on soustrait 1
@@ -142,9 +139,9 @@ export class AddEditAssignmentComponent implements OnInit {
 
   getMatieres(){
     this.loading.matiere = true;
-    const success = (reponse : ResponseListPaginate)=>{
-      this.filtredMatiere = reponse.docs as Matiere[];
-      this.matiers = reponse.docs as Matiere[];
+    const success = (response : any)=>{
+      this.filtredMatiere = response.docs ? response.docs  : response as Matiere[];
+      this.matiers = response.docs ?  response.docs  : response as Matiere[];
       console.log(this.filtredMatiere);
       
       this.loading.matiere = false;

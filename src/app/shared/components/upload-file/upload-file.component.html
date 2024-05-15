@@ -1,0 +1,52 @@
+<div class="item-name" class="dropzone" appFilesDragDrop (filesChangeEmiter)="triggerParentFunction($event)">
+    @if (image_Uri && image_Uri.includes('.')) {
+        <div class="success-element">
+            <div class="content-img">
+                <img [src]="image_Uri" alt="image" />
+            </div>
+            <div class="desc-uploaded">
+                <span style="line-height: 30px;color: #979797;">{{ dataChecked.message }}</span>
+            </div>
+            <button (click)="fileInput.click()" mat-raised-button color="primary" type="button"
+                class="spinner-left">
+                {{config.button}}
+            </button>
+        </div>
+    }
+    @else if (dataChecked && !['success', 'warning', 'error'].includes(dataChecked.state)) {
+        <div class="upload-element">
+            <i class="fas fa-cloud-upload-alt" style="font-size: 500%; color: #e4e4ec;"></i>
+            <span style="line-height: 30px;color: #979797;">{{config.label}}</span>
+            <button (click)="fileInput.click()" mat-raised-button color="primary" type="button"
+                class="spinner-left">
+                {{config.button}}
+            </button>
+        </div>
+    }
+    @else if (dataChecked && dataChecked.state=='success') {
+    <div class="success-element">
+        <i class="fas fa-check" style="font-size: 500%; color: #B4E87C;"></i>
+        <div class="desc-uploaded">
+            <span style="line-height: 30px;color: #979797;">{{ dataChecked.message }}</span>
+        </div>
+        <button (click)="fileInput.click()" mat-raised-button color="primary" type="button"
+            class="spinner-left">
+            {{config.button}}
+        </button>
+    </div>
+    }
+    @else {
+    <div class="success-element">
+        <i class="fas fa-times" style="font-size: 500%; color: #bc1e06df;"></i>
+        <div class="desc-uploaded">
+            <span style="line-height: 30px;color: #979797;">{{ dataChecked.message }}</span>
+        </div>
+        <button (click)="fileInput.click()" mat-raised-button color="primary" type="button"
+            class="spinner-left">
+            {{config.button}}
+        </button>
+    </div>
+    }
+    <input #fileInput accept="image/*" type="file" (change)="triggerParentFunction($event)"
+        hidden />
+  </div>

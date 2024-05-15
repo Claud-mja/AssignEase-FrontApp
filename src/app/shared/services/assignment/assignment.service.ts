@@ -71,8 +71,13 @@ export class AssignmentService implements OnInit {
   addAssignment(assignment:Assignment):Observable<any> {
     //this.assignments.push(assignment);
     this.logService.log(assignment.nom, "ajouté");
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${token}`
+    );
     //return of("Assignment ajouté avec succès");
-    return this.http.post<Assignment>(`${this.assigment_uri}`, assignment);
+    return this.http.post<Assignment>(`${this.assigment_uri}/add`, assignment , {headers : headers});
   }
 
   updateAssignment(assignment:Assignment):Observable<any> {

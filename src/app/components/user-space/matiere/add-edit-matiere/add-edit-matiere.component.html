@@ -1,0 +1,49 @@
+<div class="content-form">
+    <form [formGroup]="matiereForm" (submit)="matiere._id ? updateMatiere() : saveMatiere()">
+    <mat-card>
+        <mat-card-header class="header-card">
+            <app-header [headTitle]="headTitle" style="width: 100;"></app-header>
+        </mat-card-header>
+        <mat-card-content>
+                <div class="w-100 pb-3">
+                        <div class="row mt-3">
+                            <div mat-form-field class="form-group w-50 mr-5">
+                                <label class="my-2">Designation</label>
+                                <input class="form-control" placeholder="titre de l'assignment" formControlName="nom" />
+                                <span class="form-text text-muted">Designation de la matière</span>
+                            </div> 
+                        </div>
+                        <div class="row mt-3">
+                            <div id="selectProf" mat-form-field class="form-group  w-50 mr-5">
+                                <label class="my-2">Professeur</label>
+                                <input 
+                                    class="form-control" 
+                                    placeholder="professeur" 
+                                    [matAutocomplete]="autoCompleteProfesseur" 
+                                    (input)="onFilterProf($event)" 
+                                    formControlName="prof" />
+                                <mat-autocomplete #autoCompleteProfesseur="matAutocomplete" [displayWith]="displayProf">
+                                    @for (item of filterProfs; track $index) {
+                                    <mat-option [value]="item">
+                                        <img alt="" class="example-option-img rounded-circle my-2 mx-2" [src]="img_uri+'/professeur/'+item.photo"  width="50" />
+                                        <span>{{item.nom}}</span>
+                                    </mat-option>
+                                    }
+                                </mat-autocomplete>
+                                <span class="form-text text-muted">Prefesseur de la matière</span>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <label class="my-2">Image matière</label>
+                            <div class="content-upload-input">
+                                <app-upload-file [config]="configUpload" [dataChecked]="dataChecked" [image_Uri]="this.img_uri" (fileChanged)="onChangeFile($event)"></app-upload-file>
+                            </div>
+                        </div>
+                </div>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-raised-button style="background-color: #2a7cc9; color: #fff;" [disabled]="!matiereForm.valid" >{{matiere._id ? 'Modifer' : 'Ajouter'}}</button>
+            </mat-card-actions>
+        </mat-card>
+    </form>
+</div>

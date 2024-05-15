@@ -97,7 +97,8 @@ export class DetailsAssignmentComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result : any)=>{
       if (result != null) {
-        this.assignment = result
+        this.assignment = result;
+        this.router.navigate(['assignment']);
       }
     })
   }

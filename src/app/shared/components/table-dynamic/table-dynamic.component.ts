@@ -56,9 +56,12 @@ export class TableDynamicComponent implements OnInit {
   }
 
   onDelete(data : any){
+    if(!localStorage.getItem('token')){
+      this.route.navigate(['/login']);
+      return;
+    }
     const success = (response  : any)=>{
-      console.log("Response ==> ", response);
-      
+      this.notif.showSuccess("Suppression de "+this.config.tools+" reussi !" , "Suppression "+this.config.tools)
     }
 
     const error = (error : HttpErrorResponse)=>{
@@ -79,10 +82,6 @@ export class TableDynamicComponent implements OnInit {
 
   onAdd(){
     this.route.navigate([`add-${this.config.tools}`]);
-  }
-
-  onOpenDialogConfirmation(){
-
   }
 
   getDataWithtKey(field : FieldValue , data : any){

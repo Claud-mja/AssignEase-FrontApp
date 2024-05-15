@@ -15,13 +15,8 @@ import { TableDynamicComponent } from '../../../shared/components/table-dynamic/
 })
 export class MatiereComponent implements OnInit {
  
-  matieres !: Matiere[];
   tableConfig !: TableConfig;
 
-  uploadConfig : any =  {
-      label: 'Upload your data file',
-      button: 'Browse upload',
-  }
 
   constructor(){}
 

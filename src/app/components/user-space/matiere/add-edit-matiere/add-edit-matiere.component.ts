@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Matiere } from '../../../../shared/models/matiere.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -18,7 +18,7 @@ import { Teacher } from '../../../../shared/models/teacher.model';
 import { TeacherService } from '../../../../shared/services/teacher/teacher.service';
 import { environment } from '../../../../../environments/environment';
 import { UploadFileComponent } from '../../../../shared/components/upload-file/upload-file.component';
-import { CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
+import { UtilsService } from '../../../../shared/services/utils/utils.service';
 
 @Component({
   selector: 'app-add-edit-matiere',
@@ -35,8 +35,7 @@ import { CdkDrag, CdkDropList } from '@angular/cdk/drag-drop';
     MatInputModule,
     MatAutocompleteModule,
     ReactiveFormsModule,
-    UploadFileComponent,
-    CdkDropList, CdkDrag
+    UploadFileComponent
   ],
   templateUrl: './add-edit-matiere.component.html',
   styleUrl: './add-edit-matiere.component.css'
@@ -61,10 +60,12 @@ export class AddEditMatiereComponent implements OnInit {
   }
 
   constructor(
-      private route : ActivatedRoute , 
+      private route : ActivatedRoute ,
+      private router : Router, 
       private notif : NotificationService , 
       private matiereService : MatiereService , 
-      private teacherService : TeacherService , 
+      private teacherService : TeacherService ,
+      private utilsService : UtilsService, 
       private fb : FormBuilder){
         this.img_uri = environment.baseUrlImg;
   }
@@ -121,7 +122,7 @@ export class AddEditMatiereComponent implements OnInit {
     }
 
     const error = (error : HttpErrorResponse) =>{
-      this.notif.showWarning(error.message,"Erreur d'ajout de get Matiere")
+      this.notif.showWarning(error.message,"Erreur de get Matiere")
     }
     this.teacherService.getTeachers().subscribe(success , error);
   }
@@ -160,10 +161,13 @@ export class AddEditMatiereComponent implements OnInit {
 
       const success = (response : any)=>{
         this.notif.showSuccess("Matiere ajouté avec success ! ", 'Ajout d\'Matiere ');
+        this.router.navigate(['matiere']);
       }
 
       const error = (error : HttpErrorResponse) =>{
-        this.notif.showWarning(error.message,"Erreur d'ajout de Matiere")
+        const httpError = error.error;
+        const message = "Ajout "+httpError.error;
+        this.utilsService.handleError(httpError.status , message , "Ajout de Matière");
       }
 
       this.matiereService.addMatiere(this.matiere, this.imageFile).subscribe(success , error);
@@ -174,13 +178,14 @@ export class AddEditMatiereComponent implements OnInit {
     if(this.matiereForm.valid){
       const success = (response : any)=>{
         this.notif.showSuccess("Matiere modifié avec success ! ", 'Modification d\'Matiere ');
+        this.router.navigate(['matiere']);
       }
 
-      const error = (responseError : HttpErrorResponse) =>{
-        const httpError = responseError.error;
-        const message = "Modification "+httpError.error
-        this.notif.showWarning(message,"Erreur de modification d'Matiere")
-      } 
+      const error = (error : HttpErrorResponse) =>{
+        const httpError = error.error;
+        const message = "Modification "+httpError.error;
+        this.utilsService.handleError(httpError.status , message , "Modification de Matière");
+      }
       
       this.matiere = {_id : this.matiere._id ,... this.matiereForm.value};
       this.matiereService.updateMatiere(this.matiere , this.imageFile).subscribe(success , error);

@@ -18,6 +18,8 @@ import { StudentEditComponent } from './components/user-space/student/student-ed
 import { StudentCreateComponent } from './components/user-space/student/student-create/student-create.component';
 import { StudentDeleteComponent } from './components/user-space/student/student-delete/student-delete.component';
 import { AddEditMatiereComponent } from './components/user-space/matiere/add-edit-matiere/add-edit-matiere.component';
+import { ProfesseurComponent } from './components/user-space/professeur/professeur.component';
+import { AddEditProfesseurComponent } from './components/user-space/professeur/add-edit-professeur/add-edit-professeur.component';
 
 
 export const routes: Routes = [
@@ -31,11 +33,13 @@ export const routes: Routes = [
     },
     {
         path : "edit-assignment/:id",
-        component : AddEditAssignmentComponent
+        component : AddEditAssignmentComponent,
+        canActivate: [AuthGuard]
     },
     {
         path : 'add-assignment',
         component : AddEditAssignmentComponent,
+        canActivate: [AuthGuard]
     },
     {
         path : 'details-assignment/:id',
@@ -48,10 +52,26 @@ export const routes: Routes = [
     {
         path : 'edit-matiere/:id',
         component : AddEditMatiereComponent,
+        canActivate: [AuthGuard]
     },
     {
         path : 'add-matiere',
         component : AddEditMatiereComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path : 'professeur',
+        component : ProfesseurComponent,
+    },
+    {
+        path : 'edit-professeur/:id',
+        component : AddEditProfesseurComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path : 'add-professeur',
+        component : AddEditProfesseurComponent,
+        canActivate: [AuthGuard]
     },
     {
         path : 'student',

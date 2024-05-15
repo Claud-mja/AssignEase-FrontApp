@@ -20,7 +20,8 @@ import { Auteur } from '../../../../shared/models/auteur.model';
 import { ResponseListPaginate } from '../../../../shared/interfaces/ResponseListPaginate';
 import { environment } from '../../../../../environments/environment';
 import { AssignmentService } from '../../../../shared/services/assignment/assignment.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UtilsService } from '../../../../shared/services/utils/utils.service';
 
 @Component({
   selector: 'app-add-edit-assignment',
@@ -73,6 +74,8 @@ export class AddEditAssignmentComponent implements OnInit {
               private fb: FormBuilder,
               private assignmentService : AssignmentService,
               private datePipe: DatePipe,
+              private utilsService : UtilsService,
+              private router : Router,
               private activeRoute : ActivatedRoute  ){
     this.img_uri = environment.baseUrlImg;
   }
@@ -255,10 +258,13 @@ export class AddEditAssignmentComponent implements OnInit {
 
       const success = (response : any)=>{
         this.notif.showSuccess("Assignment ajouté avec success ! ", 'Ajout d\'assignment ');
+        this.router.navigate(['assignment']);
       }
 
       const error = (error : HttpErrorResponse) =>{
-        this.notif.showWarning(error.message,"Erreur d'ajout de Assignment")
+        const httpError = error.error;
+        const message = "Ajout "+httpError.error;
+        this.utilsService.handleError(httpError.status , message , "Ajout d'Assignment");
       }
 
       this.assignmentService.addAssignment(this.assignment).subscribe(success , error);
@@ -269,12 +275,13 @@ export class AddEditAssignmentComponent implements OnInit {
     if(this.assignmentForm.valid){
       const success = (response : any)=>{
         this.notif.showSuccess("Assignment modifié avec success ! ", 'Modification d\'assignment ');
+        this.router.navigate(['assignment']);
       }
 
-      const error = (responseError : HttpErrorResponse) =>{
-        const httpError = responseError.error;
-        const message = "Modification "+httpError.error
-        this.notif.showWarning(message,"Erreur de modification d'Assignment")
+      const error = (error : HttpErrorResponse) =>{
+        const httpError = error.error;
+        const message = "Modification "+httpError.error;
+        this.utilsService.handleError(httpError.status , message , "Modification d'Assignment");
       } 
       
       this.assignment = {_id : this.assignment._id ,... this.assignmentForm.value};

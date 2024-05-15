@@ -32,7 +32,7 @@ export class AppComponent implements OnInit,AfterViewInit {
   showSideBar : boolean = false;
   currentlyOpenItemIndex: number = -1;
   currentUrl !:string;
-  name !:string;
+  name !: string | null;
   showNavbar: boolean = true;
 
   constructor(private router : Router) {
@@ -45,18 +45,9 @@ export class AppComponent implements OnInit,AfterViewInit {
   ngOnInit(): void {
     this.menuList = sideBarMenu;
     this.currentUrl = this.router.url;
-    // if(localStorage.getItem("name")){
-
-    //   this.name = ""+localStorage.getItem("name");
-    // }
-    // this.router.events.subscribe(event => {
-    //   if (event instanceof NavigationEnd) {
-    //     // Vérifiez si l'URL actuelle est '/login'
-    //     this.showNavbar = event.url !== '/login';
-    //   }
-    // });
-
-
+    if (this.isLogIn()) {
+      this.name = localStorage.getItem('name');
+    }
   }
 
   sideBarEvent(){
@@ -85,11 +76,24 @@ export class AppComponent implements OnInit,AfterViewInit {
     }
   }
 
+  isLogIn(){
+    let isChecked = false;
+    if(localStorage.getItem('token')!=null){
+      if(localStorage.getItem('name')!=null){
+        isChecked = true
+      }
+    }
+    return isChecked
+  }
 
+  onLogin(){
+    this.router.navigate(['login']);
+  }
 
   onLogOut(){
     localStorage.removeItem('token');
     localStorage.removeItem('name');
+    this.name = null;
     this.router.navigate(['/login']);
   }
 

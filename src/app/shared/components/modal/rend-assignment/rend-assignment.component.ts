@@ -14,6 +14,7 @@ import { NotificationService } from '../../../services/utils/notification.servic
 import { HttpErrorResponse } from '@angular/common/http';
 import { SpinnerComponent } from '../../spinner/spinner.component';
 import { BtnSpinerComponent } from '../../btn-spiner/btn-spiner.component';
+import { UtilsService } from '../../../services/utils/utils.service';
 
 @Component({
   selector: 'app-rend-assignment',
@@ -45,6 +46,7 @@ export class RendAssignmentComponent implements OnInit {
     public data: { assignment : Assignment; },
     private fb:FormBuilder,
     private assignmentService : AssignmentService,
+    private utilsService : UtilsService,
     private notif : NotificationService
   ){}
 
@@ -69,8 +71,8 @@ export class RendAssignmentComponent implements OnInit {
 
       const error = (responseError : HttpErrorResponse) =>{
         const httpError = responseError.error;
-        const message = "Modification "+httpError.error
-        this.notif.showWarning(message,"Erreur de modification d'Assignment");
+        const message = "Modification "+httpError.error;
+        this.utilsService.handleError(httpError.status , message , "Modification d'assignment");
         this.loading = false;
         this.dialogRef.close(null);
       } 

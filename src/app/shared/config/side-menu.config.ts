@@ -3,7 +3,7 @@ export const sideBarMenu =  [
     {
         "title" : "Assignment",
         "icon": "receipt",
-        "routerLink": "/"
+        "routerLink": "/assignment"
     },
     {
         "title" : "Matière",
@@ -13,7 +13,7 @@ export const sideBarMenu =  [
     {
         "title" : "Professeur",
         "icon": "user-tie",
-        "routerLink": "/teacher"
+        "routerLink": "/professeur"
     },
     {
         "title" : "Auteur",

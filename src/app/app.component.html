@@ -22,26 +22,25 @@
               style="position: relative;"
               ><span class="mr-3"><i [class]="'fa-solid fa-'+menu.icon"></i></span>{{menu.title}}</a
             >
-
-            <!-- <ul  class="collapse list-unstyled" [id]="'menu'+i" *ngIf="menu.children" [class.show]="i === currentlyOpenItemIndex">
-              <li *ngFor="let subMenu of menu.children">
-                <a
-                  [ngClass]="{ 'active-menu': isActive('/user-space' + subMenu.routerLink) }"
-                  [routerLink]="'/user-space/'+subMenu.routerLink"><span class="mr-3">
-                    <i [class]="'fa-solid fa-'+subMenu.icon"></i></span>
-                    {{subMenu.title}}
-                </a>
-              </li>
-            </ul> -->
           </li>
         </ul>
       </div>
       <div class="bottom-side-bar">
         <hr>
-        <div class="content-log-out " (click)="onLogOut()" style="position: relative;">
+        <div class="content-log-out " (click)="isLogIn() ? onLogOut() : onLogin()" style="position: relative;">
           <a type="button" class="btn d-flex justify-content-around">
-            <span><i class="fas fa-sign-out" aria-hidden="true"></i></span>
-            Se deconnecter
+            @if (isLogIn()) {
+              <span>
+                <i class="fas fa-sign-out" aria-hidden="true"></i>
+              </span>
+              Se deconnecter
+            }
+            @else {
+              <span>
+                <i class="fas fa-sign-in" aria-hidden="true"></i>
+              </span>
+              Se connecter
+            }
           </a>
         </div>
       </div>
@@ -51,7 +50,6 @@
   <div class="content">
     <div class="content-tool-bar"  *ngIf="showNavbar">
       <mat-toolbar class="tool-bar" style="padding: 0 40px;">
-        <span>Assign-E</span>
         <span class="example-spacer"></span>
         <span mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
           <i class="fas fa-user"></i>

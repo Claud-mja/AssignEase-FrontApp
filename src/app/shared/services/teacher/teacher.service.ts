@@ -4,13 +4,14 @@ import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
 import { Teacher } from '../../models/teacher.model';
 import { Observable,throwError } from 'rxjs';
+import { UtilsService } from '../utils/utils.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TeacherService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient , private utilsServices : UtilsService) { }
 
   getTeachers(): Observable<Teacher[]> {
     const jwt = localStorage.getItem('token');
@@ -22,12 +23,12 @@ export class TeacherService {
   }
 
   getTeacherById(idTeacher:any): Observable<any> {
-    const jwt = localStorage.getItem('token');
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${jwt}`
-    });
+    // const jwt = localStorage.getItem('token');
+    // const headers = new HttpHeaders({
+    //   'Authorization': `Bearer ${jwt}`
+    // });
 
-    return this.http.get<any>(`${environment.baseUrl}/teacher/${idTeacher}`, { headers });
+    return this.http.get<any>(`${environment.baseUrl}/teacher/${idTeacher}`);
   }
 
   createTeacher(formdata: FormData): Observable<any> {
@@ -37,6 +38,39 @@ export class TeacherService {
     });
 
     return this.http.post<any>(`${environment.baseUrl}/teacher`,formdata, { headers });
+  }
+
+  addProfesseur(profeseur: Teacher , file : File):Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${token}`
+    );
+    const formData = new FormData();
+    const uniqueFilename = this.utilsServices.makeFileUniqueName(file.name); 
+    profeseur.photo = uniqueFilename;
+    
+    formData.append("professeur" , JSON.stringify(profeseur));
+    formData.append("fileName" , uniqueFilename);
+    formData.append("imageFile" , file);
+    return this.http.post<Teacher>(`${environment.baseUrl}/professeur/professeur`, formData , {headers : headers});
+  }
+
+  updateProfesseur(professeur : Teacher , file : File):Observable<any>{
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${token}`
+    );
+    const formData = new FormData();
+    formData.append("professeur" , JSON.stringify(professeur));
+    if (file) {   
+      const uniqueFilename = this.utilsServices.makeFileUniqueName(file.name); 
+      professeur.photo = uniqueFilename;
+      formData.append("fileName" , uniqueFilename);
+      formData.append("imageFile" , file);
+    }
+    return this.http.put<Teacher>(`${environment.baseUrl}/professeur/${professeur._id}/professeur`, formData , {headers : headers});
   }
 
   updateProfilTeacher(idTeacher:string,formdata: FormData): Observable<any> {

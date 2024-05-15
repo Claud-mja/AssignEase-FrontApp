@@ -40,6 +40,7 @@ export class MatiereService {
     if (file) {   
       const uniqueFilename = this.utilsServices.makeFileUniqueName(file.name); 
       matiere.image = uniqueFilename;
+      formData.append("fileName" , uniqueFilename);
       formData.append("imageFile" , file);
     }
     return this.http.put<Matiere>(`${this.matiere_uri}/${matiere._id}/matiere`, formData , {headers : headers});
@@ -57,6 +58,7 @@ export class MatiereService {
     matiere.image = uniqueFilename;
     
     formData.append("matiere" , JSON.stringify(matiere));
+    formData.append("fileName" , uniqueFilename);
     formData.append("imageFile" , file);
     return this.http.post<Matiere>(`${this.matiere_uri}/matiere`, formData , {headers : headers});
   }

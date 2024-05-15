@@ -71,4 +71,22 @@ export class UploadFileComponent implements OnInit {
     }
   }
 
+  onImageError(event: Event, section : string): void {
+    const imagHtml = event.target as HTMLImageElement;
+    let defaultImageUrl = "assets/images";
+    
+    switch(section){
+      case 'auteur':
+        defaultImageUrl = `${defaultImageUrl}/etu.png`;
+        break;
+      case 'professeur':
+        defaultImageUrl = `${defaultImageUrl}/prof.png`;
+        break;
+      case 'matiere':
+        defaultImageUrl = `${defaultImageUrl}/matiere.png`;
+        break;
+    }
+    imagHtml.src = defaultImageUrl;
+  }
+
 } 

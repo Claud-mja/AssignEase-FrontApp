@@ -35,7 +35,7 @@ export class AuthService {
 
   logout(): void {
     // Supprimer le token JWT du stockage local
-    localStorage.removeItem('token');
+    localStorage.clear();
     this.loggedIn = false;
   }
 

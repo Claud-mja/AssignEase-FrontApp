@@ -2,7 +2,7 @@
     @if (image_Uri && image_Uri.includes('.')) {
         <div class="success-element">
             <div class="content-img">
-                <img [src]="image_Uri" alt="image" />
+                <img [src]="image_Uri" (error)="onImageError($event , config.tools)" alt="image" />
             </div>
             <div class="desc-uploaded">
                 <span style="line-height: 30px;color: #979797;">{{ dataChecked.message }}</span>

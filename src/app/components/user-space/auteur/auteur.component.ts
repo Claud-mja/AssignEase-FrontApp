@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { TableConfig } from '../../../shared/interfaces/table-config';
+import { TableDynamicComponent } from '../../../shared/components/table-dynamic/table-dynamic.component';
 
 @Component({
   selector: 'app-auteur',
   standalone: true,
-  imports: [],
+  imports: [
+    TableDynamicComponent
+  ],
   templateUrl: './auteur.component.html',
   styleUrl: './auteur.component.css'
 })
@@ -21,17 +24,15 @@ export class AuteurComponent implements OnInit {
 
   initTbaleConfig(){
     this.tableConfig = {
-      tools : "professeur",
+      tools : "auteur",
       header : {
         fields : [
           { name : "photo" , type: 'image' },
           { name : "nom" , type : 'string' },
-          { name : "prenom" , type: 'string' },
         ],
         labels : {
-          "photo" : "Photo professeur",
-          "nom" : "Nom professeur",
-          "prenom" : "Prenom professeur",
+          "photo" : "Photo auteur",
+          "nom" : "Nom auteur",
         },
         filters : [],
         sorts : []

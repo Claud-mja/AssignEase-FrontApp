@@ -25,9 +25,10 @@
                         <p-avatar 
                             pBadge 
                             value="4" 
-                            [image]="img_uri(field , getDataWithtKey(field , data))" 
+                            [image]="img_uri(field , getDataWithtKey(field , data))"
+                            (onImageError)="onImageError($event, getPathSection(field))" 
                             size="xlarge"
-                            [shape]="getPathSection(field) ==='student' || getPathSection(field)==='professeur' ? 'circle' : 'square'" />
+                            [shape]="getPathSection(field) ==='auteur' || getPathSection(field)==='professeur' ? 'circle' : 'square'" />
                     </td>
                 }
                 @else {

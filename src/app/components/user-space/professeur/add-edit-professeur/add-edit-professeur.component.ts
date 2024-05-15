@@ -52,7 +52,8 @@ export class AddEditProfesseurComponent implements OnInit {
 
   configUpload : any = {
     label: 'Upload your image file',
-    button: 'Browse upload'
+    button: 'Browse upload',
+    tools : 'professeur'
   }
 
   constructor(

@@ -61,7 +61,8 @@ export class TableDynamicComponent implements OnInit {
       return;
     }
     const success = (response  : any)=>{
-      this.notif.showSuccess("Suppression de "+this.config.tools+" reussi !" , "Suppression "+this.config.tools)
+      this.notif.showSuccess("Suppression de "+this.config.tools+" reussi !" , "Suppression "+this.config.tools);
+      this.getData();
     }
 
     const error = (error : HttpErrorResponse)=>{
@@ -77,6 +78,8 @@ export class TableDynamicComponent implements OnInit {
   }
 
   onEdit(data : any){
+    console.log(data , `edit-${this.config.tools}`);
+    
     this.route.navigate([`edit-${this.config.tools}`, data["_id"]]);
   }
 
@@ -123,9 +126,6 @@ export class TableDynamicComponent implements OnInit {
       case 'prof':
         pathParent = 'professeur';
         break;
-      case 'auteur':
-        pathParent = 'student';
-        break;
       default:
         pathParent = this.config.tools;
         break;
@@ -144,6 +144,24 @@ export class TableDynamicComponent implements OnInit {
       }
     )
     return modalref;
+  }
+
+  onImageError(event: Event, section : string): void {
+    const imagHtml = event.target as HTMLImageElement;
+    let defaultImageUrl = "assets/images";
+    
+    switch(section){
+      case 'auteur':
+        defaultImageUrl = `${defaultImageUrl}/etu.png`;
+        break;
+      case 'professeur':
+        defaultImageUrl = `${defaultImageUrl}/prof.png`;
+        break;
+      case 'matiere':
+        defaultImageUrl = `${defaultImageUrl}/matiere.png`;
+        break;
+    }
+    imagHtml.src = defaultImageUrl;
   }
 
 }

@@ -14,7 +14,6 @@
                             </div> 
                             <div mat-form-field class="form-group w-50 ml-5">
                                 <label class="my-2">Date de rendue</label>
-                                <!-- <input class="form-control" placeholder="date de rendue" type="date" [(ngModel)]="assignment.dateDeRendu" name="date"/> -->
                                 <div class="content-input">
                                     <input  
                                         class="form-control"
@@ -39,10 +38,10 @@
                                     (input)="onFilterMatiere($event)" 
                                     formControlName="matiere" />
                                 <mat-autocomplete #autoCompleteMatiere="matAutocomplete" [displayWith]="displayMatiere">
-                                    @for (item of filtredMatiere; track $index) {
-                                    <mat-option [value]="item">
-                                        <img alt="" class="example-option-img" [src]="img_uri+'/matiere/'+item.image" height="25" width="50" />
-                                        <span>{{item.nom}}</span>
+                                    @for (matiere of filtredMatiere; track $index) {
+                                    <mat-option [value]="matiere">
+                                        <img alt="matiere photo" class="example-option-img" [src]="img_uri+'/matiere/'+matiere.image" (error)="onImageError($event , 'matiere')" height="25" width="50" />
+                                        <span>{{matiere.nom}}</span>
                                     </mat-option>
                                     }
                                 </mat-autocomplete>
@@ -59,7 +58,7 @@
                                 <mat-autocomplete #autoCompleteAuteur="matAutocomplete"  [displayWith]="displayAuteur">
                                     @for (auteur of filtredAuteur; track $index) {
                                     <mat-option [value]="auteur">
-                                        <img alt="" class="example-option-img" src="assets/images/etu.jpg" height="25" />
+                                        <img alt="auteur photo" class="example-option-img" [src]="img_uri+'/auteur/'+auteur.photo" (error)="onImageError($event , 'auteur')" height="25" />
                                         <span>{{auteur.nom}}</span>
                                     </mat-option>
                                     }
@@ -68,12 +67,6 @@
                             </div>
                         </div>
                         @if (assignment._id && assignment.rendu) {
-                            <!-- <div class="row mt-3">
-                                <div mat-form-field class="form-group mr-5">
-                                    <label class="my-2">Rendue</label>
-                                    <mat-checkbox [checked]="assignment.rendu" class="example-margin" formControlName="rendu"></mat-checkbox>
-                                </div>
-                            </div> -->
                             <div class="row mt-3">
                                 <div mat-form-field class="form-group mr-5" style="width: 15%;">
                                     <label class="my-2">Note</label>

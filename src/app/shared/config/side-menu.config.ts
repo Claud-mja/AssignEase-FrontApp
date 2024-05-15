@@ -18,7 +18,7 @@ export const sideBarMenu =  [
     {
         "title" : "Auteur",
         "icon": "user",
-        "routerLink": "/student"
+        "routerLink": "/auteur"
     },
     // {
     //     "title": "Test",

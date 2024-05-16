@@ -51,9 +51,7 @@ export class CardAssignmentComponent implements OnInit {
     return ''; 
   }
 
-  onImageError(event: Event , section : string): void {
-    console.log(event);
-    
+  onImageError(event: Event , section : string): void { 
     this.utilsService.handleImageError(event , section);
   }
 

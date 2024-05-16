@@ -1,61 +1,72 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatCardModule } from "@angular/material/card";
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatProgressSpinnerModule } from "@angular/material/progress-spinner";
-import { MatInputModule } from "@angular/material/input";
-import { MatButtonModule } from "@angular/material/button";
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 
 import { Router } from '@angular/router';
 import { AuthService } from '../../../auth.service';
+import { NotificationService } from '../../../shared/services/utils/notification.service';
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
+            CommonModule,
             FormsModule,
-            MatCardModule,MatFormFieldModule , MatProgressSpinnerModule,MatInputModule,MatButtonModule
+            ReactiveFormsModule
             ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-
-  username : string = '';
-  password !: string;
   showSpinner : boolean = false;
-  errorMessage!: string;
+  errorMessage!: any;
 
-  constructor(private authService: AuthService, private router: Router) { }
+  loginForm !: FormGroup;
+  hidePass : boolean = true;
+
+  constructor(private authService: AuthService, private router: Router, private fb : FormBuilder,private notif : NotificationService) { }
 
   ngOnInit(): void {
-    // Vérifiez si l'utilisateur est déjà connecté au chargement du composant
     if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/']); // Redirigez vers la page d'accueil si l'utilisateur est déjà connecté
+      this.router.navigate(['/']); 
+    }else{
+      this.initForm()
     }
   }
 
-  login(): void {
-    if(this.username.length>2 && this.password.length>1){
+  onToggleEye(){
+    this.hidePass = !this.hidePass;
+  }
+
+  initForm(){
+    this.loginForm = this.fb.group({
+      email : ['', Validators.compose([Validators.required , Validators.email])],
+      password : ['' , Validators.required]
+    })
+  }
+
+  async onLogin(){
+    this.errorMessage=undefined
+    this.loginForm.markAllAsTouched();
+    if(this.loginForm.valid){
+      const email = this.loginForm.value['email'];
+      const password = this.loginForm.value['password'];
       this.showSpinner=true;
-      this.authService.login(this.username, this.password)
+      this.authService.login(email, password)
         .subscribe(success => {
           this.showSpinner=false;
           if (success) {
+            this.notif.showSuccess('Connexion réussi' , "Authentification !");
             this.router.navigate(['/']);
           } else {
-            this.errorMessage = 'Identifiants incorrects';
+            this.errorMessage = 'Identifiants ou mot de passe incorect !';
           }
         }, error => {
           this.showSpinner=false;
-          console.error('Erreur lors de la connexion : ', error);
+          this.notif.showSuccess('Echec de connexion, '+error , "Authentification !");
           this.errorMessage = 'Une erreur s\'est produite, veuillez réessayer.';
         });
-    } else {
-      this.errorMessage = 'Champs invalide';
     }
-
   }
 
 }

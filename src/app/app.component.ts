@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Router, RouterLink, RouterOutlet,NavigationEnd } from '@angular/router';
 import { MatToolbar, MatToolbarModule } from "@angular/material/toolbar";
 import { MatIconModule } from "@angular/material/icon";
@@ -9,6 +9,9 @@ import { IMenu } from './shared/interfaces/IMenu';
 import { CommonModule } from '@angular/common';
 import { sideBarMenu } from './shared/config/side-menu.config';
 import { MatPaginator } from '@angular/material/paginator';
+import { UtilsService } from './shared/services/utils/utils.service';
+import { AuthService } from './auth.service';
+import { Subject, Subscription } from 'rxjs';
 
 
 @Component({
@@ -25,7 +28,7 @@ import { MatPaginator } from '@angular/material/paginator';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit,AfterViewInit {
+export class AppComponent implements OnInit,AfterViewInit,OnDestroy {
   title = 'AssignEase-frontApp';
 
   menuList !: IMenu[];
@@ -35,9 +38,15 @@ export class AppComponent implements OnInit,AfterViewInit {
   name !: string | null;
   showNavbar: boolean = true;
 
-  constructor(private router : Router) {
+  private unserNameSbscription !: Subscription;
+
+  constructor(private router : Router,private authService : AuthService) {
     this.currentUrl = this.router.url;
   }
+
+  ngOnDestroy(): void {
+  }
+
   ngAfterViewInit(): void {
     this.sideBarEvent();
   }
@@ -46,8 +55,11 @@ export class AppComponent implements OnInit,AfterViewInit {
     this.menuList = sideBarMenu;
     this.currentUrl = this.router.url;
     if (this.isLogIn()) {
-      this.name = localStorage.getItem('name');
+      this.authService.setName(localStorage.getItem('name'));
     }
+    this.unserNameSbscription = this.authService.getName().subscribe((name)=>{
+      this.name = name;
+    })
   }
 
   sideBarEvent(){
@@ -91,10 +103,8 @@ export class AppComponent implements OnInit,AfterViewInit {
   }
 
   onLogOut(){
-    localStorage.removeItem('token');
-    localStorage.removeItem('name');
-    this.name = null;
-    this.router.navigate(['/login']);
+    this.authService.logout();
+    this.router.navigate(['login']);
   }
 
   toggleCollapse(index: number) {

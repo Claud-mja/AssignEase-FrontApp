@@ -1,4 +1,4 @@
-<div class="content-login">
+<!-- <div class="content-login">
     <mat-card class="example-card">
         <mat-card-header>
           <mat-card-title>Login</mat-card-title>
@@ -27,4 +27,134 @@
           <button mat-raised-button (click)="login()" color="primary">Login</button>
         </mat-card-actions>
     </mat-card>
-</div>
+</div> -->
+
+<!-- <mat-card>
+  <mat-card-content>
+    <form #loginForm="ngForm" (ngSubmit)="login()">
+      <h2>Log In</h2>
+      <mat-error *ngIf="!loginValid">
+        The username and password were not recognized
+      </mat-error>
+      <mat-form-field>
+        <input matInput placeholder="Email" [(ngModel)]="username" name="username" required>
+        <mat-error>
+          Please provide a valid email address
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="password" placeholder="Password" [(ngModel)]="password" name="password" required>
+        <mat-error>
+          Please provide a valid password
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" [disabled]="!loginForm.form.valid">Login</button>
+    </form>
+  </mat-card-content>
+</mat-card> -->
+
+<section class="sign-in" id="signin">
+  <div class="container">
+      <div class="signin-content">
+          <div class="signin-image">
+              <figure><img src="assets/images/signin-image.jpg" alt="sing up image"></figure>
+          </div>
+
+          <div class="signin-form">
+              <h2 class="form-title">Sign In</h2>
+              <form [formGroup]="loginForm"  class="register-form" id="login-form" >
+                    <div class="form-group">
+                        <label for="email"><i class="fa fa-envelope"></i></label>
+                        <input [ngClass]="{
+                            'error' : (loginForm.controls['email'].touched ||
+                                        loginForm.controls['email'].dirty ) &&
+                                        loginForm.controls['email'].errors && 
+                                        (loginForm.controls['email'].errors['required'] || loginForm.controls['email'].errors['incorrectEmail']) }" type="email" formControlName="email" id="email" placeholder="Email"/>
+                    </div>
+                    <div class="mb-2" style="position: relative;" *ngIf="(loginForm.controls['email'].touched ||
+                    loginForm.controls['email'].dirty ) &&
+                    loginForm.controls['email'].errors && 
+                    (loginForm.controls['email'].errors['required'] || loginForm.controls['email'].errors['incorrectEmail'])">
+                        <div class="content-mesg">
+                          @if (loginForm.controls['email'].touched &&
+                              loginForm.controls['email'].errors && 
+                              loginForm.controls['email'].errors['required']) {
+                                <span class="form-text text-muted text-error" mat-error>
+                                    Champs email requis 
+                                </span>
+                          }
+
+                          @if (loginForm.controls['email'].errors && 
+                              loginForm.controls['email'].errors['incorrectEmail']) {
+                                <span class="form-text text-muted text-error" mat-error >
+                                    Email inexistant ! 
+                                </span>
+                          }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="your_pass"><i class="fa fa-lock"></i></label>
+                        <div class="content-in">
+                            <input [ngClass]="{
+                                'error' : (loginForm.controls['password'].touched ||
+                                            loginForm.controls['password'].dirty ) &&
+                                            loginForm.controls['password'].errors && 
+                                            (loginForm.controls['password'].errors['required'] || loginForm.controls['password'].errors['incorrectPassword']) }" [type]="hidePass ? 'password' : 'text'" formControlName="password" id="your_pass" placeholder="Password"/>
+                            <span style="position: absolute;
+                              right: 0;
+                              top: 6px;">
+                                
+                                <i [class]="!hidePass ? 'fas fa-solid fa-eye' : 'fa-solid fa-eye-slash'" (click)="onToggleEye()"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="mb-2" style="position: relative;" *ngIf="(loginForm.controls['email'].touched ||
+                    loginForm.controls['password'].dirty ) &&
+                    loginForm.controls['password'].errors && 
+                    (loginForm.controls['password'].errors['required'] || loginForm.controls['password'].errors['incorrectPassword'])">
+                        <div class="content-mesg">
+                          @if ( loginForm.controls['password'].touched &&
+                                loginForm.controls['password'].errors && 
+                                loginForm.controls['password'].errors['required']) {
+                            <span class="form-text text-muted text-error" mat-error>
+                                Champs password requis 
+                            </span>
+                          }
+
+                          @if (loginForm.controls['password'].touched &&
+                              loginForm.controls['password'].errors && 
+                              loginForm.controls['password'].errors['incorrectPassword']) {
+
+                              <span class="form-text text-muted text-error" mat-error>
+                                  Password incorect ! 
+                              </span>
+                          }
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <input type="checkbox" name="remember-me" id="remember-me" class="agree-term" />
+                        <label for="remember-me" class="label-agree-term"><span><span></span></span>Remember me</label>
+                    </div>
+                    <div class="form-group form-button">
+                      @if (showSpinner) {
+                        <div class="text-center">
+                          <div class="spinner-grow" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                          </div>
+                        </div>
+                      }@else {
+                        <input type="submit" (click)="onLogin()" name="signin" id="signin" class="form-submit" value="Log in"/>
+                      }
+                    </div>
+                    @if (errorMessage) {
+                      <div class="error-message">
+                        <div class="content-mesg">
+                          <span class="form-text text-muted text-error" mat-error>{{errorMessage}}</span>
+                        </div>
+                      </div>
+                    }
+              </form>
+          </div>
+      </div>
+  </div>
+</section>

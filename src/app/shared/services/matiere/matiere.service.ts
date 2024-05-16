@@ -29,7 +29,7 @@ export class MatiereService {
     return this.http.get<ResponseListPaginate>(`${this.matiere_uri}` + "?page=" + page + "&limit=" + limit);
   }
 
-  updateMatiere(matiere : Matiere , file : File):Observable<any>{
+  updateMatiere(matiere : Matiere , file : File , lastFile : string):Observable<any>{
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set(
       'Authorization',
@@ -39,8 +39,8 @@ export class MatiereService {
     formData.append("matiere" , JSON.stringify(matiere));
     if (file) {   
       const uniqueFilename = this.utilsServices.makeFileUniqueName(file.name); 
-      matiere.image = uniqueFilename;
       formData.append("fileName" , uniqueFilename);
+      formData.append("lastFile" , lastFile);
       formData.append("imageFile" , file);
     }
     return this.http.put<Matiere>(`${this.matiere_uri}/${matiere._id}/matiere`, formData , {headers : headers});

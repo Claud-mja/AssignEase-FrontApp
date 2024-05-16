@@ -143,8 +143,9 @@ export class AddEditProfesseurComponent implements OnInit {
         this.utilsService.handleError(httpError.status , message , "Ajout de Professeur");
       } 
       
+      const photo = this.professeur.photo; 
       this.professeur = {_id : this.professeur._id ,... this.professeurForm.value};
-      this.professeurService.updateProfesseur(this.professeur , this.imageFile).subscribe(success , error);
+      this.professeurService.updateProfesseur(this.professeur , this.imageFile , photo).subscribe(success , error);
     }
   }
 

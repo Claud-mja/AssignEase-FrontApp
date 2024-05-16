@@ -188,8 +188,9 @@ export class AddEditMatiereComponent implements OnInit {
         this.utilsService.handleError(httpError.status , message , "Modification de Matière");
       }
       
+      const image = this.matiere.image; 
       this.matiere = {_id : this.matiere._id ,... this.matiereForm.value};
-      this.matiereService.updateMatiere(this.matiere , this.imageFile).subscribe(success , error);
+      this.matiereService.updateMatiere(this.matiere , this.imageFile , image).subscribe(success , error);
     }
   }
 

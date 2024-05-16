@@ -54,7 +54,7 @@ export class AuteurService {
     return this.http.post<Auteur>(`${environment.baseUrl}/auteur/auteur`, formData , {headers : headers});
   }
 
-  updateAuteur(auteur : Auteur , file : File):Observable<any>{
+  updateAuteur(auteur : Auteur , file : File , lastFile : string):Observable<any>{
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set(
       'Authorization',
@@ -64,8 +64,8 @@ export class AuteurService {
     formData.append("auteur" , JSON.stringify(auteur));
     if (file) {   
       const uniqueFilename = this.utilsService.makeFileUniqueName(file.name); 
-      auteur.photo = uniqueFilename;
       formData.append("fileName" , uniqueFilename);
+      formData.append("lastFile" , lastFile);
       formData.append("imageFile" , file);
     }
     return this.http.put<Auteur>(`${environment.baseUrl}/auteur/${auteur._id}/auteur`, formData , {headers : headers});

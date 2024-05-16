@@ -56,7 +56,7 @@ export class TeacherService {
     return this.http.post<Teacher>(`${environment.baseUrl}/professeur/professeur`, formData , {headers : headers});
   }
 
-  updateProfesseur(professeur : Teacher , file : File):Observable<any>{
+  updateProfesseur(professeur : Teacher , file : File , lastFile : string):Observable<any>{
     const token = localStorage.getItem('token');
     const headers = new HttpHeaders().set(
       'Authorization',
@@ -66,8 +66,8 @@ export class TeacherService {
     formData.append("professeur" , JSON.stringify(professeur));
     if (file) {   
       const uniqueFilename = this.utilsServices.makeFileUniqueName(file.name); 
-      professeur.photo = uniqueFilename;
       formData.append("fileName" , uniqueFilename);
+      formData.append("lastFile" , lastFile);
       formData.append("imageFile" , file);
     }
     return this.http.put<Teacher>(`${environment.baseUrl}/professeur/${professeur._id}/professeur`, formData , {headers : headers});

@@ -140,9 +140,9 @@ export class AddEditAuteurComponent implements OnInit {
         const message = "Modification "+httpError.error;
         this.utilsService.handleError(httpError.status , message , "Ajout de Auteur");
       } 
-      
+      const photo = this.auteur.photo;
       this.auteur = {_id : this.auteur._id ,... this.auteurForm.value};
-      this.auteurService.updateAuteur(this.auteur , this.imageFile).subscribe(success , error);
+      this.auteurService.updateAuteur(this.auteur , this.imageFile , photo).subscribe(success , error);
     }
   }
 

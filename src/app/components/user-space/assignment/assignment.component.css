@@ -1,10 +1,12 @@
 
-   .header-card{
-    position: sticky;
-    top: -5%;
-    z-index: 1;
-    background: #fff;
-   }
+  .header-card{
+  position: sticky;
+  top: -5%;
+  z-index: 1;
+  background: #fff;
+  border-radius: 4px;
+  margin-bottom: 30px;
+  }
 
 .icon-add-fixed{
   position: fixed;

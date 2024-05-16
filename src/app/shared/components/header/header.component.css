@@ -29,7 +29,7 @@
    .content-field{
      padding: 10px;
      position: absolute;
-     top: 48px;
+     top: 56px;
      right: -3px;
      height: 200px;
      width: 180px;
@@ -56,4 +56,8 @@
 
    .activeFilter:hover{
      background-color: #1766AF !important;
+   }
+
+   .padding-up{
+    padding-top: 30px;
    }

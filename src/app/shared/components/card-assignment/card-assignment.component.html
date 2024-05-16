@@ -1,45 +1,37 @@
-<div class="content-card" style="cursor: pointer;" (click)="onDetails()">
-  <div class="content-card-info">
-    <div class="content-img-head">
-      <article>
-        <img mat-card-image [src]="image_uri+'/matiere/'+assignment?.matiere?.image" alt="Photo of a Shiba Inu">
-      </article>
-      <div class="content-name-matiere">
-        <h1><strong>{{assignment?.matiere?.nom}}</strong></h1>
+
+  <div class="content-img-head" [style.backgroundImage]="'url('+image_uri+'/matiere/'+assignment?.matiere?.image+')'">
+  </div>
+  <mat-card-content>
+    <div class="content-info-body">
+      <div class="top-info">
+        <p id="matiere">{{assignment?.matiere?.nom}}</p>
+        <h2  [routerLink]="['/details-assignment', assignment?._id]" role="link" id="assignment-name" class="text-init-color text single-line">{{assignment?.nom}}</h2>
+        <p>
+          <span class="text-muted">
+            <i class="far fa-calendar"></i>
+          </span>
+          <span class="mx-1" id="dateRendue">
+            {{constructDate()}}
+          </span>
+        </p>
+      </div>
+      <div class="bottom-info">
+        <div class="prof-info">
+          <img class="rounded-circle" [src]="image_uri+'/professeur/'+assignment?.matiere?.prof?.photo" (error)="onImageError($event , 'professeur')" alt="" width="35">
+          <p class="text-init-color">{{assignment?.matiere?.prof?.nom+" "+assignment?.matiere?.prof?.prenom}}</p>
+        </div>
+        <div class="other-info">
+          <div class="rendu-info">
+            <span class="text-muted">
+              <i class="far" [ngClass]="{'fa-times-circle error-color' : !assignment?.rendu , 'fa-check-circle success-color' : assignment?.rendu}"></i>
+            </span>
+            <p class="m-0 mx-2" [ngClass]="{'error-color' : !assignment?.rendu , 'success-color' : assignment?.rendu}">{{ assignment?.rendu ? 'Rendu' : 'Non rendu' }}</p>
+          </div>
+          <div class="auteur-info">
+            <img class="rounded-circle mx-2" [src]="image_uri+'/auteur/'+assignment?.auteur?.photo" (error)="onImageError($event , 'auteur')" alt="" width="28">
+            <p class="text-init-color m-0">{{assignment?.auteur?.nom}}</p>
+          </div>
+        </div>
       </div>
     </div>
-    <mat-card>
-      <mat-card-content>
-        <div class="content-head-info row">
-          <div class="info-assign col-md-6">
-            <h2 class="m-0"><strong>Titre : </strong> {{assignment?.nom}}</h2>
-            <p><strong>Date de rendue : </strong> {{assignment?.dateDeRendu}}</p>
-          </div>
-          <div class="info-prof col-md-6">
-            <div [style.background-image]="'url('+image_uri+'/professeur/'+assignment?.matiere?.prof?.photo+')'" mat-card-avatar class="example-header-image m-0"></div>
-            <div class="name-prof">
-              <mat-card-title class="text-right">{{assignment?.matiere?.prof?.nom}}</mat-card-title>
-              <mat-card-subtitle class="text-right fonction">Proffesseur en <span>{{assignment?.matiere?.nom}}</span></mat-card-subtitle>
-            </div>
-          </div>
-        </div>
-        <div class="content-body-info">
-          <div class="content-info-etu">
-            <h3> <strong>Auteur info : </strong></h3>
-            <div class="info-etu">
-              <img [src]="'assets/images/etu.png'" />
-              <div class="etu">
-                <p class="m-0">{{assignment?.auteur?.nom}}</p>
-                <p class="m-0 text-muted">{{assignment?.auteur?.nom+'@gmail.com'}}</p>
-              </div>
-            </div>
-          </div>
-          <div class="content-rendu-stat">
-            <div class="rounded-circle-stat" [ngStyle]="{'background-color': assignment?.rendu ? '#0bb613' : '#bb2916'}" ></div>
-          </div>
-        </div>
-      </mat-card-content>
-    </mat-card>
-  </div>
-</div>
-
+    </mat-card-content>

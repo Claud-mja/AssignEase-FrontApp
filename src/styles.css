@@ -3,7 +3,7 @@
 @import 'primeng/resources/themes/saga-blue/theme.css';
 @import 'primeicons/primeicons.css';
 
-html, body { height: 100%; overflow: hidden;  }
+html, body { height: 100%; overflow: hidden;   }
 body { margin: 0;  }
 
 *{
@@ -34,3 +34,24 @@ input , textarea{
     font-size: 13px !important;
     color: rgb(63, 63, 63);
 }
+
+
+.text-init-color{
+    color: #292929;
+}
+
+.error-color{
+    color: #d33c44;
+  }
+  
+  .error-bg{
+    background-color: #d33c44;
+  }
+  
+  .success-color{
+    color: #2aa82a;
+  }
+  
+  .success-bg{
+    background-color: #2aa82a;
+  }

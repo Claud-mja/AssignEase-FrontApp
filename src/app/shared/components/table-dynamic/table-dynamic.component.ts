@@ -11,6 +11,7 @@ import { FieldValue } from '../../interfaces/Header-config';
 import { environment } from '../../../../environments/environment';
 import { MatButton} from '@angular/material/button'
 import { ConfirmationComponent } from '../modal/confirmation/confirmation.component';
+import { UtilsService } from '../../services/utils/utils.service';
 
 @Component({
   selector: 'app-table-dynamic',
@@ -32,7 +33,8 @@ export class TableDynamicComponent implements OnInit {
   constructor(
       private tableService : TableService,
       private dialog : MatDialog , 
-      private route : Router , 
+      private route : Router ,
+      private utilsService : UtilsService, 
       private notif : NotificationService){
     
   }
@@ -46,7 +48,6 @@ export class TableDynamicComponent implements OnInit {
     const success = (response : any)=>{
         this.data = response.docs ? response.docs : response;
         this.nbElement = this.data.length;
-        console.log("Response ==> ", response);
     }
 
     const error = (error : HttpErrorResponse)=>{
@@ -147,21 +148,7 @@ export class TableDynamicComponent implements OnInit {
   }
 
   onImageError(event: Event, section : string): void {
-    const imagHtml = event.target as HTMLImageElement;
-    let defaultImageUrl = "assets/images";
-    
-    switch(section){
-      case 'auteur':
-        defaultImageUrl = `${defaultImageUrl}/etu.png`;
-        break;
-      case 'professeur':
-        defaultImageUrl = `${defaultImageUrl}/prof.png`;
-        break;
-      case 'matiere':
-        defaultImageUrl = `${defaultImageUrl}/matiere.png`;
-        break;
-    }
-    imagHtml.src = defaultImageUrl;
+    this.utilsService.handleImageError(event , section);
   }
 
 }

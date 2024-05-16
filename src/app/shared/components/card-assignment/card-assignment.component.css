@@ -1,159 +1,98 @@
-
-  .example-header-image {
-    /* background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg'); */
-    background-size: cover;
-  }
-
-  article{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-    clip-path: inset(0 0px 83px 0);
-  }
-
-  article img{
-    height: 100%;
-    width: 100%;
-  }
-
-
-  .content-img-head{
-    position: relative;
-    border-radius: 20px;
-    height: 100px;
-  }
-
-  .content-name-matiere{
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(95, 94, 94, 0.5); /* couleur de fond avec opacité */
-    pointer-events: none;
-    display: flex;
-    justify-content: center; 
-    align-items: center;
-    text-transform: uppercase;
-    color: #fff;
-    border-top-left-radius: 30px;
-    border-top-right-radius: 30px;
-  }
-
-  .content-name-matiere h1{
-    font-size: 24px;
-  }
-
-.info-prof{
-  display: flex;
-    flex-direction: column;
-    align-items: end;
-}
-
-.info-prof .name-prof .text-right{
-  text-align: right;
-}
-
 .content-card{
-  padding: 10px;
+  display: block;
 }
 
-.content-head-info{
+.content-img-head{
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  width: 100%;
+  height: 120px;
+  border-top-left-radius: 10px ;
+  border-top-right-radius: 10px ;
+}
+
+.content-info-body{
+  padding: 20px;
+  height: 250px;
+  background-color: #fff;
+  border-bottom-left-radius: 10px ;
+  border-bottom-right-radius: 10px ;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+#matiere{
+  font-size: 16px;
+  color: #FF5930;
+  font-weight: 600;
+  font-family: 'Poppins', Open Sans !important;
+}
+
+#assignment-name{
+  font-size: 22px;
+  font-weight: 600;
+  font-family: 'Poppins', Open Sans !important;
+  position: relative;
+  cursor: pointer;
+}
+
+#assignment-name:hover{
+  color: #18a6f3;
+}
+
+#assignment-name:hover:after{
+  font-family: "Font Awesome 6 Free";
+  content: "\f05a";
+  position: absolute;
+  color: #209EE3;
+  right: 10px;
+  font-size: 18px;
+  top: 0;
+}
+
+#dateRendue{
+  color: #209EE3;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.prof-info{
+  display: flex;
+  align-items: center;
+padding: 10px 0;
+
+  p{
+    margin: 0;
+    margin-left: 6px;
+    font-weight: 500;
+  }
+}
+
+.text.single-line {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fa-times-circle,.fa-check-circle{
+  font-size: 18px;
+}
+
+.rendu-info{
+  display: flex;
+  align-items: center;
+}
+
+.other-info{
   display: flex;
   justify-content: space-between;
 }
 
-.info-assign{
-  position: relative;
-}
-
-.info-assign::after{
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 1px;
-  width: 100%;
-  background-color: #cecdcd;
-  border-radius: 8px;
-}
-
-.info-assign h2{
-  font-size: 18px;
-}
-
-.content-info-etu{
-  width: 100%;
-}
-
-.content-info-etu h3{
-  margin: 0;
-  font-size: 14px;
-}
-
-.content-info-etu img{
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  margin-right: 8px;
-} 
-
-.info-etu{
+.auteur-info{
   display: flex;
+  align-items: center;
 }
 
-.info-etu p{
-  font-style: italic;
-  font-size: 13px;
-}
-
-.content-body-info{
-  display: flex;
-  margin-top: 10px;
-}
-
-.content-rendu-stat{
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;;
-}
-
-.rounded-circle-stat{
-  position: relative;
-  background-color: #0bb613;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-
-.rounded-circle-stat::after{
-  content: "";
-  position: absolute;
-  width: 80%;
-  height: 80%;
-  background-color: #fff;
-  top: 10%;
-  left: 10%;
-  border-radius: 50%;
-}
-
-.name-prof .mat-mdc-card-title{
-  font-size: 16px;
-}
-
-.name-prof .mat-mdc-card-subtitle{
-  font-size: 12px;
-}
-
-.content-card-info{
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
-}
-
-.content-card:hover .content-card-info{
-  box-shadow: 0px 0px 12px 0px #248dca;
--webkit-box-shadow: 0px 0px 12px 0px #248dca;
--moz-box-shadow: 0px 0px 12px 0px #248dca;
-}

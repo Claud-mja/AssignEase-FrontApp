@@ -1,6 +1,6 @@
-<div class="card-header border-0 d-flex justify-content-between w-100">
-    <div class="content-title d-flex align-items-center">
-        <h3 fxlayout="column" class="card-title align-items-start" style="flex-direction: column; box-sizing: border-box; display: flex;">
+<div class="card-header border-0 d-flex justify-content-between w-100" [ngClass]="{'padding-up' : haveSearch}">
+    <div class="content-title" >
+        <h3 fxlayout="column" class="card-title align-items-start" style="flex-direction: column; box-sizing: border-box; display: flex;" [ngStyle]="{'margin-left': haveSearch ? '8px' : '0', 'margin-top': haveSearch ? '8px' : '0' }">
             <span class="card-label font-weight-bolder text-dark">{{headTitle.title}}</span>
             <span class="text-muted mt-0 font-weight-bold font-size-sm" *ngIf="haveSubTitle">{{headTitle.subTitle}}</span>
         </h3>
@@ -11,7 +11,7 @@
                 @if (currentField.type=='string') {
                     <mat-form-field>
                         <mat-label>{{config.labels && config.labels[currentField.name] ? config.labels[currentField.name] : currentField.name}}</mat-label>
-                        <input matInput type="text" [(ngModel)]="valueFilter" name="text">
+                        <input matInput autocomplete="off" type="text" [(ngModel)]="valueFilter" name="text">
                     </mat-form-field>
                 }
                 @else {

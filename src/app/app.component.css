@@ -11714,7 +11714,7 @@ a.text-dark:focus {
 }
 
 body {
-    font-family: "Poppins", Arial, sans-serif;
+    font-family: "Poppins",  Open Sans;
     font-size: 14px;
     line-height: 1.8;
     font-weight: normal;
@@ -11763,7 +11763,7 @@ h5,
 .h5 {
     line-height: 1.5;
     font-weight: 400;
-    font-family: "Poppins", Arial, sans-serif;
+    font-family: "Poppins",  Open Sans;
     color: #000;
 }
 
@@ -12060,6 +12060,8 @@ hr{
     padding: 0 40px;
     overflow-y: auto; /* Ajoutez un défilement vertical uniquement au contenu de content-body */
     max-height: calc(100vh - 40px); /* Fixez la hauteur maximale à 100% de la hauteur de la vue moins la hauteur des espaces de remplissage */
+    background-color: #ededed;
+    height: 100%;
   }
 #content {
     margin-left: 250px;
@@ -12071,3 +12073,7 @@ hr{
   .content{
     width: 100%;
   }
+
+  .mat-toolbar  ::ng-deep {
+        background-color: #fff;
+}

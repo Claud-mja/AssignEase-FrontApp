@@ -2,6 +2,7 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild }
 import { MatButtonModule } from '@angular/material/button';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { FilesDragDropDirective } from '../../directives/files-drag-drop.directive';
+import { UtilsService } from '../../services/utils/utils.service';
 
 @Component({
   selector: 'app-upload-file',
@@ -27,7 +28,7 @@ export class UploadFileComponent implements OnInit {
   @Output() fileChanged: EventEmitter<File> = new EventEmitter<File>();
 
 
-  constructor() { }
+  constructor(private utilsService : UtilsService) { }
 
   ngOnInit() {
     
@@ -71,22 +72,8 @@ export class UploadFileComponent implements OnInit {
     }
   }
 
-  onImageError(event: Event, section : string): void {
-    const imagHtml = event.target as HTMLImageElement;
-    let defaultImageUrl = "assets/images";
-    
-    switch(section){
-      case 'auteur':
-        defaultImageUrl = `${defaultImageUrl}/etu.png`;
-        break;
-      case 'professeur':
-        defaultImageUrl = `${defaultImageUrl}/prof.png`;
-        break;
-      case 'matiere':
-        defaultImageUrl = `${defaultImageUrl}/matiere.png`;
-        break;
-    }
-    imagHtml.src = defaultImageUrl;
+  onImageError(event: Event): void {
+    this.utilsService.handleImageError(event , this.config.tools);
   }
 
 } 

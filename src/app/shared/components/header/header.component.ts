@@ -91,6 +91,7 @@ export class HeaderComponent implements OnInit {
   onMakeFilter(){
     const fieldData = this.currentField;
     if (fieldData.type=="number" || fieldData.type=="date") {
+      this.config.sorts = [];
       this.config.filters = [];
       if(this.valueFilter!=null){
         const index = this.config.sorts.findIndex(sort => sort.field == fieldData.name);
@@ -105,6 +106,7 @@ export class HeaderComponent implements OnInit {
       }
     }else {
       this.config.sorts = [];
+      this.config.filters = [];
       if(this.valueFilter!=null){
         const index = this.config.filters.findIndex(filter => filter.field == fieldData.name);
         if (index!=-1) {

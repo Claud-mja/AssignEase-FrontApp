@@ -14,6 +14,7 @@ import { ImageService } from '../../../../shared/services/utils/image.service';
 import { CdkDragDrop, CdkDropList, CdkDrag} from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
 import { RendAssignmentComponent } from '../../../../shared/components/modal/rend-assignment/rend-assignment.component';
+import { UtilsService } from '../../../../shared/services/utils/utils.service';
 
 @Component({
   selector: 'app-details-assignment',
@@ -43,6 +44,7 @@ export class DetailsAssignmentComponent implements OnInit {
     private router : Router ,
     private route : ActivatedRoute ,
     private assignmentService  : AssignmentService ,
+    private utilsService : UtilsService,
     private notif : NotificationService,
     private dialog : MatDialog){
     this.img_uri = environment.baseUrlImg;
@@ -101,6 +103,17 @@ export class DetailsAssignmentComponent implements OnInit {
         this.router.navigate(['assignment']);
       }
     })
+  }
+
+  async placeHoldImage(url :string ,section : string){
+    const response = await this.utilsService.imageExists(url);
+    if(response){
+      console.log("response ,");
+      
+    }else{
+    }
+    
+    return url
   }
 
 

@@ -129,5 +129,4 @@ export class TeacherUpdateComponent {
     const file: File = event.target.files[0];
   this.fileToUpload = file;
   }
-
 }

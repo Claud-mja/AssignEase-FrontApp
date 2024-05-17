@@ -11,7 +11,7 @@ describe('TeacherUpdateComponent', () => {
       imports: [TeacherUpdateComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(TeacherUpdateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

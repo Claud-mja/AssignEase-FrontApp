@@ -46,3 +46,4 @@ export class TeacherComponent {
     this.router.navigate(['/edit-student', id]);
   }
 }
+

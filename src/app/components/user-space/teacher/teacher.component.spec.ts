@@ -11,7 +11,7 @@ describe('TeacherComponent', () => {
       imports: [TeacherComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(TeacherComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -21,3 +21,4 @@ describe('TeacherComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

@@ -26,7 +26,6 @@ export class StudentCreateComponent {
     nom: new FormControl('', [Validators.required])  // Renommez `name` en `nom` pour correspondre au template
   });
 
-
   constructor(
     private auteurService: AuteurService,
     private route: ActivatedRoute,

@@ -8,7 +8,6 @@ import { Auteur } from '../../../shared/models/auteur.model';
 
 import { AuteurService } from '../../../shared/services/auteur/auteur.service';
 
-
 @Component({
   selector: 'app-student',
   templateUrl: './student.component.html',

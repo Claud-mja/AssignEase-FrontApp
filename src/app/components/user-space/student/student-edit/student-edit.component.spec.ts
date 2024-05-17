@@ -11,7 +11,7 @@ describe('StudentEditComponent', () => {
       imports: [StudentEditComponent]
     })
     .compileComponents();
-    
+
     fixture = TestBed.createComponent(StudentEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -21,3 +21,4 @@ describe('StudentEditComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

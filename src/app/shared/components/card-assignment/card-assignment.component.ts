@@ -74,11 +74,14 @@ export class CardAssignmentComponent implements OnInit {
     dialodRef.afterClosed().subscribe((result : any)=> {
       if (result) {
         if (this.assignment) {
-          this.assigmnentService.deleteAssignment(this.assignment).subscribe((response)=>{
+          this.assigmnentService.deleteAssignment(this.assignment._id).subscribe((response)=>{
             this.notifs.showSuccess("Suppression effectué !" , "Suppression d'assignment");
+            this.assigmnentService.triggerRefreshList();
           },
           (error : HttpErrorResponse)=>{
             const httpError = error.error;
+            console.log(error);
+            
             const message = "Supression "+httpError.error;
             this.utilsService.handleError(httpError.status , message , "Supression d'Assignment");
           })

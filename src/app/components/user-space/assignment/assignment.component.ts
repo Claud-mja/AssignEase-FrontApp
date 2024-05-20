@@ -70,6 +70,10 @@ export class AssignmentComponent implements OnInit {
     }
     this.initHeaderConfig();
     this.getAssignments();
+
+    this.assignmentService.refreshList$.subscribe(()=>{
+      this.getAssignments();
+    })
   }
 
   getAssignments(){

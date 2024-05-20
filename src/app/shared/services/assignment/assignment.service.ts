@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable, OnInit } from '@angular/core';
 import { Assignment } from '../../models/assignment.model';
-import { Observable, catchError, of } from 'rxjs';
+import { Observable, Subject, catchError, of } from 'rxjs';
 import { environment } from '../../../../environments/environment';
 import { LogginService } from '../utils/loggin.service';
 import { ResponseListPaginate } from '../../interfaces/ResponseListPaginate';
@@ -13,6 +13,9 @@ import { HeaderConfig } from '../../interfaces/Header-config';
 export class AssignmentService implements OnInit {
 
   assigment_uri !: string;
+  private refreshListSource = new Subject<void>();
+  refreshList$ = this.refreshListSource.asObservable();
+
   
   constructor(private http : HttpClient , private logService : LogginService) {
     this.assigment_uri = environment.baseUrl+'/assignment';
@@ -94,13 +97,19 @@ export class AssignmentService implements OnInit {
     return this.http.put<Assignment>(`${this.assigment_uri}/`, assignment , {headers : headers});
   }
 
-  deleteAssignment(assignment:Assignment):Observable<any> {
+  deleteAssignment(id : string):Observable<any> {
     // on va supprimer l'assignment dans le tableau
     //let pos = this.assignments.indexOf(assignment);
-    //this.assignments.splice(pos, 1);
-    this.logService.log(assignment.nom, "supprimé");
-    //return of("Assignment supprimé avec succès");
-    return this.http.delete(`${this.assigment_uri}/${assignment}`);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${token}`
+    );
+    return this.http.delete(`${this.assigment_uri}/${id}` , { headers : headers });
+  }
+
+  triggerRefreshList() {
+    this.refreshListSource.next();
   }
 
 }

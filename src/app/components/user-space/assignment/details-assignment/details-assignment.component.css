@@ -178,3 +178,35 @@
 .content-details .icon-survol i:hover{
     color: rgb(247, 67, 67);
 }
+
+
+.block-info{
+    padding: 20px;
+    position: relative;
+
+    .content-state{
+        position: absolute;
+        width: 60px;
+        height: 60px;
+        border: 1px solid #f2f7f2ee;
+        display: flex;
+        border-radius: 8px;
+        justify-content: center;
+        align-items: center;
+        top: 4px;
+        right: 6px;
+
+        i{
+            font-size: 45px;
+            color: #fff;
+        }
+    }
+}
+
+.not-rendu{
+    background-color: #f10d0d98;
+}
+
+.rendu{
+    background-color: #2d963ea1;
+}

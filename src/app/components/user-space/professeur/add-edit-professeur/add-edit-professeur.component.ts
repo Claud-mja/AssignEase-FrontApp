@@ -70,7 +70,6 @@ export class AddEditProfesseurComponent implements OnInit {
     this.headTitle = {
       title : "Ajout de Professeur"
     }
-    console.log(this.professeur._id);
     
     const idProfesseur = this.route.snapshot.params['id'];
     this.initData()
@@ -94,7 +93,6 @@ export class AddEditProfesseurComponent implements OnInit {
   getProfesseur(id : string){
     const success = (response : Teacher)=>{
       this.professeur = response;
-      console.log(response);
       
       this.initForm();
       if (this.professeur.photo.trim()!='') {

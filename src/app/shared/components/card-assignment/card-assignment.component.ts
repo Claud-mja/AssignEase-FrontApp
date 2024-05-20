@@ -80,7 +80,6 @@ export class CardAssignmentComponent implements OnInit {
           },
           (error : HttpErrorResponse)=>{
             const httpError = error.error;
-            console.log(error);
             
             const message = "Supression "+httpError.error;
             this.utilsService.handleError(httpError.status , message , "Supression d'Assignment");

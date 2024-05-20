@@ -40,7 +40,6 @@ export class TableDynamicComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.config);
     this.getData();
   }
 
@@ -79,7 +78,6 @@ export class TableDynamicComponent implements OnInit {
   }
 
   onEdit(data : any){
-    console.log(data , `edit-${this.config.tools}`);
     
     this.route.navigate([`edit-${this.config.tools}`, data["_id"]]);
   }

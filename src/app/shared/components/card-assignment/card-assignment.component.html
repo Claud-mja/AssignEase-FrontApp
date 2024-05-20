@@ -1,5 +1,9 @@
 
   <div class="content-img-head" [style.backgroundImage]="'url('+image_uri+'/matiere/'+assignment?.matiere?.image+')'">
+    <div class="opacity-calc"></div>
+    <div class="remove-item" (click)="onDelete()">
+      <i class="fas fa-times-circle"></i>
+    </div>
   </div>
   <mat-card-content>
     <div class="content-info-body">

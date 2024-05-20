@@ -5,6 +5,7 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { Router } from '@angular/router';
 import { AuthService } from '../../../auth.service';
 import { NotificationService } from '../../../shared/services/utils/notification.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -56,7 +57,7 @@ export class LoginComponent {
         .subscribe(success => {
           this.showSpinner=false;
           if (success) {
-            this.notif.showSuccess('Connexion réussi' , "Authentification !");
+            this.notif.openSnackBar("Connexion resussi !",2000);
             this.router.navigate(['/']);
           } else {
             this.errorMessage = 'Identifiants ou mot de passe incorect !';

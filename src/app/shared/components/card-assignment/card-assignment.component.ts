@@ -6,6 +6,11 @@ import { environment } from '../../../../environments/environment';
 import { CommonModule, DatePipe } from '@angular/common';
 import { UtilsService } from '../../services/utils/utils.service';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
+import { ConfirmationComponent } from '../modal/confirmation/confirmation.component';
+import { AssignmentService } from '../../services/assignment/assignment.service';
+import { NotificationService } from '../../services/utils/notification.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-card-assignment',
@@ -25,7 +30,7 @@ export class CardAssignmentComponent implements OnInit {
   @Input() assignment : Assignment | undefined;
   image_uri !: string;
 
-  constructor(private router : Router ,private datePipe: DatePipe, private utilsService : UtilsService){
+  constructor(private router : Router ,private datePipe: DatePipe, private utilsService : UtilsService,private dialog : MatDialog, private assigmnentService : AssignmentService, private notifs : NotificationService){
     this.image_uri = environment.baseUrlImg
   }
 
@@ -53,6 +58,33 @@ export class CardAssignmentComponent implements OnInit {
 
   onImageError(event: Event , section : string): void { 
     this.utilsService.handleImageError(event , section);
+  }
+
+  onDelete(){
+    const dialodRef = this.dialog.open(ConfirmationComponent , 
+      {
+        width : "600px",
+        data : {
+          title : "Suppression d'Assignment",
+          message : "Cette action supprimera l'assignement selectioné, voulez-vous poursuivre?"
+        }
+      }
+    );
+
+    dialodRef.afterClosed().subscribe((result : any)=> {
+      if (result) {
+        if (this.assignment) {
+          this.assigmnentService.deleteAssignment(this.assignment).subscribe((response)=>{
+            this.notifs.showSuccess("Suppression effectué !" , "Suppression d'assignment");
+          },
+          (error : HttpErrorResponse)=>{
+            const httpError = error.error;
+            const message = "Supression "+httpError.error;
+            this.utilsService.handleError(httpError.status , message , "Supression d'Assignment");
+          })
+        }
+      }
+    })
   }
 
 

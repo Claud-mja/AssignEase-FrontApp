@@ -12,7 +12,7 @@ import { TableDynamicComponent } from '../../../shared/components/table-dynamic/
   styleUrl: './auteur.component.css'
 })
 export class AuteurComponent implements OnInit {
-  
+
   tableConfig !: TableConfig;
 
 

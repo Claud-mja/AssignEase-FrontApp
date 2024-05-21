@@ -60,7 +60,14 @@ export class AppComponent implements OnInit,AfterViewInit,OnDestroy {
     }
     this.unserNameSbscription = this.authService.getName().subscribe((name)=>{
       this.name = name;
-    })
+    });
+
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        // Vérifiez si l'URL actuelle est '/login'
+        this.showNavbar = event.url !== '/login';
+      }
+    });
   }
 
   sideBarEvent(){

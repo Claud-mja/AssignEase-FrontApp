@@ -18,13 +18,13 @@ constructor(private notif : NotificationService , private router : Router , priv
   handleError(status : number , message : string , title : string){
     if (status > 400 && status < 500 ) {
       this.notif.showWarning("Authentification requis",title);
-      this.authService.logout();
-      this.router.navigate(['login']);
+      // this.authService.logout();
+      // this.router.navigate(['login']);
     }else{
       this.notif.showWarning(message,title);
     }
   }
-  
+
   handleImageError(event: Event, section : string): void {
     const imagHtml = event.target as HTMLImageElement;
     imagHtml.src = this.defaultImage(section);
@@ -32,6 +32,7 @@ constructor(private notif : NotificationService , private router : Router , priv
 
   defaultImage(section : string){
     let defaultImageUrl = "assets/images";
+    // let defaultImageUrl = "img_default/images";
     switch(section){
       case 'auteur':
         defaultImageUrl = `${defaultImageUrl}/etu.png`;

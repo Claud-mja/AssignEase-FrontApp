@@ -69,11 +69,11 @@ export class AddEditProfesseurComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.headTitle = {
-      title : "Ajout de Professeur"
-    }
     
     const idProfesseur = this.route.snapshot.params['id'];
+    this.headTitle = {
+      title : idProfesseur ? "Modif de Professeur" : "Ajout de Professeur"
+    }
     this.initData()
     if(idProfesseur){
       this.getProfesseur(idProfesseur);

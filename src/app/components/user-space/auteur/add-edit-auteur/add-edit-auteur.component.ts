@@ -68,11 +68,11 @@ export class AddEditAuteurComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.headTitle = {
-      title : "Ajout de Auteur"
-    }
     
     const idAuteur = this.route.snapshot.params['id'];
+    this.headTitle = {
+      title : idAuteur ? "Modif d'Auteur" :  "Ajout d'Auteur"
+    }
     this.initData()
     if(idAuteur){
       this.getAuteur(idAuteur);

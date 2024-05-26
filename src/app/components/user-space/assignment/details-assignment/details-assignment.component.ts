@@ -124,7 +124,7 @@ export class DetailsAssignmentComponent implements OnInit {
       const dateParts = dateAssignment.split('-');
       const year = parseInt(dateParts[2]);
       const month = parseInt(dateParts[1]) - 1; 
-      const day = parseInt(dateParts[0]);
+      const day = parseInt(dateParts[0])+1;
       const date = new Date(year, month, day);
       return this.datePipe.transform(date, 'EEE, dd MMM yyyy', 'fr');
     }

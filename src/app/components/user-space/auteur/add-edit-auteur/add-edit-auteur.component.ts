@@ -55,6 +55,8 @@ export class AddEditAuteurComponent implements OnInit {
     tools : 'auteur'
   }
 
+  loadingAction : boolean = false;
+
   constructor(
     private route : ActivatedRoute ,
     private roter : Router, 
@@ -110,14 +112,17 @@ export class AddEditAuteurComponent implements OnInit {
 
   saveAuteur(){
     if(this.auteurForm.valid){
+      this.loadingAction =  true;
       this.auteur = this.auteurForm.value;
 
       const success = (response : any)=>{
+        this.loadingAction = false;
         this.notif.showSuccess("Auteur ajouté avec success ! ", 'Ajout de Auteur ');
         this.roter.navigate(['auteur']);
       }
 
       const error = (error : HttpErrorResponse) =>{
+        this.loadingAction = false;
         const httpError = error.error;
         const message = "Ajout "+httpError.error;
         this.utilsService.handleError(httpError.status , message , "Ajout de Auteur");
@@ -128,12 +133,15 @@ export class AddEditAuteurComponent implements OnInit {
 
   updateAuteur(){
     if(this.auteurForm.valid){
+      this.loadingAction =  true;
       const success = (response : any)=>{
+        this.loadingAction = false;
         this.notif.showSuccess("Auteur modifié avec success ! ", 'Modification de Auteur');
         this.roter.navigate(['auteur']);
       }
 
       const error = (responseError : HttpErrorResponse) =>{
+        this.loadingAction = false;
         const httpError = responseError.error;
         const message = "Modification "+httpError.error;
         this.utilsService.handleError(httpError.status , message , "Ajout de Auteur");

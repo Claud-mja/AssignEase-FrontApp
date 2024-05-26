@@ -72,6 +72,7 @@ export class AssignmentComponent implements OnInit {
     this.getAssignments();
 
     this.assignmentService.refreshList$.subscribe(()=>{
+      this.initPaginationData();
       this.getAssignments();
     })
   }
@@ -155,7 +156,15 @@ export class AssignmentComponent implements OnInit {
     }
   }
 
+  initPaginationData(){
+    this.page = 1 ;
+    this.rows = 12;
+    this.first =0;
+    this.limit = 12;
+  }
+
   onFilter(event : HeaderConfig){
+    this.page = 1 ;
     this.getAssignments();
   }
 

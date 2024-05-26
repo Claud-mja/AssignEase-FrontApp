@@ -66,6 +66,8 @@ export class AddEditAssignmentComponent implements OnInit {
     auteur : false
   }
 
+  loadingAction : boolean = false;
+
   isDisabled : boolean = true;
   
   constructor(private matiereService : MatiereService , 
@@ -118,7 +120,7 @@ export class AddEditAssignmentComponent implements OnInit {
   initForm(){
     this.assignmentForm = this.fb.group({
       nom: [this.assignment ? this.assignment.nom : '', Validators.required],
-      dateDeRendu: [this.assignment ?   this.constructDate(this.assignment.dateDeRendu) : '', Validators.required],
+      dateDeRendu: [this.assignment.dateDeRendu ?   this.constructDate(this.assignment.dateDeRendu) : '', Validators.required],
       note: [this.assignment.note ? this.assignment.note : 0 , [Validators.required, Validators.min(0), Validators.max(20)]],
       rendu: [this.assignment.rendu ? this.assignment.rendu : false],
       matiere: [this.assignment.matiere ? this.assignment.matiere : '', Validators.required],
@@ -132,7 +134,7 @@ export class AddEditAssignmentComponent implements OnInit {
       const dateParts = dateStr.split('-');
       const year = parseInt(dateParts[2]);
       const month = parseInt(dateParts[1]) - 1; // Les mois dans JavaScript sont 0-indexés, donc on soustrait 1
-      const day = parseInt(dateParts[0]);
+      const day = parseInt(dateParts[0])+1;
       const date = new Date(year, month, day);
       return this.datePipe.transform(date, 'yyyy-MM-dd')
     }
@@ -253,14 +255,17 @@ export class AddEditAssignmentComponent implements OnInit {
 
   saveAssignment(){
     if(this.assignmentForm.valid){
+      this.loadingAction = true;
       this.assignment = this.assignmentForm.value;
 
       const success = (response : any)=>{
+        this.loadingAction = false;
         this.notif.showSuccess("Assignment ajouté avec success ! ", 'Ajout d\'assignment ');
         this.router.navigate(['assignment']);
       }
 
       const error = (error : HttpErrorResponse) =>{
+        this.loadingAction = false;
         const httpError = error.error;
         const message = "Ajout "+httpError.error;
         this.utilsService.handleError(httpError.status , message , "Ajout d'Assignment");
@@ -272,12 +277,15 @@ export class AddEditAssignmentComponent implements OnInit {
 
   updateAssignment(){
     if(this.assignmentForm.valid){
+      this.loadingAction = true;
       const success = (response : any)=>{
+        this.loadingAction = false;
         this.notif.showSuccess("Assignment modifié avec success ! ", 'Modification d\'assignment ');
         this.router.navigate(['assignment']);
       }
 
       const error = (error : HttpErrorResponse) =>{
+        this.loadingAction = false;
         const httpError = error.error;
         const message = "Modification "+httpError.error;
         this.utilsService.handleError(httpError.status , message , "Modification d'Assignment");

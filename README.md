@@ -116,5 +116,8 @@
     ==>    `ng build`pour builder l'application
     ==>    `ng serve`pour lancer l'application
 
+### IV. Membre de l'équipe
 
+#### Tomboanjara Claudio
+#### ANTOENJARA Noam Francisco
 

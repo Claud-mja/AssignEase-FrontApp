@@ -29,7 +29,15 @@
                 </div>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-raised-button style="background-color: #2a7cc9; color: #fff;" [disabled]="!professeurForm.valid" >{{professeur._id ? 'Modifer' : 'Ajouter'}}</button>
+                <button mat-raised-button style="background-color: #2a7cc9; color: #fff;" [disabled]="!professeurForm.valid" >
+                    @if (loadingAction) {
+                        <span class="spinner-border spinner-border-sm mr-3" role="status" aria-hidden="true"></span>
+                        <span>{{professeur._id ? 'Modif...' : 'Ajout...'}}</span>
+                    }
+                    @else {
+                        <span>{{professeur._id ? 'Modifer' : 'Ajouter'}}</span>
+                    }
+                </button>
             </mat-card-actions>
         </mat-card>
     </form>

@@ -12,6 +12,7 @@ import { environment } from '../../../../environments/environment';
 import { MatButton} from '@angular/material/button'
 import { ConfirmationComponent } from '../modal/confirmation/confirmation.component';
 import { UtilsService } from '../../services/utils/utils.service';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
   selector: 'app-table-dynamic',
@@ -19,7 +20,8 @@ import { UtilsService } from '../../services/utils/utils.service';
   imports: [
     TableModule,
     AvatarModule,
-    MatButton
+    MatButton,
+    SpinnerComponent
   ],
   templateUrl: './table-dynamic.component.html',
   styleUrl: './table-dynamic.component.css'
@@ -29,6 +31,7 @@ export class TableDynamicComponent implements OnInit {
   @Input() config !: TableConfig;
   data !: Object[];
   nbElement : number = 0;
+  loadingData : boolean = false;
 
   constructor(
       private tableService : TableService,
@@ -44,13 +47,16 @@ export class TableDynamicComponent implements OnInit {
   }
 
   getData(){
+    this.loadingData = true ;
     const success = (response : any)=>{
         this.data = response.docs ? response.docs : response;
         this.nbElement = this.data.length;
+        this.loadingData = false ;
     }
 
     const error = (error : HttpErrorResponse)=>{
       this.notif.showWarning(error.message , "Get "+this.config.tools+" error")
+      this.loadingData = false ;
     }
     this.tableService.getData(this.config).subscribe(success , error);
   }
@@ -78,7 +84,6 @@ export class TableDynamicComponent implements OnInit {
   }
 
   onEdit(data : any){
-
     this.route.navigate([`edit-${this.config.tools}`, data["_id"]]);
   }
 

@@ -6,13 +6,19 @@
         </div>
         <mat-card-content class="pl-2">
             @if (!loading['data']) {
-                <div class="row">
-                    @for (assignment of assignments; track $index) {
-                        <div class="item-assignment col-md-3" style="margin-bottom: 30px;">
-                            <app-card-assignment [assignment]="assignment" ></app-card-assignment>
-                        </div>
-                    }
-                </div>
+                @if (assignments.length>0) {
+                    <div class="row">
+                        @for (assignment of assignments; track $index) {
+                            <div class="item-assignment col-md-3" style="margin-bottom: 30px;">
+                                <app-card-assignment [assignment]="assignment" ></app-card-assignment>
+                            </div>
+                        }
+                    </div>
+                }@else {
+                    <div class="d-flex row align-items-center">
+                        <p class="text-center">Aucune assignment trouver !</p>
+                    </div>
+                }
             }
             @else{
                 <div class="spin-content">

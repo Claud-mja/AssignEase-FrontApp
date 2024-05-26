@@ -15,8 +15,11 @@
                             <div mat-form-field class="form-group w-50 ml-5">
                                 <label class="my-2">Date de rendue</label>
                                 <div class="content-input">
-                                    <input  
+                                    <input 
+                                        (click)="picker.open()"
+                                        (focus)="picker.open()" 
                                         class="form-control"
+                                        readonly
                                         placeholder="dd-mm-yyyy"
                                         [matDatepicker]="picker"
                                         formControlName="dateDeRendu" >
@@ -85,7 +88,15 @@
                 </div>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-raised-button style="background-color: #2a7cc9; color: #fff;" [disabled]="!assignmentForm.valid || !isFormDirty()" >{{assignment._id ? 'Modifer' : 'Ajouter'}}</button>
+                <button mat-raised-button style="background-color: #2a7cc9; color: #fff;" [disabled]="!assignmentForm.valid || !isFormDirty()" >
+                    @if (loadingAction) {
+                        <span class="spinner-border spinner-border-sm mr-3" role="status" aria-hidden="true"></span>
+                        <span>{{assignment._id ? 'Modif...' : 'Ajout...'}}</span>
+                    }
+                    @else {
+                        <span>{{assignment._id ? 'Modifer' : 'Ajouter'}}</span>
+                    }
+                </button>
             </mat-card-actions>
         </mat-card>
     </form>

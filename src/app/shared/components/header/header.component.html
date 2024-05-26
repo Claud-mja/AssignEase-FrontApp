@@ -9,16 +9,16 @@
     <div class="content-search" *ngIf="haveSearch">
             <div class="content-input input-group">
                 @if (currentField.type=='string') {
-                    <mat-form-field>
+                    <mat-form-field appearance="outline">
                         <mat-label>{{config.labels && config.labels[currentField.name] ? config.labels[currentField.name] : currentField.name}}</mat-label>
-                        <input matInput autocomplete="off" type="text" [(ngModel)]="valueFilter" name="text">
+                        <input matInput autocomplete="off" type="text" [(ngModel)]="valueFilter" (keydown.enter)="onMakeFilter()" name="text">
                     </mat-form-field>
                 }
                 @else {
-                    <mat-form-field>
+                    <mat-form-field appearance="outline">
                         <mat-label>{{config.labels && config.labels[currentField.name] ? config.labels[currentField.name] : currentField.name}}</mat-label>
                         <mat-select [(ngModel)]="valueFilter" (selectionChange)="onMakeFilter()" name="select">
-                                <mat-option [value]="null">Tous</mat-option>
+                                <mat-option [value]="'All'">Tous</mat-option>
                             @for (item of selectOption[currentField.type]; track $index) {
                                 <mat-option [value]="item.value">{{item.label}}</mat-option>
                             }
@@ -36,9 +36,9 @@
                     </ul>
                 </div>
             </div>
-            <button *ngIf="currentField.type=='string'" [disabled]="valueFilter==''" (click)="onMakeFilter()" mat-icon-button aria-label="Search assignment icon">
+            <!-- <button *ngIf="currentField.type=='string'" [disabled]="valueFilter==''" (click)="onMakeFilter()" mat-icon-button aria-label="Search assignment icon">
                 <mat-icon>search</mat-icon>
-            </button>
+            </button> -->
         </div>
     </form>
 </div>

@@ -1,8 +1,8 @@
 ## AssignEaseFrontApp (FrontOffice)
 
-## La branche finale du FrontOffice c'est ' realease/producion '
+## La branche finale du frontOffice c'est ' release/production '
 
-### I.  Structure de l'application
+## I.  Structure de l'application Front Office
 
     Notre Projet /
     .   / node_modules/
@@ -118,6 +118,6 @@
 
 ### IV. Membre de l'équipe
 
-#### Tomboanjara Claudio
-#### ANTOENJARA Noam Francisco
+#### - Tomboanjara Claudio
+#### - ANTOENJARA Noam Francisco
 

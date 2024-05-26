@@ -35,13 +35,18 @@ export class UploadFileComponent implements OnInit {
   }
 
   triggerParentFunction(event: any){
-    this.onChangeDataFile(event);
+    this.onTraitFiles(event)
   }
 
-  onChangeDataFile(event: any) {
-    const file: File = event?.target?.files?.[0];
+  onChangeDataFile(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.onTraitFiles(input.files)
+  }
+
+  onTraitFiles(files : FileList | null){
     this.image_Uri = '';
-    if (file) {
+    if (files && files.length > 0) {
+        const file: File = files[0];
         const fileType: string = file.type;
 
         if (fileType.startsWith('image/')) {
@@ -59,7 +64,7 @@ export class UploadFileComponent implements OnInit {
         }
         this.fileChanged.emit(file);
     }
-}
+  }
 
 
 

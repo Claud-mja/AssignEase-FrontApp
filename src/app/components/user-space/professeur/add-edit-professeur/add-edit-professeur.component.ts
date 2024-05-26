@@ -56,6 +56,8 @@ export class AddEditProfesseurComponent implements OnInit {
     tools : 'professeur'
   }
 
+  loadingAction : boolean = false;
+
   constructor(
     private route : ActivatedRoute ,
     private roter : Router, 
@@ -67,11 +69,11 @@ export class AddEditProfesseurComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    this.headTitle = {
-      title : "Ajout de Professeur"
-    }
     
     const idProfesseur = this.route.snapshot.params['id'];
+    this.headTitle = {
+      title : idProfesseur ? "Modif de Professeur" : "Ajout de Professeur"
+    }
     this.initData()
     if(idProfesseur){
       this.getProfesseur(idProfesseur);
@@ -112,14 +114,17 @@ export class AddEditProfesseurComponent implements OnInit {
 
   saveProfesseur(){
     if(this.professeurForm.valid){
+      this.loadingAction = true;
       this.professeur = this.professeurForm.value;
 
       const success = (response : any)=>{
+        this.loadingAction = false;
         this.notif.showSuccess("Professeur ajouté avec success ! ", 'Ajout de Professeur ');
         this.roter.navigate(['professeur']);
       }
 
       const error = (error : HttpErrorResponse) =>{
+        this.loadingAction = false;
         const httpError = error.error;
         const message = "Ajout "+httpError.error;
         this.utilsService.handleError(httpError.status , message , "Ajout de Professeur");
@@ -130,12 +135,15 @@ export class AddEditProfesseurComponent implements OnInit {
 
   updateProfesseur(){
     if(this.professeurForm.valid){
+      this.loadingAction = true;
       const success = (response : any)=>{
+        this.loadingAction = false;
         this.notif.showSuccess("Professeur modifié avec success ! ", 'Modification de Professeur');
         this.roter.navigate(['professeur']);
       }
 
       const error = (responseError : HttpErrorResponse) =>{
+        this.loadingAction = false;
         const httpError = responseError.error;
         const message = "Modification "+httpError.error;
         this.utilsService.handleError(httpError.status , message , "Ajout de Professeur");

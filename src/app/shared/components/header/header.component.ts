@@ -68,6 +68,9 @@ export class HeaderComponent implements OnInit {
   onChoiseFilter(field : FieldValue){
     this.currentField = field;
     this.valueFilter = null;
+    if(field.type!="text"){
+      this.valueFilter = 'All'
+    }
     this.onMakeFilter();
   }
 
@@ -89,11 +92,13 @@ export class HeaderComponent implements OnInit {
   }
 
   onMakeFilter(){
+    console.log(this.currentField , this.valueFilter);
+    
     const fieldData = this.currentField;
     if (fieldData.type=="number" || fieldData.type=="date") {
       this.config.sorts = [];
       this.config.filters = [];
-      if(this.valueFilter!=null){
+      if(this.valueFilter!=null && this.valueFilter!='All'){
         const index = this.config.sorts.findIndex(sort => sort.field == fieldData.name);
         if (index!=-1) {
           this.config.sorts[index].value = this.valueFilter;
@@ -107,7 +112,7 @@ export class HeaderComponent implements OnInit {
     }else {
       this.config.sorts = [];
       this.config.filters = [];
-      if(this.valueFilter!=null){
+      if(this.valueFilter!=null && this.valueFilter!='All'){
         const index = this.config.filters.findIndex(filter => filter.field == fieldData.name);
         if (index!=-1) {
           this.config.filters[index].value = this.valueFilter;

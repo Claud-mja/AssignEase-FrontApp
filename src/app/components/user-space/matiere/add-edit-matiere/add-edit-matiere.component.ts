@@ -50,6 +50,7 @@ export class AddEditMatiereComponent implements OnInit {
   filterProfs !: Teacher[];
 
   img_uri !: string;
+  matiere_uri !: string;
   imageFile !: File;
 
   dataChecked : any = {state : '' , message :'' }
@@ -59,6 +60,8 @@ export class AddEditMatiereComponent implements OnInit {
     button: 'Browse upload',
     tools : 'matiere'
   }
+
+  loadingAction : boolean = false;
 
   constructor(
       private route : ActivatedRoute ,
@@ -72,10 +75,10 @@ export class AddEditMatiereComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.headTitle = {
-      title : "Ajout de Matière"
-    }
     const idMatiere = this.route.snapshot.params['id'];
+    this.headTitle = {
+      title : idMatiere? 'Modif de Matière' : 'Ajout de Matière'
+    }
     this.initData()
     if(idMatiere){
       this.getMatiere(idMatiere);
@@ -101,7 +104,7 @@ export class AddEditMatiereComponent implements OnInit {
       
       this.initForm();
       if (this.matiere.image.trim()!='') {
-        this.img_uri = `${this.img_uri}/matiere/${this.matiere.image}`
+        this.matiere_uri = `${this.img_uri}/matiere/${this.matiere.image}`
         this.dataChecked = {
           state : 'success',
           message: 'Successfully uploaded',
@@ -152,19 +155,22 @@ export class AddEditMatiereComponent implements OnInit {
   }
 
   displayProf(prof: Teacher): string {
-    return prof && prof.nom ? prof.nom : '';
+    return prof && prof.nom ? prof.nom+' '+prof.prenom : '';
   }
 
   saveMatiere(){
     if(this.matiereForm.valid){
+      this.loadingAction = true;
       this.matiere = this.matiereForm.value;
 
       const success = (response : any)=>{
+        this.loadingAction = false;
         this.notif.showSuccess("Matiere ajouté avec success ! ", 'Ajout d\'Matiere ');
         this.router.navigate(['matiere']);
       }
 
       const error = (error : HttpErrorResponse) =>{
+        this.loadingAction = false;
         const httpError = error.error;
         const message = "Ajout "+httpError.error;
         this.utilsService.handleError(httpError.status , message , "Ajout de Matière");
@@ -176,12 +182,15 @@ export class AddEditMatiereComponent implements OnInit {
 
   updateMatiere(){
     if(this.matiereForm.valid){
+      this.loadingAction = true;
       const success = (response : any)=>{
+        this.loadingAction = false;
         this.notif.showSuccess("Matiere modifié avec success ! ", 'Modification d\'Matiere ');
         this.router.navigate(['matiere']);
       }
 
       const error = (error : HttpErrorResponse) =>{
+        this.loadingAction = false;
         const httpError = error.error;
         const message = "Modification "+httpError.error;
         this.utilsService.handleError(httpError.status , message , "Modification de Matière");
@@ -202,6 +211,10 @@ export class AddEditMatiereComponent implements OnInit {
     return formValue.nom === this.matiere.nom
       && formValue.prof === this.matiere.prof
       && formValue.image === this.matiere.image;
+  }
+
+  onProfSelected(selectedProf: Teacher): void {
+    this.matiereForm.get('prof')?.setValue(selectedProf);
   }
 
   onChangeFile(file : File){

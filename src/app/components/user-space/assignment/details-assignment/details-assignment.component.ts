@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -29,7 +29,10 @@ import { UtilsService } from '../../../../shared/services/utils/utils.service';
     CdkDropList, CdkDrag
   ],
   templateUrl: './details-assignment.component.html',
-  styleUrl: './details-assignment.component.css'
+  styleUrl: './details-assignment.component.css',
+  providers : [
+    DatePipe 
+  ]
 })
 export class DetailsAssignmentComponent implements OnInit {
   assignment !: Assignment;
@@ -46,6 +49,7 @@ export class DetailsAssignmentComponent implements OnInit {
     private assignmentService  : AssignmentService ,
     private utilsService : UtilsService,
     private notif : NotificationService,
+    private datePipe : DatePipe,
     private dialog : MatDialog){
     this.img_uri = environment.baseUrlImg;
   }
@@ -67,7 +71,6 @@ export class DetailsAssignmentComponent implements OnInit {
     const succes = (response : Assignment | undefined)=>{
       if(response){
         this.assignment = response;
-        console.log(this.assignment);
         
         this.loading = false;
       }
@@ -87,7 +90,6 @@ export class DetailsAssignmentComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<Assignment>) {
-    console.log(event.item.data);
     const dialogRef = this.dialog.open(RendAssignmentComponent , 
       {
         width : '800px',
@@ -108,7 +110,6 @@ export class DetailsAssignmentComponent implements OnInit {
   async placeHoldImage(url :string ,section : string){
     const response = await this.utilsService.imageExists(url);
     if(response){
-      console.log("response ,");
       
     }else{
     }
@@ -116,5 +117,18 @@ export class DetailsAssignmentComponent implements OnInit {
     return url
   }
 
+  constructDate(){
+    const dateAssignment = this.assignment?.dateDeRendu;
+    
+    if (dateAssignment) {
+      const dateParts = dateAssignment.split('-');
+      const year = parseInt(dateParts[2]);
+      const month = parseInt(dateParts[1]) - 1; 
+      const day = parseInt(dateParts[0]);
+      const date = new Date(year, month, day);
+      return this.datePipe.transform(date, 'EEE, dd MMM yyyy', 'fr');
+    }
+    return ''; 
+  }
 
 }

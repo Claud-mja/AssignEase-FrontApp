@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
@@ -6,7 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class NotificationService {
 
-  constructor(private toastr : ToastrService) { }
+  constructor(private toastr : ToastrService , private _snackBar: MatSnackBar) { }
 
   showSuccess(message : string,title : string) {
     this.toastr.success(message, title);
@@ -22,6 +23,12 @@ export class NotificationService {
 
   showInfo(message : string,title : string){
     this.toastr.info(message, title);
+  }
+
+  openSnackBar(message: string, duration: number) {
+    this._snackBar.open(message, undefined, {
+      duration: duration,
+    });
   }
 
 }

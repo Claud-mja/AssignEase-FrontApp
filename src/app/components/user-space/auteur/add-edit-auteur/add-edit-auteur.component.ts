@@ -90,8 +90,6 @@ export class AddEditAuteurComponent implements OnInit {
   getAuteur(id : string){
     const success = (response : Auteur)=>{
       this.auteur = response;
-      console.log(response);
-
       this.initForm();
       if (this.auteur.photo.trim()!='') {
         this.img_uri = `${this.img_uri}/auteur/${this.auteur.photo}`

@@ -98,7 +98,6 @@ export class AddEditMatiereComponent implements OnInit {
   getMatiere(id : string){
     const success = (response : Matiere)=>{
       this.matiere = response;
-      console.log(response);
       
       this.initForm();
       if (this.matiere.image.trim()!='') {
@@ -208,9 +207,6 @@ export class AddEditMatiereComponent implements OnInit {
   onChangeFile(file : File){
     this.imageFile = file;
     this.matiereForm.value['image'] = file.name;
-
-    console.log(this.matiereForm.value , this.isFormDirty() , this.matiereForm.valid);
-    
   }
 
 } 

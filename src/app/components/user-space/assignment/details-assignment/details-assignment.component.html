@@ -19,7 +19,7 @@
                             <div class="content-date d-flex">
                                 <i class="fas fa-calendar text-muted"></i>
                                 <span class="mx-2">
-                                    <p class="text-muted">22-09-2000</p>
+                                    <p class="text-muted">{{constructDate()}}</p>
                                 </span>
                             </div>
                         </div>
@@ -40,18 +40,25 @@
                     </div>
                     <div class="body-info row " #assign="cdkDropList" cdkDropList [cdkDropListConnectedTo]="[rend]" >
                         <div class="block-info col-md-10 example-box" [cdkDragData]="assignment"  cdkDrag>
-                            <div class="d-flex justify-content-between">
+
+                            <div class="d-flex justify-content-between align-items-center">
+
                                 <div class="litle-title d-flex">
                                     <i class="fas fa-user text-muted"></i>
                                     <span class="mx-2">
                                         <p class="m-0">Etudiant informations : </p>
                                     </span>
                                 </div>
+
+                                <div class="p-1 bg-success text-white" [ngClass]="{'rendu' : assignment.rendu , 'not-rendu' : !assignment.rendu }">
+                                    <i [ngClass]="{'fa-check' : assignment.rendu, 'fa-times' : !assignment.rendu}" class="fas"></i>
+                                </div>
+
                                 <span class="mx-2">
                                     <p class="m-0"> <i class="fa fa-bars"></i></p>
-
                                 </span>
                             </div>
+
 
                             <div class="info-etudiant">
                                 <div class="info-row d-flex">
@@ -69,7 +76,7 @@
                                 <div class="info-row">
                                     <p class="m-0">Remarques : </p><br/>
                                     <div class="remark-content">
-                                        <p>{{assignment.remarques}}</p>
+                                        <p style="font-size: 12px;">{{assignment.remarques}}</p>
                                     </div>
                                 </div>
                             </div>

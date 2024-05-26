@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TableConfig } from '../../../shared/interfaces/table-config';
 import { TableDynamicComponent } from '../../../shared/components/table-dynamic/table-dynamic.component';
+import { Router, RouterLink, RouterOutlet,NavigationEnd } from '@angular/router';
 
 @Component({
   selector: 'app-auteur',
@@ -15,10 +16,21 @@ export class AuteurComponent implements OnInit {
 
   tableConfig !: TableConfig;
 
+  currentUrl !:string;
+  showNavbar: boolean = true;
 
-  constructor(){}
+
+  constructor(private router : Router) {
+    this.currentUrl = this.router.url;
+  }
 
   ngOnInit(): void {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        // Vérifiez si l'URL actuelle est '/login'
+        this.showNavbar = event.url !== '/login';
+      }
+    });
     this.initTbaleConfig();
   }
 

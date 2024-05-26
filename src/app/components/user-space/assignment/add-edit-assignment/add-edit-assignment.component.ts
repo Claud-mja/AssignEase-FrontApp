@@ -145,7 +145,6 @@ export class AddEditAssignmentComponent implements OnInit {
     const success = (response : any)=>{
       this.filtredMatiere = response.docs ? response.docs  : response as Matiere[];
       this.matiers = response.docs ?  response.docs  : response as Matiere[];
-      console.log(this.filtredMatiere);
       
       this.loading.matiere = false;
     }
@@ -285,8 +284,7 @@ export class AddEditAssignmentComponent implements OnInit {
       } 
       
       this.assignment = {_id : this.assignment._id ,... this.assignmentForm.value};
-      
-      console.log("Assignment ==> ", this.assignment);
+    
       
       this.assignmentService.updateAssignment(this.assignment).subscribe(success , error);
     }

@@ -115,7 +115,7 @@
                 0 2px 2px 0 rgba(0, 0, 0, 0.14),
                 0 1px 5px 0 rgba(0, 0, 0, 0.12); */
   }
-  
+
   .example-box:active {
     padding: 20px;
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
@@ -147,7 +147,7 @@
     border: 2px dashed #dedede;
     border-radius: 8px;
   }
-  
+
   #dropContent{
     position: relative;
   }
@@ -156,7 +156,7 @@
    position: absolute;
    width: 150px;
   }
-  
+
   .content-details{
     position: relative;
   }
@@ -177,4 +177,46 @@
 
 .content-details .icon-survol i:hover{
     color: rgb(247, 67, 67);
+}
+
+
+.block-info{
+    padding: 20px;
+    position: relative;
+
+   /* .content-state{
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border: 1px solid #f2f7f2ee;
+        display: flex;
+        border-radius: 8px;
+        justify-content: center;
+        align-items: center;
+        top: 4px;
+        right: 6px;
+
+        i{
+            font-size: 45px;
+            color: #fff;
+        }
+    } */
+    .content-state{
+        background-color: #2d963ea1;
+        color: white;
+        padding: 10px;
+        border-radius: 20%;
+        -webkit-border-radius: 20%;
+        -moz-border-radius: 20%;
+        -ms-border-radius: 20%;
+        -o-border-radius: 20%;
+}
+}
+
+.not-rendu{
+    background-color: #f10d0d98;
+}
+
+.rendu{
+    background-color: #2d963ea1;
 }

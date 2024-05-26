@@ -40,7 +40,3 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
-
-#Data back
-/src/assets/data
-/src/assets/images

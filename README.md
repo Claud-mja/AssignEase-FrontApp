@@ -1,12 +1,8 @@
-# AssignEaseFrontApp (FrontOffice)
+## AssignEaseFrontApp (FrontOffice)
 
+## La branche finale du FrontOffice c'est ' realease/producion '
 
-
-# README de la structure du  Front office Angular js pour le projet
-
-# Le branch finale du backOffice c'est ' realease/producion '
-
-# I. ++++++++++++++ Structure de l'application Front Office ++++++++++++++
+### I.  Structure de l'application
 
     Notre Projet /
     .   / node_modules/
@@ -33,7 +29,7 @@
     .   styles.css
 
 
-### II.  ++++++++++++++ Explication de la structure du projet ++++++++++++++
+### II.  Explication de la structure du projet
 
   ###### 1. notre projet/src/app/components et /shared/components:
 
@@ -104,16 +100,16 @@
     """
 
 
-# III. ++++++++++++++ Liste des commandes pour lancer le projet +++++++++++++
+### III.  Liste des commandes pour lancer le projet
 
 
- #  1. Installation des environement:
+ ######  1. Installation des environement:
 
         Pour installer les dépendances du projet, veuillez lancer cette commande pour la première fois :
 
      ==>   npm install
 
- #  2. Lancement de l'application local:
+ ###  2. Lancement de l'application local:
 
         Pour lancer l'application (ou démarrer l'application), veuillez lancer cette commande dans un terminale:
 

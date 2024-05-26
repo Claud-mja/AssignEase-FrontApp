@@ -45,12 +45,13 @@ export class AuteurService {
       `Bearer ${token}`
     );
     const formData = new FormData();
-    const uniqueFilename = this.utilsService.makeFileUniqueName(file.name); 
+    const uniqueFilename = this.utilsService.makeFileUniqueName(file.name);
     auteur.photo = uniqueFilename;
-    
+
     formData.append("auteur" , JSON.stringify(auteur));
     formData.append("fileName" , uniqueFilename);
     formData.append("imageFile" , file);
+
     return this.http.post<Auteur>(`${environment.baseUrl}/auteur/auteur`, formData , {headers : headers});
   }
 
@@ -62,8 +63,8 @@ export class AuteurService {
     );
     const formData = new FormData();
     formData.append("auteur" , JSON.stringify(auteur));
-    if (file) {   
-      const uniqueFilename = this.utilsService.makeFileUniqueName(file.name); 
+    if (file) {
+      const uniqueFilename = this.utilsService.makeFileUniqueName(file.name);
       formData.append("fileName" , uniqueFilename);
       formData.append("lastFile" , lastFile);
       formData.append("imageFile" , file);

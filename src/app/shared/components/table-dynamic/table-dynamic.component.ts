@@ -35,11 +35,11 @@ export class TableDynamicComponent implements OnInit {
 
   constructor(
       private tableService : TableService,
-      private dialog : MatDialog , 
+      private dialog : MatDialog ,
       private route : Router ,
-      private utilsService : UtilsService, 
+      private utilsService : UtilsService,
       private notif : NotificationService){
-    
+
   }
 
   ngOnInit(): void {
@@ -93,7 +93,7 @@ export class TableDynamicComponent implements OnInit {
 
   getDataWithtKey(field : FieldValue , data : any){
     if(field.type=='object'){
-      const keySplit = field.name.split('.'); 
+      const keySplit = field.name.split('.');
       let result : any = data;
       for (let index = 0; index < keySplit.length; index++) {
         const key = keySplit[index];
@@ -138,7 +138,7 @@ export class TableDynamicComponent implements OnInit {
   }
 
   confirmdDialog() : MatDialogRef<ConfirmationComponent>{
-    const modalref : MatDialogRef<ConfirmationComponent> = this.dialog.open(ConfirmationComponent , 
+    const modalref : MatDialogRef<ConfirmationComponent> = this.dialog.open(ConfirmationComponent ,
       {
         width: '600px',
         data : {

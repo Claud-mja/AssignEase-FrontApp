@@ -4,11 +4,17 @@
         {{'('+nbElement + ')'}}
     </span>
 </h4>
-<p-table 
+<div class="content-btn">
+    <button mat-raised-button (click)="onAdd()" style="background-color: #2a7cc9; color: #fff;">
+       <i class="pi pi-plus"></i>
+        Ajouter un nouveau
+    </button>
+</div>
+<p-table
     [value]="data"
-    [scrollable]="true" 
+    [scrollable]="true"
     scrollHeight="660px"
-    [loading]="loadingData" 
+    [loading]="loadingData"
     [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template pTemplate="header">
         <tr>
@@ -23,11 +29,11 @@
             @for (field of config.header.fields; track $index) {
                 @if (typeData(getDataWithtKey(field , data)) ==='img') {
                     <td>
-                        <p-avatar 
-                            pBadge 
-                            value="4" 
+                        <p-avatar
+                            pBadge
+                            value="4"
                             [image]="img_uri(field , getDataWithtKey(field , data))"
-                            (onImageError)="onImageError($event, getPathSection(field))" 
+                            (onImageError)="onImageError($event, getPathSection(field))"
                             size="xlarge"
                             [shape]="getPathSection(field) ==='auteur' || getPathSection(field)==='professeur' ? 'circle' : 'square'" />
                     </td>
@@ -47,9 +53,3 @@
     </ng-template>
 </p-table>
 
-<div class="content-btn">
-    <button mat-raised-button (click)="onAdd()" style="background-color: #2a7cc9; color: #fff;">
-       <i class="pi pi-plus"></i>
-        Ajouter un nouveau
-    </button>
-</div>

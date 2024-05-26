@@ -1,27 +1,124 @@
-# AssignEaseFrontApp
+# AssignEaseFrontApp (FrontOffice)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.1.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+# README de la structure du  Front office Angular js pour le projet
 
-## Code scaffolding
+# Le branch finale du backOffice c'est ' release/production '
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+# I. ++++++++++++++ Structure de l'application Front Office ++++++++++++++
 
-## Build
+    Notre Projet /
+    .   / node_modules/
+    .   src
+        .   . / app/
+        .   .   .   . / components/*
+        .   .   .   . / shared/*
+        .   .   .   . / app.components.css
+        .   .   .   . / app.components.html
+        .   .   .   . / app.components.spec.ts
+        .   .   .   . / app.components.ts
+        .   .   .   . / app.config.ts
+        .   .   .   . / app.routes.ts
+        .   .   .   . / auth.guard.ts
+        .   .   .   . / auth.services.spec.ts
+        .   .   .   . / auth.service.ts
+        .   . / assets/*
+        .   . / environements/*
+        .   . / index.html
+        .   . / main.ts
+        .   . / styles.css
+    .   index.html
+    .   main.ts
+    .   styles.css
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+### II.  ++++++++++++++ Explication de la structure du projet ++++++++++++++
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+  ###### 1. notre projet/src/app/components et /shared/components:
 
-## Running end-to-end tests
+    ==> C'est la gestion des components ou des pages web dynamique de notre application
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+  ###### 2.  notre projet/src/app/shared/config/:
 
-## Further help
+    """
+        C'est la gestion des menus de l'application
+    """
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+  ###### 3.  notre projet/src/app/shared/interfaces/:
+
+    """
+        C'est la gestion des interfaces des données dans le page Web
+    """
+
+  ###### 4.  notre projet/src/app/shared/models/:
+
+    """
+        C'est la gestion des models des données appelé dépuis le BackOffice
+    """
+
+  ###### 5.  notre projet/src/app/shared/services/:
+
+    """
+        C'est la gestion des services des APIs dépuis le BackOffice
+    """
+
+  ###### 5.  notre projet/src/app/app.component.*:
+
+    """
+        C'est le premier composant appelé  lors de le lancement de l'application
+    """
+
+  ###### 6.  notre projet/src/app/app.config.ts:
+
+    """
+        C'est la gestion de configuration de base de l'application
+    """
+
+  ###### 7.  notre projet/src/app/app.routes.ts:
+
+    """
+        C'est la gestion de tout les routes de l'application
+    """
+
+  ###### 8.  notre projet/src/app/auth.guard.ts:
+
+    """
+        C'est la gestion de permission sur l'authentification d'utilisateur
+    """
+
+  ###### 9.  notre projet/src/app/auth.services.ts:
+
+    """
+        C'est la gestion d'authentification des utilisateurs
+    """
+   ###### 10.  notre projet/src/assets/*:
+
+    """
+        C'est la gestion des fichiers multimédias
+    """
+   ###### 11.  notre projet/src/environements/:
+
+    """
+        C'est la gestion des environements 'local' et 'production'
+    """
+
+
+# III. ++++++++++++++ Liste des commandes pour lancer le projet +++++++++++++
+
+
+ #  1. Installation des environement:
+
+        Pour installer les dépendances du projet, veuillez lancer cette commande pour la première fois :
+
+     ==>   npm install
+
+ #  2. Lancement de l'application local:
+
+        Pour lancer l'application (ou démarrer l'application), veuillez lancer cette commande dans un terminale:
+
+    ==>    `ng build`pour builder l'application
+    ==>    `ng serve`pour lancer l'application
+
+
+

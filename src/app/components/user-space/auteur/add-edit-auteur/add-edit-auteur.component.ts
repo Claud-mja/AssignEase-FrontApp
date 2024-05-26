@@ -59,16 +59,16 @@ export class AddEditAuteurComponent implements OnInit {
 
   constructor(
     private route : ActivatedRoute ,
-    private roter : Router, 
-    private notif : NotificationService , 
-    private auteurService : AuteurService , 
+    private roter : Router,
+    private notif : NotificationService ,
+    private auteurService : AuteurService ,
     private utilsService : UtilsService,
     private fb : FormBuilder){
       this.img_uri = environment.baseUrlImg;
     }
 
   ngOnInit(): void {
-    
+
     const idAuteur = this.route.snapshot.params['id'];
     this.headTitle = {
       title : idAuteur ? "Modif d'Auteur" :  "Ajout d'Auteur"
@@ -93,7 +93,6 @@ export class AddEditAuteurComponent implements OnInit {
   getAuteur(id : string){
     const success = (response : Auteur)=>{
       this.auteur = response;
-     
       this.initForm();
       if (this.auteur.photo.trim()!='') {
         this.img_uri = `${this.img_uri}/auteur/${this.auteur.photo}`
@@ -125,6 +124,7 @@ export class AddEditAuteurComponent implements OnInit {
         this.loadingAction = false;
         const httpError = error.error;
         const message = "Ajout "+httpError.error;
+        console.log(message);
         this.utilsService.handleError(httpError.status , message , "Ajout de Auteur");
       }
       this.auteurService.addAuteur(this.auteur, this.imageFile).subscribe(success , error);
@@ -145,7 +145,7 @@ export class AddEditAuteurComponent implements OnInit {
         const httpError = responseError.error;
         const message = "Modification "+httpError.error;
         this.utilsService.handleError(httpError.status , message , "Ajout de Auteur");
-      } 
+      }
       const photo = this.auteur.photo;
       this.auteur = {_id : this.auteur._id ,... this.auteurForm.value};
       this.auteurService.updateAuteur(this.auteur , this.imageFile , photo).subscribe(success , error);

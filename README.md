@@ -92,10 +92,15 @@ Gestion des environnements 'local' et 'production'.
 npm install
 ```
 
-# pour builder l'application
+#### pour builder l'application
+```bash
 ng build
-# pour lancer l'application
+```
+
+#### pour lancer l'application
+```bash
 ng serve
+```
 
 
 ## VI.  Membres de l'équipe

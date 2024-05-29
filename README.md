@@ -1,8 +1,11 @@
 ## AssignEaseFrontApp (FrontOffice)
 
-## La branche finale du frontOffice c'est ' release/production '
+### Branch finale du FrontOffice : `release/production`
 
 ## I.  Structure de l'application Front Office
+
+## La branche finale du frontOffice c'est ' release/production '
+
 
     Notre Projet /
     .   / node_modules/
@@ -29,95 +32,109 @@
     .   styles.css
 
 
-### II.  Explication de la structure du projet
 
-  ###### 1. notre projet/src/app/components et /shared/components:
+## II. Explication de la structure du projet
 
-    ==> C'est la gestion des components ou des pages web dynamique de notre application
+### 1. `src/app/components` et `src/app/shared/components`:
 
-  ###### 2.  notre projet/src/app/shared/config/:
+Gestion des composants et des pages web dynamiques de l'application.
 
-    """
-        C'est la gestion des menus de l'application
-    """
+### 2. `src/app/shared/config`:
 
-  ###### 3.  notre projet/src/app/shared/interfaces/:
+Gestion des menus de l'application.
 
-    """
-        C'est la gestion des interfaces des données dans le page Web
-    """
+### 3. `src/app/shared/interfaces`:
 
-  ###### 4.  notre projet/src/app/shared/models/:
+Gestion des interfaces des données dans les pages Web.
 
-    """
-        C'est la gestion des models des données appelé dépuis le BackOffice
-    """
+### 4. `src/app/shared/models`:
 
-  ###### 5.  notre projet/src/app/shared/services/:
+Gestion des modèles de données appelés depuis le BackOffice.
 
-    """
-        C'est la gestion des services des APIs dépuis le BackOffice
-    """
+### 5. `src/app/shared/services`:
 
-  ###### 5.  notre projet/src/app/app.component.*:
+Gestion des services des APIs appelés depuis le BackOffice.
 
-    """
-        C'est le premier composant appelé  lors de le lancement de l'application
-    """
+### 6. `src/app/app.component.*`:
 
-  ###### 6.  notre projet/src/app/app.config.ts:
+Premier composant appelé lors du lancement de l'application.
 
-    """
-        C'est la gestion de configuration de base de l'application
-    """
+### 7. `src/app/app.config.ts`:
 
-  ###### 7.  notre projet/src/app/app.routes.ts:
+Gestion de la configuration de base de l'application.
 
-    """
-        C'est la gestion de tout les routes de l'application
-    """
+### 8. `src/app/app.routes.ts`:
 
-  ###### 8.  notre projet/src/app/auth.guard.ts:
+Gestion de toutes les routes de l'application.
 
-    """
-        C'est la gestion de permission sur l'authentification d'utilisateur
-    """
+### 9. `src/app/auth.guard.ts`:
 
-  ###### 9.  notre projet/src/app/auth.services.ts:
+Gestion des permissions sur l'authentification des utilisateurs.
 
-    """
-        C'est la gestion d'authentification des utilisateurs
-    """
-   ###### 10.  notre projet/src/assets/*:
+### 10. `src/app/auth.services.ts`:
 
-    """
-        C'est la gestion des fichiers multimédias
-    """
-   ###### 11.  notre projet/src/environements/:
+Gestion de l'authentification des utilisateurs.
 
-    """
-        C'est la gestion des environements 'local' et 'production'
-    """
+### 11. `src/assets/*`:
 
+Gestion des fichiers multimédias.
 
-### III.  Liste des commandes pour lancer le projet
+### 12. `src/environments/`:
+
+Gestion des environnements 'local' et 'production'.
+
+## III. Liste des commandes pour lancer le projet
+
+### 1. **Installation des environnements**:
+
+#### Pour installer les dépendances du projet, exécutez cette commande pour la première fois :
+
+```bash
+npm install
+```
+
+#### pour builder l'application
+```bash
+ng build
+```
+
+#### pour lancer l'application
+```bash
+ng serve
+```
 
 
- ######  1. Installation des environement:
+## VI.  Membres de l'équipe
 
-        Pour installer les dépendances du projet, veuillez lancer cette commande pour la première fois :
+- Tomboanjara Claudio
+- ANTOENJARA Noam Francisco
 
-     ==>   npm install
 
- ###  2. Lancement de l'application local:
+## Overview
 
-        Pour lancer l'application (ou démarrer l'application), veuillez lancer cette commande dans un terminale:
+Ce projet est un système de gestion des assignments, développé en Angular. Il permet aux utilisateurs de gérer des assignments, des matières, des professeurs et des auteurs.
 
-    ==>    `ng build`pour builder l'application
-    ==>    `ng serve`pour lancer l'application
+## Fonctionnalités
 
-### IV. Membre de l'équipe
+1. **Gestion des Assignments**:
+    - Liste avec pagination
+    - Recherche simple par titre, date de rendue, et statut
+    - Ajout d'un nouvel assignment avec spécification du titre, de la date de rendue, de la matière et de l'auteur
+    - Détails de l'assignment avec possibilité de le marquer comme rendu via drag-and-drop, et ajout de notes et remarques
+    - Édition de l'assignment
+    - Suppression de l'assignment avec confirmation modale
 
-#### - Tomboanjara Claudio
-#### - ANTOENJARA Noam Francisco
+2. **Gestion des Matières**:
+    - Liste simple sans filtre ni pagination
+    - Ajout d'une nouvelle matière avec spécification du nom, du professeur et téléchargement d'une image d'illustration
+    - Édition de la matière
+    - Suppression de la matière avec confirmation modale
 
+3. **Gestion des Professeurs**:
+    - Ajout, édition et suppression de professeurs avec leurs noms, prénoms et photos
+
+4. **Gestion des Auteurs**:
+    - Ajout, édition et suppression d'auteurs avec leurs noms et photos
+
+5. **Authentification**:
+    - Seul un utilisateur authentifié (ou un administrateur) peut effectuer des opérations de gestion (ajout, modification, suppression)

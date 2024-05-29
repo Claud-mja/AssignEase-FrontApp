@@ -60,16 +60,16 @@ export class AddEditProfesseurComponent implements OnInit {
 
   constructor(
     private route : ActivatedRoute ,
-    private roter : Router, 
-    private notif : NotificationService , 
-    private professeurService : TeacherService , 
+    private roter : Router,
+    private notif : NotificationService ,
+    private professeurService : TeacherService ,
     private utilsService : UtilsService,
     private fb : FormBuilder){
       this.img_uri = environment.baseUrlImg;
     }
 
   ngOnInit(): void {
-    
+
     const idProfesseur = this.route.snapshot.params['id'];
     this.headTitle = {
       title : idProfesseur ? "Modif de Professeur" : "Ajout de Professeur"
@@ -95,7 +95,7 @@ export class AddEditProfesseurComponent implements OnInit {
   getProfesseur(id : string){
     const success = (response : Teacher)=>{
       this.professeur = response;
-      
+
       this.initForm();
       if (this.professeur.photo.trim()!='') {
         this.img_uri = `${this.img_uri}/professeur/${this.professeur.photo}`
@@ -118,9 +118,15 @@ export class AddEditProfesseurComponent implements OnInit {
       this.professeur = this.professeurForm.value;
 
       const success = (response : any)=>{
-        this.loadingAction = false;
-        this.notif.showSuccess("Professeur ajouté avec success ! ", 'Ajout de Professeur ');
-        this.roter.navigate(['professeur']);
+        if(response.status==200){
+          this.loadingAction = false;
+          this.notif.showSuccess("Professeur ajouté avec success ! ", 'Ajout de Professeur ');
+          this.roter.navigate(['professeur']);
+        } else {
+          this.loadingAction = false;
+          const message = response.error;
+          this.utilsService.handleError(response.status , message , "Ajout de Professeur");
+        }
       }
 
       const error = (error : HttpErrorResponse) =>{
@@ -136,20 +142,27 @@ export class AddEditProfesseurComponent implements OnInit {
   updateProfesseur(){
     if(this.professeurForm.valid){
       this.loadingAction = true;
+
       const success = (response : any)=>{
-        this.loadingAction = false;
-        this.notif.showSuccess("Professeur modifié avec success ! ", 'Modification de Professeur');
-        this.roter.navigate(['professeur']);
+        if(response.status==200){
+          this.loadingAction = false;
+          this.notif.showSuccess("Professeur modifié avec success ! ", 'Modification de Professeur');
+          this.roter.navigate(['professeur']);
+        } else {
+          this.loadingAction = false;
+          const message = response.error;
+          this.utilsService.handleError(response.status , message , "Modification de Professeur");
+        }
       }
 
       const error = (responseError : HttpErrorResponse) =>{
         this.loadingAction = false;
         const httpError = responseError.error;
         const message = "Modification "+httpError.error;
-        this.utilsService.handleError(httpError.status , message , "Ajout de Professeur");
-      } 
-      
-      const photo = this.professeur.photo; 
+        this.utilsService.handleError(httpError.status , message , "Modification de Professeur");
+      }
+
+      const photo = this.professeur.photo;
       this.professeur = {_id : this.professeur._id ,... this.professeurForm.value};
       this.professeurService.updateProfesseur(this.professeur , this.imageFile , photo).subscribe(success , error);
     }

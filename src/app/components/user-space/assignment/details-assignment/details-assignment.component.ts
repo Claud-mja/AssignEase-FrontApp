@@ -31,17 +31,18 @@ import { UtilsService } from '../../../../shared/services/utils/utils.service';
   templateUrl: './details-assignment.component.html',
   styleUrl: './details-assignment.component.css',
   providers : [
-    DatePipe 
+    DatePipe
   ]
 })
 export class DetailsAssignmentComponent implements OnInit {
   assignment !: Assignment;
   idAssigmnent !: string;
-  img_uri !: string; 
+  img_uri !: string;
   loading : boolean = false;
   btnEdit : any;
 
   headTitle : any;
+  isAdminConnected : boolean = false;
 
   constructor(
     private router : Router ,
@@ -66,12 +67,20 @@ export class DetailsAssignmentComponent implements OnInit {
     this.getAssignment();
   }
 
+  isAdmin() {
+    if(localStorage.getItem('role')==="ADMIN" ){
+      this.isAdminConnected=true;
+    }
+   }
+
   getAssignment(){
+    this.isAdmin();
+
     this.loading = true;
     const succes = (response : Assignment | undefined)=>{
       if(response){
         this.assignment = response;
-        
+
         this.loading = false;
       }
     }
@@ -90,7 +99,7 @@ export class DetailsAssignmentComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<Assignment>) {
-    const dialogRef = this.dialog.open(RendAssignmentComponent , 
+    const dialogRef = this.dialog.open(RendAssignmentComponent ,
       {
         width : '800px',
         data : {
@@ -110,25 +119,25 @@ export class DetailsAssignmentComponent implements OnInit {
   async placeHoldImage(url :string ,section : string){
     const response = await this.utilsService.imageExists(url);
     if(response){
-      
+
     }else{
     }
-    
+
     return url
   }
 
   constructDate(){
     const dateAssignment = this.assignment?.dateDeRendu;
-    
+
     if (dateAssignment) {
       const dateParts = dateAssignment.split('-');
       const year = parseInt(dateParts[2]);
-      const month = parseInt(dateParts[1]) - 1; 
+      const month = parseInt(dateParts[1]) - 1;
       const day = parseInt(dateParts[0])+1;
       const date = new Date(year, month, day);
       return this.datePipe.transform(date, 'EEE, dd MMM yyyy', 'fr');
     }
-    return ''; 
+    return '';
   }
 
 }

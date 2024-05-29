@@ -10,6 +10,7 @@ import { environment } from '../environments/environment';
 export class AuthService {
   private loggedIn = false;
   private userName$: BehaviorSubject<string | null> = new BehaviorSubject<string | null >(null);
+  private userRole$: BehaviorSubject<string | null> = new BehaviorSubject<string | null >(null);
 
   constructor(private http: HttpClient) { }
 
@@ -19,9 +20,12 @@ export class AuthService {
         map(response => {
           if(response.status==200){
             this.setName(response.name);
+            this.setRole(response.role);
+
             const token = response.token;
             localStorage.setItem('token', token);
             localStorage.setItem('name', response.name);
+            localStorage.setItem('role', response.role);
             this.loggedIn = true;
             return true;
           } else {
@@ -39,6 +43,7 @@ export class AuthService {
     // Supprimer le token JWT du stockage local
     localStorage.clear();
     this.setName(null);
+    this.setRole(null);
     this.loggedIn = false;
   }
 
@@ -50,8 +55,14 @@ export class AuthService {
   setName(name : string | null){
     this.userName$.next(name);
   }
+  setRole(role : string | null){
+    this.userRole$.next(role);
+  }
 
   getName(){
     return this.userName$;
+  }
+  getRole(){
+    return this.userRole$;
   }
 }

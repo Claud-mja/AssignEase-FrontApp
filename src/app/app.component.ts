@@ -36,9 +36,11 @@ export class AppComponent implements OnInit,AfterViewInit,OnDestroy {
   currentlyOpenItemIndex: number = -1;
   currentUrl !:string;
   name !: string | null;
+  role !: string | null;
   showNavbar: boolean = true;
 
   private unserNameSbscription !: Subscription;
+  private unserRoleSbscription !: Subscription;
 
   constructor(private router : Router,private authService : AuthService) {
     this.currentUrl = this.router.url;
@@ -46,6 +48,7 @@ export class AppComponent implements OnInit,AfterViewInit,OnDestroy {
 
   ngOnDestroy(): void {
     this.unserNameSbscription.unsubscribe();
+    this.unserRoleSbscription.unsubscribe();
   }
 
   ngAfterViewInit(): void {
@@ -57,14 +60,17 @@ export class AppComponent implements OnInit,AfterViewInit,OnDestroy {
     this.currentUrl = this.router.url;
     if (this.isLogIn()) {
       this.authService.setName(localStorage.getItem('name'));
+      this.authService.setRole(localStorage.getItem('role'));
     }
     this.unserNameSbscription = this.authService.getName().subscribe((name)=>{
       this.name = name;
     });
+    this.unserRoleSbscription = this.authService.getRole().subscribe((role)=>{
+      this.role = role;
+    });
 
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
-        // Vérifiez si l'URL actuelle est '/login'
         this.showNavbar = event.url !== '/login';
       }
     });

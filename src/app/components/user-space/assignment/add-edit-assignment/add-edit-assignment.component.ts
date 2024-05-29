@@ -44,7 +44,7 @@ import { UtilsService } from '../../../../shared/services/utils/utils.service';
   providers : [
     provideNativeDateAdapter(),
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' },
-    DatePipe 
+    DatePipe
   ]
 })
 export class AddEditAssignmentComponent implements OnInit {
@@ -69,10 +69,10 @@ export class AddEditAssignmentComponent implements OnInit {
   loadingAction : boolean = false;
 
   isDisabled : boolean = true;
-  
-  constructor(private matiereService : MatiereService , 
-              private auteurService : AuteurService , 
-              private notif : NotificationService, 
+
+  constructor(private matiereService : MatiereService ,
+              private auteurService : AuteurService ,
+              private notif : NotificationService,
               private fb: FormBuilder,
               private assignmentService : AssignmentService,
               private datePipe: DatePipe,
@@ -147,7 +147,7 @@ export class AddEditAssignmentComponent implements OnInit {
     const success = (response : any)=>{
       this.filtredMatiere = response.docs ? response.docs  : response as Matiere[];
       this.matiers = response.docs ?  response.docs  : response as Matiere[];
-      
+
       this.loading.matiere = false;
     }
 
@@ -180,7 +180,7 @@ export class AddEditAssignmentComponent implements OnInit {
     if (value) {
       this.filtredMatiere = this.matiers.filter((matiere : Matiere) => matiere.nom.toLowerCase().includes(value.toLowerCase()));
     } else {
-      this.filtredMatiere = this.matiers; 
+      this.filtredMatiere = this.matiers;
     }
     this.onIputMatSelect(value);
   }
@@ -190,7 +190,7 @@ export class AddEditAssignmentComponent implements OnInit {
     if (value) {
       this.filtredAuteur = this.auteurs.filter((auteur : Auteur) => auteur.nom.toLowerCase().includes(value.toLowerCase()));
     } else {
-      this.filtredAuteur = this.auteurs; 
+      this.filtredAuteur = this.auteurs;
     }
     this.onIputAutSelect(value);
   }
@@ -241,7 +241,7 @@ export class AddEditAssignmentComponent implements OnInit {
   isFormDirty(): boolean {
     return !this.assignmentForm.pristine && !this.isFormValueEqualToAssignment();
   }
-  
+
   private isFormValueEqualToAssignment(): boolean {
     const formValue = this.assignmentForm.value;
     return formValue.nom === this.assignment.nom
@@ -259,16 +259,22 @@ export class AddEditAssignmentComponent implements OnInit {
       this.assignment = this.assignmentForm.value;
 
       const success = (response : any)=>{
-        this.loadingAction = false;
-        this.notif.showSuccess("Assignment ajouté avec success ! ", 'Ajout d\'assignment ');
-        this.router.navigate(['assignment']);
+        if(response.status==200){
+          this.loadingAction = false;
+          this.notif.showSuccess("Assignment ajouté avec success ! ", 'Ajout d\'un Assignment ');
+          this.router.navigate(['assignment']);
+        } else {
+          this.loadingAction = false;
+          const message = response.error;
+          this.utilsService.handleError(response.status , message , "Ajout d\'un Assignment");
+        }
       }
 
       const error = (error : HttpErrorResponse) =>{
         this.loadingAction = false;
         const httpError = error.error;
         const message = "Ajout "+httpError.error;
-        this.utilsService.handleError(httpError.status , message , "Ajout d'Assignment");
+        this.utilsService.handleError(httpError.status , message , "Ajout d\'un Assignment");
       }
 
       this.assignmentService.addAssignment(this.assignment).subscribe(success , error);
@@ -279,9 +285,16 @@ export class AddEditAssignmentComponent implements OnInit {
     if(this.assignmentForm.valid){
       this.loadingAction = true;
       const success = (response : any)=>{
-        this.loadingAction = false;
-        this.notif.showSuccess("Assignment modifié avec success ! ", 'Modification d\'assignment ');
-        this.router.navigate(['assignment']);
+        if(response.status==200){
+          this.loadingAction = false;
+          this.notif.showSuccess("Assignment modifié avec success ! ", 'Modification d\'un Assignment ');
+          this.router.navigate(['assignment']);
+        } else {
+          this.loadingAction = false;
+          const message = response.error;
+          this.utilsService.handleError(response.status , message , "Modification d\'un Assignment");
+        }
+
       }
 
       const error = (error : HttpErrorResponse) =>{
@@ -289,11 +302,11 @@ export class AddEditAssignmentComponent implements OnInit {
         const httpError = error.error;
         const message = "Modification "+httpError.error;
         this.utilsService.handleError(httpError.status , message , "Modification d'Assignment");
-      } 
-      
+      }
+
       this.assignment = {_id : this.assignment._id ,... this.assignmentForm.value};
-    
-      
+
+
       this.assignmentService.updateAssignment(this.assignment).subscribe(success , error);
     }
   }
@@ -301,7 +314,7 @@ export class AddEditAssignmentComponent implements OnInit {
   onImageError(event: Event, section : string): void {
     const imagHtml = event.target as HTMLImageElement;
     let defaultImageUrl = "assets/images";
-    
+
     switch(section){
       case 'auteur':
         defaultImageUrl = `${defaultImageUrl}/etu.png`;

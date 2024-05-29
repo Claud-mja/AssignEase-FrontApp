@@ -71,7 +71,7 @@ export class AddEditAuteurComponent implements OnInit {
 
     const idAuteur = this.route.snapshot.params['id'];
     this.headTitle = {
-      title : idAuteur ? "Modif d'Auteur" :  "Ajout d'Auteur"
+      title : idAuteur ? "Modif d'Auteur" :  "Ajout  d\'un Auteur"
     }
     this.initData()
     if(idAuteur){
@@ -115,17 +115,22 @@ export class AddEditAuteurComponent implements OnInit {
       this.auteur = this.auteurForm.value;
 
       const success = (response : any)=>{
-        this.loadingAction = false;
-        this.notif.showSuccess("Auteur ajouté avec success ! ", 'Ajout de Auteur ');
+        if(response.status==200){
+          this.loadingAction = false;
+          this.notif.showSuccess("Auteur ajouté avec success ! ", 'Ajout d\'un Auteur ');
         this.roter.navigate(['auteur']);
+        } else {
+          this.loadingAction = false;
+          const message = response.error;
+          this.utilsService.handleError(response.status , message , "Ajout  d\'un Auteur");
+        }
       }
 
       const error = (error : HttpErrorResponse) =>{
         this.loadingAction = false;
         const httpError = error.error;
         const message = "Ajout "+httpError.error;
-        console.log(message);
-        this.utilsService.handleError(httpError.status , message , "Ajout de Auteur");
+        this.utilsService.handleError(httpError.status , message , "Ajout  d\'un Auteur");
       }
       this.auteurService.addAuteur(this.auteur, this.imageFile).subscribe(success , error);
     }
@@ -134,17 +139,25 @@ export class AddEditAuteurComponent implements OnInit {
   updateAuteur(){
     if(this.auteurForm.valid){
       this.loadingAction =  true;
+
       const success = (response : any)=>{
-        this.loadingAction = false;
-        this.notif.showSuccess("Auteur modifié avec success ! ", 'Modification de Auteur');
+        if(response.status==200){
+          this.loadingAction = false;
+          this.notif.showSuccess("Auteur modifié avec success ! ", 'Modification  d\'un Auteur');
         this.roter.navigate(['auteur']);
+        } else {
+          this.loadingAction = false;
+          const message = response.error;
+          this.utilsService.handleError(response.status , message , "Modification d\'un Auteur");
+        }
       }
+
 
       const error = (responseError : HttpErrorResponse) =>{
         this.loadingAction = false;
         const httpError = responseError.error;
         const message = "Modification "+httpError.error;
-        this.utilsService.handleError(httpError.status , message , "Ajout de Auteur");
+        this.utilsService.handleError(httpError.status , message , "Modification d\'un Auteur");
       }
       const photo = this.auteur.photo;
       this.auteur = {_id : this.auteur._id ,... this.auteurForm.value};

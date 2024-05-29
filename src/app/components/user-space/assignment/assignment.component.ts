@@ -39,6 +39,7 @@ import { HeaderConfig } from '../../../shared/interfaces/Header-config';
 })
 export class AssignmentComponent implements OnInit {
 
+  isAdminConnected : boolean = false;
   assignments !: Assignment[];
   loading : any = {
     data : false
@@ -60,8 +61,8 @@ export class AssignmentComponent implements OnInit {
   hasPrevPage!: boolean;
 
   constructor(private assignmentService : AssignmentService,
-              private router : Router , 
-              private route: ActivatedRoute , 
+              private router : Router ,
+              private route: ActivatedRoute ,
               private notif : NotificationService){ }
 
   ngOnInit(): void {
@@ -77,7 +78,14 @@ export class AssignmentComponent implements OnInit {
     })
   }
 
+  isAdmin() {
+    if(localStorage.getItem('role')==="ADMIN" ){
+      this.isAdminConnected=true;
+    }
+   }
+
   getAssignments(){
+    this.isAdmin();
     this.loading['data'] = true;
     const success = (response: ResponseListPaginate)=>{
       this.assignments = response.docs as Assignment[];
@@ -88,7 +96,7 @@ export class AssignmentComponent implements OnInit {
       this.hasNextPage = response.hasNextPage;
       this.hasPrevPage = response.hasPrevPage;
       this.loading['data'] = false;
-    
+
       // this.notif.showSuccess('Assignments Chargé avec succes !', 'Liste assignment');
     }
 
@@ -105,7 +113,7 @@ export class AssignmentComponent implements OnInit {
     this.router.navigate(['add-assignment'] , { relativeTo: this.route })
   }
 
-  
+
 
    // Pour la pagination
    pagePrecedente() {
@@ -134,7 +142,7 @@ export class AssignmentComponent implements OnInit {
     this.limit = event.rows;
     this.page = event.page+1;
     this.getAssignments();
-    
+
   }
 
   initHeaderConfig(){

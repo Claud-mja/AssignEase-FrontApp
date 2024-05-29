@@ -1,3 +1,4 @@
+import { catchError } from 'rxjs';
 import { Component, Input, OnInit } from '@angular/core';
 import { TableConfig } from '../../interfaces/table-config';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -13,6 +14,7 @@ import { MatButton} from '@angular/material/button'
 import { ConfirmationComponent } from '../modal/confirmation/confirmation.component';
 import { UtilsService } from '../../services/utils/utils.service';
 import { SpinnerComponent } from '../spinner/spinner.component';
+
 
 @Component({
   selector: 'app-table-dynamic',
@@ -32,6 +34,7 @@ export class TableDynamicComponent implements OnInit {
   data !: Object[];
   nbElement : number = 0;
   loadingData : boolean = false;
+  isAdminConnected : boolean = false;
 
   constructor(
       private tableService : TableService,
@@ -44,9 +47,17 @@ export class TableDynamicComponent implements OnInit {
 
   ngOnInit(): void {
     this.getData();
+
   }
 
+  isAdmin() {
+    if(localStorage.getItem('role')==="ADMIN" ){
+      this.isAdminConnected=true;
+    }
+   }
+
   getData(){
+    this.isAdmin();
     this.loadingData = true ;
     const success = (response : any)=>{
         this.data = response.docs ? response.docs : response;

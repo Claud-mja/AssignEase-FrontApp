@@ -65,11 +65,11 @@ export class AddEditMatiereComponent implements OnInit {
 
   constructor(
       private route : ActivatedRoute ,
-      private router : Router, 
-      private notif : NotificationService , 
-      private matiereService : MatiereService , 
+      private router : Router,
+      private notif : NotificationService ,
+      private matiereService : MatiereService ,
       private teacherService : TeacherService ,
-      private utilsService : UtilsService, 
+      private utilsService : UtilsService,
       private fb : FormBuilder){
         this.img_uri = environment.baseUrlImg;
   }
@@ -101,7 +101,7 @@ export class AddEditMatiereComponent implements OnInit {
   getMatiere(id : string){
     const success = (response : Matiere)=>{
       this.matiere = response;
-      
+
       this.initForm();
       if (this.matiere.image.trim()!='') {
         this.matiere_uri = `${this.img_uri}/matiere/${this.matiere.image}`
@@ -135,7 +135,7 @@ export class AddEditMatiereComponent implements OnInit {
     if (value) {
       this.filterProfs = this.professeurs.filter((prof : Teacher) => prof.nom.toLowerCase().includes(value.toLowerCase()));
     } else {
-      this.filterProfs = this.professeurs; 
+      this.filterProfs = this.professeurs;
     }
     this.onIputProfSelect(value);
   }
@@ -164,16 +164,23 @@ export class AddEditMatiereComponent implements OnInit {
       this.matiere = this.matiereForm.value;
 
       const success = (response : any)=>{
-        this.loadingAction = false;
-        this.notif.showSuccess("Matiere ajouté avec success ! ", 'Ajout d\'Matiere ');
-        this.router.navigate(['matiere']);
+        if(response.status==200){
+          this.loadingAction = false;
+          this.notif.showSuccess("Matiere ajouté avec success ! ", 'Ajout de la Matiere ');
+          this.router.navigate(['matiere']);
+        } else {
+          this.loadingAction = false;
+          const message = response.error;
+          this.utilsService.handleError(response.status , message , "Ajout de la Matière");
+        }
       }
+
 
       const error = (error : HttpErrorResponse) =>{
         this.loadingAction = false;
         const httpError = error.error;
         const message = "Ajout "+httpError.error;
-        this.utilsService.handleError(httpError.status , message , "Ajout de Matière");
+        this.utilsService.handleError(httpError.status , message , "Ajout de la Matière");
       }
 
       this.matiereService.addMatiere(this.matiere, this.imageFile).subscribe(success , error);
@@ -183,20 +190,28 @@ export class AddEditMatiereComponent implements OnInit {
   updateMatiere(){
     if(this.matiereForm.valid){
       this.loadingAction = true;
+
       const success = (response : any)=>{
-        this.loadingAction = false;
-        this.notif.showSuccess("Matiere modifié avec success ! ", 'Modification d\'Matiere ');
-        this.router.navigate(['matiere']);
+        if(response.status==200){
+          this.loadingAction = false;
+          this.notif.showSuccess("Matiere modifié avec success ! ", 'Modification de la Matiere ');
+          this.router.navigate(['matiere']);
+        } else {
+          this.loadingAction = false;
+          const message = response.error;
+          this.utilsService.handleError(response.status , message , "Modification de la Matière");
+        }
       }
+
 
       const error = (error : HttpErrorResponse) =>{
         this.loadingAction = false;
         const httpError = error.error;
         const message = "Modification "+httpError.error;
-        this.utilsService.handleError(httpError.status , message , "Modification de Matière");
+        this.utilsService.handleError(httpError.status , message , "Modification de la Matière");
       }
-      
-      const image = this.matiere.image; 
+
+      const image = this.matiere.image;
       this.matiere = {_id : this.matiere._id ,... this.matiereForm.value};
       this.matiereService.updateMatiere(this.matiere , this.imageFile , image).subscribe(success , error);
     }
@@ -205,7 +220,7 @@ export class AddEditMatiereComponent implements OnInit {
   isFormDirty(): boolean {
     return !this.matiereForm.pristine && !this.isFormValueEqualToMatiere();
   }
-  
+
   private isFormValueEqualToMatiere(): boolean {
     const formValue = this.matiereForm.value;
     return formValue.nom === this.matiere.nom
@@ -222,4 +237,4 @@ export class AddEditMatiereComponent implements OnInit {
     this.matiereForm.value['image'] = file.name;
   }
 
-} 
+}

@@ -4,6 +4,7 @@
 
 ## I.  Structure de l'application Front Office
 
+## La branche finale du frontOffice c'est ' release/production '
 
 
     Notre Projet /

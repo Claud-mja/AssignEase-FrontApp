@@ -38,6 +38,8 @@
                             </div>
                         </div>
                     </div>
+
+
                     <div class="body-info row " #assign="cdkDropList" cdkDropList [cdkDropListConnectedTo]="[rend]" >
                         <div class="block-info col-md-10 example-box" [cdkDragData]="assignment"  cdkDrag>
 
@@ -80,18 +82,25 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
+
                 </div>
-                <div class="content-drag-drop">
-                    <div #rend="cdkDropList" id="dropContent" cdkDropList class="drop-content"  (cdkDropListDropped)="drop($event)">
+
+                <div class="" #rend="cdkDropList" id="dropContent" cdkDropList  (cdkDropListDropped)="drop($event)">
+                    @if(isAdminConnected){
+                    <div class="content-drag-drop  drop-content">
                         <img src="assets/images/drag-drop-tool.jpg" alt="">
                     </div>
+                }
                 </div>
+                @if(isAdminConnected){
                 <div class="icon-survol">
                     <i class="fas fa-edit" (click)="onEdit()"></i>
                 </div>
+                }
+
             </div>
             }
             @else{

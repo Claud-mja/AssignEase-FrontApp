@@ -29,7 +29,7 @@ export class LoginComponent {
 
   ngOnInit(): void {
     if (this.authService.isLoggedIn()) {
-      this.router.navigate(['/']); 
+      this.router.navigate(['/']);
     }else{
       this.initForm()
     }

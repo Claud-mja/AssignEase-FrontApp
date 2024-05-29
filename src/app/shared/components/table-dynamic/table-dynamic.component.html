@@ -4,12 +4,15 @@
         {{'('+nbElement + ')'}}
     </span>
 </h4>
-<div class="content-btn">
-    <button mat-raised-button (click)="onAdd()" style="background-color: #2a7cc9; color: #fff;">
-       <i class="pi pi-plus"></i>
-        Ajouter un nouveau
-    </button>
-</div>
+
+@if(isAdminConnected){
+    <div class="content-btn" >
+        <button mat-raised-button (click)="onAdd()" style="background-color: #2a7cc9; color: #fff;">
+           <i class="pi pi-plus"></i>
+           Ajouter un nouveau
+        </button>
+    </div>
+}
 <p-table
     [value]="data"
     [scrollable]="true"
@@ -21,7 +24,11 @@
             @for (field of config.header.fields; track $index) {
                 <th> {{ config.header.labels && config.header.labels[field.name] ? config.header.labels[field.name] : field.name }}</th>
             }
-            <th>Action</th>
+            @if(isAdminConnected){
+                <th>Action</th>
+            }
+
+
         </tr>
     </ng-template>
     <ng-template pTemplate="body" let-data>
@@ -43,12 +50,14 @@
 
                 }
             }
-            <td>
-                <div class="content-action">
-                    <i class="pi pi-pen-to-square edit" style="font-size: 1rem" (click)="onEdit(data)"></i>
-                    <i class="pi pi-trash mx-2 delete" style="font-size: 1rem" (click)="onDelete(data)"></i>
-                </div>
-            </td>
+            @if(isAdminConnected){
+                <td>
+                    <div class="content-action">
+                        <i class="pi pi-pen-to-square edit" style="font-size: 1rem" (click)="onEdit(data)"></i>
+                        <i class="pi pi-trash mx-2 delete" style="font-size: 1rem" (click)="onDelete(data)"></i>
+                    </div>
+                </td>
+            }
         </tr>
     </ng-template>
 </p-table>

@@ -1,27 +1,81 @@
-# AssignEaseFrontApp
+# Système de Gestion des Assignments - Frontend
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.2.1.
+Ce projet représente la partie frontend du Système de Gestion des Assignments, développé avec Angular. Il fournit une interface utilisateur pour gérer les assignments, les matières, les professeurs et les auteurs.
 
-## Development server
+## Table des matières
+- [Fonctionnalités](#fonctionnalités)
+- [Installation](#installation)
+- [Utilisation](#utilisation)
+- [Déploiement](#déploiement)
+- [Contributeurs](#contributeurs)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Fonctionnalités
+- **Assignments**
+  - Liste des assignments avec pagination.
+  - Recherche des assignments par titre, date de rendu (Ascendant ou Descendant),la note (Ascendant ou Descendant)  et statut (rendu ou non).
+  - Ajouter un nouvel assignment avec des détails spécifiques.
+  - Afficher les détails d'un assignment et marquer comme rendu avec `drag-drop` qui affichera un modal pour saisir le Note et Remarques.
+  - Modifier les détails d'un assignment (titre, date de rendu, matière, auteur).
+  - Supprimer un assignment avec modal de confirmation.
+- **Matières**
+  - Liste des matières dans un tableau.
+  - Ajouter une nouvelle matière avec nom, professeur, et image.
+  - Modifier les matières.
+  - Supprimer les matières avec modal de confirmation.
+- **professeurs**
+  - Liste des professeurs dans un tableau.
+  - Ajouter une nouvelle professeur avec nom, prenom et photo.
+  - Modifier les professeurs.
+  - Supprimer les professeurs avec modal de confirmation.
+- **auteurs (élèves)**
+  - Liste des auteurs dans un tableau.
+  - Ajouter une nouvelle auteur avec nom et photo.
+  - Modifier les auteurs.
+  - Supprimer les auteurs avec modal de confirmation.
+- **Authentification**
+  - Seul un administrateur authentifié peut ajouter, modifier ou supprimer des éléments 
+  - Utilisation JWT (JSON Web Tokens) pour gérer les sessions de connexion.
+  
+  - ***Login Admin*** :
+    - email : `adminassign@gmail.com`
+    - password : `admin`
 
-## Code scaffolding
+## Installation
+1. Cloner le dépôt :
+  ```bash
+  git clone https://github.com/Claud-mja/AssignEase-FrontApp.git
+  ```
+  ```bash
+  cd AssignEase-FrontApp
+  ```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+2. Installer les dépendances :
+  ```bash
+  npm install
+  ```
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Utilisation
+1. Démarrer le serveur de développement  :
+  ```bash
+  ng serve
+  ```
 
-## Running unit tests
+2. Naviguer vers http://localhost:4200/ dans votre navigateur (4200 port par defaut)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Déploiement
+1. Construire le projet :
+  ```bash
+  ng build --prod
+  ```
 
-## Running end-to-end tests
+2. Déployer le dossier `dist/` sur Render.com.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+3. Lien de l'application deployer https://assignease-frontapp.onrender.com
 
-## Further help
+## Contributeurs
+  - TOMBOANJARA Claudio
+  - ANTOENJARA Noam Francisco
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+

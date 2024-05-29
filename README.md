@@ -84,16 +84,18 @@ Gestion des environnements 'local' et 'production'.
 
 ## III. Liste des commandes pour lancer le projet
 
-1. **Installation des environnements**:
+### 1. **Installation des environnements**:
 
-Pour installer les dépendances du projet, exécutez cette commande pour la première fois :
+#### Pour installer les dépendances du projet, exécutez cette commande pour la première fois :
 
 ```bash
 npm install
+```
 
-
-ng build # pour builder l'application
-ng serve # pour lancer l'application
+# pour builder l'application
+ng build
+# pour lancer l'application
+ng serve
 
 
 ## VI.  Membres de l'équipe

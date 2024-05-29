@@ -23,7 +23,8 @@ export const routes: Routes = [
     },
     {
         path : 'assignment',
-        component : AssignmentComponent
+        component : AssignmentComponent,
+        canActivate: [AuthGuard]
     },
     {
         path : "edit-assignment/:id",
@@ -38,10 +39,12 @@ export const routes: Routes = [
     {
         path : 'details-assignment/:id',
         component : DetailsAssignmentComponent,
+        canActivate: [AuthGuard]
     },
     {
         path : 'matiere',
         component : MatiereComponent,
+        canActivate: [AuthGuard]
     },
     {
         path : 'edit-matiere/:id',
@@ -56,6 +59,7 @@ export const routes: Routes = [
     {
         path : 'professeur',
         component : ProfesseurComponent,
+        canActivate: [AuthGuard]
     },
     {
         path : 'edit-professeur/:id',
@@ -70,6 +74,7 @@ export const routes: Routes = [
     {
         path : 'auteur',
         component : AuteurComponent,
+        canActivate: [AuthGuard]
     },
     {
         path : 'edit-auteur/:id',
@@ -82,8 +87,13 @@ export const routes: Routes = [
         canActivate: [AuthGuard]
     },
     {
-        path : '', // Retirer canActivate de cette route
-        redirectTo : 'assignment',
-        pathMatch : 'full'
-    }
+        path : '',
+        component : AssignmentComponent,
+        canActivate: [AuthGuard]
+    },
+    // {
+    //     path : '', // Retirer canActivate de cette route
+    //     redirectTo : 'assignment',
+    //     pathMatch : 'full',
+    // }
 ];

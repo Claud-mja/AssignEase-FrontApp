@@ -40,15 +40,26 @@
                     </div>
                     <div class="body-info row " #assign="cdkDropList" cdkDropList [cdkDropListConnectedTo]="[rend]" >
                         <div class="block-info col-md-10 example-box" [cdkDragData]="assignment"  cdkDrag>
-                            <div class="content-state" [ngClass]="{'rendu' : assignment.rendu , 'not-rendu' : !assignment.rendu }">
-                                <i [ngClass]="{'fa-check' : assignment.rendu, 'fa-times' : !assignment.rendu}" class="fas"></i>
-                            </div>
-                            <div class="litle-title d-flex">
-                                <i class="fas fa-user text-muted"></i>
+
+                            <div class="d-flex justify-content-between align-items-center">
+
+                                <div class="litle-title d-flex">
+                                    <i class="fas fa-user text-muted"></i>
+                                    <span class="mx-2">
+                                        <p class="m-0">Etudiant informations : </p>
+                                    </span>
+                                </div>
+
+                                <div class="p-1 bg-success text-white" [ngClass]="{'rendu' : assignment.rendu , 'not-rendu' : !assignment.rendu }">
+                                    <i [ngClass]="{'fa-check' : assignment.rendu, 'fa-times' : !assignment.rendu}" class="fas"></i>
+                                </div>
+
                                 <span class="mx-2">
-                                    <p class="m-0">Etudiant informations : </p>
+                                    <p class="m-0"> <i class="fa fa-bars"></i></p>
                                 </span>
                             </div>
+
+
                             <div class="info-etudiant">
                                 <div class="info-row d-flex">
                                     <p>Nom : </p>
@@ -70,7 +81,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     </div>
                 </div>
                 <div class="content-drag-drop">

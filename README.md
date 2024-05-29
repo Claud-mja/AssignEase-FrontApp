@@ -37,8 +37,8 @@ Ce projet représente la partie frontend du Système de Gestion des Assignments,
   - Utilisation JWT (JSON Web Tokens) pour gérer les sessions de connexion.
   
   - ***Login Admin*** :
-    - email : `adminassign@gmail.com`
-    - password : `admin`
+      - email : `adminassign@gmail.com`
+      - password : `develop`
 
 ## Installation
 1. Cloner le dépôt :

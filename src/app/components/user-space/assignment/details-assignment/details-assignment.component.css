@@ -220,3 +220,12 @@
 .rendu{
     background-color: #2d963ea1;
 }
+
+.squared{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+}

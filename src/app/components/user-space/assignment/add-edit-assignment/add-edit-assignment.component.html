@@ -88,7 +88,7 @@
                 </div>
             </mat-card-content>
             <mat-card-actions>
-                <button mat-raised-button style="background-color: #2a7cc9; color: #fff;" [disabled]="!assignmentForm.valid || !isFormDirty()" >
+                <button mat-raised-button style="background-color: #2a7cc9; color: #fff;" [disabled]="!assignmentForm.valid" >
                     @if (loadingAction) {
                         <span class="spinner-border spinner-border-sm mr-3" role="status" aria-hidden="true"></span>
                         <span>{{assignment._id ? 'Modif...' : 'Ajout...'}}</span>

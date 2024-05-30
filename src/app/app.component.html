@@ -52,14 +52,9 @@
       <mat-toolbar class="tool-bar" style="padding: 0 40px;">
         <span class="example-spacer"></span>
         <span mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-          @if (role?.toLowerCase()=="user") {
-            <i class="fas fa-user"></i>
-          }
-          @else{
-            <i class="fa-solid fa-user-tie"></i>
-          }
+          <i class="fas fa-user"></i>
           {{name}} 
-          <!-- <br> <span style="font-size: small;color: gray;">{{role}}</span> -->
+          <br> <span class="text-muted" style="font-size: 12px;">{{role}}</span>
         </span>
       </mat-toolbar>
     </div>

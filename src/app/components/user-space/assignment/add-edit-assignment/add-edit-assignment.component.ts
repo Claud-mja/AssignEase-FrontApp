@@ -259,15 +259,9 @@ export class AddEditAssignmentComponent implements OnInit {
       this.assignment = this.assignmentForm.value;
 
       const success = (response : any)=>{
-        if(response.status==200){
           this.loadingAction = false;
           this.notif.showSuccess("Assignment ajouté avec success ! ", 'Ajout d\'un Assignment ');
           this.router.navigate(['assignment']);
-        } else {
-          this.loadingAction = false;
-          const message = response.error;
-          this.utilsService.handleError(response.status , message , "Ajout d\'un Assignment");
-        }
       }
 
       const error = (error : HttpErrorResponse) =>{
@@ -285,16 +279,9 @@ export class AddEditAssignmentComponent implements OnInit {
     if(this.assignmentForm.valid){
       this.loadingAction = true;
       const success = (response : any)=>{
-        if(response.status==200){
           this.loadingAction = false;
           this.notif.showSuccess("Assignment modifié avec success ! ", 'Modification d\'un Assignment ');
           this.router.navigate(['assignment']);
-        } else {
-          this.loadingAction = false;
-          const message = response.error;
-          this.utilsService.handleError(response.status , message , "Modification d\'un Assignment");
-        }
-
       }
 
       const error = (error : HttpErrorResponse) =>{

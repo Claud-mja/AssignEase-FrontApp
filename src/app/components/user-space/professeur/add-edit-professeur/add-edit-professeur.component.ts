@@ -118,15 +118,9 @@ export class AddEditProfesseurComponent implements OnInit {
       this.professeur = this.professeurForm.value;
 
       const success = (response : any)=>{
-        if(response.status==200){
           this.loadingAction = false;
           this.notif.showSuccess("Professeur ajouté avec success ! ", 'Ajout de Professeur ');
           this.roter.navigate(['professeur']);
-        } else {
-          this.loadingAction = false;
-          const message = response.error;
-          this.utilsService.handleError(response.status , message , "Ajout de Professeur");
-        }
       }
 
       const error = (error : HttpErrorResponse) =>{
@@ -144,15 +138,9 @@ export class AddEditProfesseurComponent implements OnInit {
       this.loadingAction = true;
 
       const success = (response : any)=>{
-        if(response.status==200){
           this.loadingAction = false;
           this.notif.showSuccess("Professeur modifié avec success ! ", 'Modification de Professeur');
           this.roter.navigate(['professeur']);
-        } else {
-          this.loadingAction = false;
-          const message = response.error;
-          this.utilsService.handleError(response.status , message , "Modification de Professeur");
-        }
       }
 
       const error = (responseError : HttpErrorResponse) =>{

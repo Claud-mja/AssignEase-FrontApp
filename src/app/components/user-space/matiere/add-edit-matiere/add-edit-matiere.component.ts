@@ -164,15 +164,9 @@ export class AddEditMatiereComponent implements OnInit {
       this.matiere = this.matiereForm.value;
 
       const success = (response : any)=>{
-        if(response.status==200){
           this.loadingAction = false;
           this.notif.showSuccess("Matiere ajouté avec success ! ", 'Ajout de la Matiere ');
           this.router.navigate(['matiere']);
-        } else {
-          this.loadingAction = false;
-          const message = response.error;
-          this.utilsService.handleError(response.status , message , "Ajout de la Matière");
-        }
       }
 
 
@@ -192,15 +186,9 @@ export class AddEditMatiereComponent implements OnInit {
       this.loadingAction = true;
 
       const success = (response : any)=>{
-        if(response.status==200){
           this.loadingAction = false;
           this.notif.showSuccess("Matiere modifié avec success ! ", 'Modification de la Matiere ');
           this.router.navigate(['matiere']);
-        } else {
-          this.loadingAction = false;
-          const message = response.error;
-          this.utilsService.handleError(response.status , message , "Modification de la Matière");
-        }
       }
 
 

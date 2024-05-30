@@ -3,11 +3,37 @@
 Ce projet représente la partie frontend du Système de Gestion des Assignments, développé avec Angular. Il fournit une interface utilisateur pour gérer les assignments, les matières, les professeurs et les auteurs.
 
 ## Table des matières
+- [Structure Projet](#structure)
 - [Fonctionnalités](#fonctionnalités)
 - [Installation](#installation)
 - [Utilisation](#utilisation)
 - [Déploiement](#déploiement)
 - [Contributeurs](#contributeurs)
+
+## Structure Projet 
+  AssignEase-FrontApp /
+    .   / node_modules/
+    .   src
+        .   . / app/
+        .   .   .   . / components/*
+        .   .   .   . / shared/*
+        .   .   .   . / app.components.css
+        .   .   .   . / app.components.html
+        .   .   .   . / app.components.spec.ts
+        .   .   .   . / app.components.ts
+        .   .   .   . / app.config.ts
+        .   .   .   . / app.routes.ts
+        .   .   .   . / auth.guard.ts
+        .   .   .   . / auth.services.spec.ts
+        .   .   .   . / auth.service.ts
+        .   . / assets/*
+        .   . / environements/*
+        .   . / index.html
+        .   . / main.ts
+        .   . / styles.css
+    .   index.html
+    .   main.ts
+    .   styles.css
 
 ## Fonctionnalités
 - **Assignments**
@@ -33,11 +59,17 @@ Ce projet représente la partie frontend du Système de Gestion des Assignments,
   - Modifier les auteurs.
   - Supprimer les auteurs avec modal de confirmation.
 - **Authentification**
-  - Seul un administrateur authentifié peut ajouter, modifier ou supprimer des éléments 
+  - Necessite d'être connecté (Login)   
+  - Seul un administrateur authentifié (rôle admin) peut ajouter, modifier ou supprimer des éléments 
   - Utilisation JWT (JSON Web Tokens) pour gérer les sessions de connexion.
   
-  - ***Login Admin*** :
+  - ***Login*** :
+    - Admin : 
       - email : `adminassign@gmail.com`
+      - password : `develop`
+        
+    - User :
+      - email : `userassign@gmail.com`
       - password : `develop`
 
 ## Installation
@@ -71,7 +103,10 @@ Ce projet représente la partie frontend du Système de Gestion des Assignments,
 
 2. Déployer le dossier `dist/` sur Render.com.
 
-3. Lien de l'application deployer https://assignease-frontapp.onrender.com
+3. Lien front deployement https://assignease-frontapp.onrender.com
+4. Lien backend :
+  - Git (Readme) https://github.com/FranciscoNoam/AssignEase-BackOffice/tree/features/release-prod?tab=readme-ov-file#readme
+  - deployement https://assignease-backend-b8rt.onrender.com (Necessaire d'être demmaré avant de tester l'app) 
 
 ## Contributeurs
   - TOMBOANJARA Claudio

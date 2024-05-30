@@ -107,7 +107,7 @@ export class AddEditProfesseurComponent implements OnInit {
     }
 
     const error = (error : HttpErrorResponse) =>{
-      this.notif.showWarning(error.message,"Erreur de recuperation de Professeur")
+      this.utilsService.handleError(error.status , error.error.message , "Get Professeur!")
     }
     this.professeurService.getTeacherById(id).subscribe(success , error);
   }

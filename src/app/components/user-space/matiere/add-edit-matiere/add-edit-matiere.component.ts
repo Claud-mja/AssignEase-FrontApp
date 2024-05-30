@@ -113,7 +113,7 @@ export class AddEditMatiereComponent implements OnInit {
     }
 
     const error = (error : HttpErrorResponse) =>{
-      this.notif.showWarning(error.message,"Erreur d'ajout de get Matiere")
+      this.utilsService.handleError(error.status , error.error.message , "Get Matiere !")
     }
     this.matiereService.getMatiere(id).subscribe(success , error);
   }
@@ -125,7 +125,7 @@ export class AddEditMatiereComponent implements OnInit {
     }
 
     const error = (error : HttpErrorResponse) =>{
-      this.notif.showWarning(error.message,"Erreur de get Matiere")
+      this.utilsService.handleError(error.status , error.error.message , "Get Professeur matiere !")
     }
     this.teacherService.getTeachers().subscribe(success , error);
   }

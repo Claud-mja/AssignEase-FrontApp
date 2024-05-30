@@ -17,6 +17,7 @@ import { environment } from '../../../../environments/environment';
 import { SpinnerComponent } from '../../../shared/components/spinner/spinner.component';
 import { PaginatorModule } from 'primeng/paginator'
 import { HeaderConfig } from '../../../shared/interfaces/Header-config';
+import { UtilsService } from '../../../shared/services/utils/utils.service';
 
 @Component({
   selector: 'app-assignment',
@@ -62,6 +63,7 @@ export class AssignmentComponent implements OnInit {
 
   constructor(private assignmentService : AssignmentService,
               private router : Router ,
+              private utilsService : UtilsService,
               private route: ActivatedRoute ,
               private notif : NotificationService){ }
 
@@ -102,7 +104,9 @@ export class AssignmentComponent implements OnInit {
 
     const error = (error : HttpErrorResponse) => {
       this.loading['data'] = false;
-      this.notif.showWarning(error.message, 'Liste assignment erreur');
+      console.log(localStorage.getItem('token'));
+      
+      this.utilsService.handleError(error.status , error.error.message , "List assignment !")
     }
 
     this.assignmentService.getAssignmentsPagines(this.page , this.limit , this.headerConfig).subscribe(success , error);

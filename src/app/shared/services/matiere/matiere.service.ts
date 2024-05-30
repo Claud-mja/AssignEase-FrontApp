@@ -18,15 +18,30 @@ export class MatiereService {
   }
 
   getMatieres():Observable<any>{
-    return this.http.get<Matiere[]>(`${this.matiere_uri}`);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${token}`
+    );
+    return this.http.get<Matiere[]>(`${this.matiere_uri}`, { headers : headers });
   }
 
   getMatiere(id : string):Observable<any>{
-    return this.http.get<Matiere>(`${this.matiere_uri}/${id}`);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${token}`
+    );
+    return this.http.get<Matiere>(`${this.matiere_uri}/${id}`, { headers : headers });
   }
 
   getMatierePagines(page:number, limit:number):Observable<any> {
-    return this.http.get<ResponseListPaginate>(`${this.matiere_uri}` + "?page=" + page + "&limit=" + limit);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${token}`
+    );
+    return this.http.get<ResponseListPaginate>(`${this.matiere_uri}` + "?page=" + page + "&limit=" + limit, { headers : headers });
   }
 
   updateMatiere(matiere : Matiere , file : File , lastFile : string):Observable<any>{

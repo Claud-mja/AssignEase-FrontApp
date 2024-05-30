@@ -26,21 +26,36 @@ export class AssignmentService implements OnInit {
 
 
   getAssignments():Observable<Assignment[]> {
-    return this.http.get<Assignment[]>(`${this.assigment_uri}`);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${token}`
+    );
+    return this.http.get<Assignment[]>(`${this.assigment_uri}` , { headers : headers });
   }
 
   getAssignmentsPagines(page:number, limit:number , config : any = null):Observable<any> {
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${token}`
+    );
     const body = {
       filters : config!=null && config.filters!=null ? config.filters : [],
       sorts : config!=null && config.sorts!=null ? config.sorts : [],
 
     }
-    return this.http.post<ResponseListPaginate>(`${this.assigment_uri}` + "?page=" + page + "&limit=" + limit , body);
+    return this.http.post<ResponseListPaginate>(`${this.assigment_uri}` + "?page=" + page + "&limit=" + limit , body , { headers : headers });
   }
 
   // renvoie un assignment par son id, renvoie undefined si pas trouvé
   getAssignment(id:string):Observable<Assignment|undefined> {
-    return this.http.get<Assignment>(`${this.assigment_uri}/${id}`)
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${token}`
+    );
+    return this.http.get<Assignment>(`${this.assigment_uri}/${id}`, { headers : headers })
     .pipe(
            catchError(this.handleError<any>('### catchError: getAssignments by id avec id=' + id))
       /*

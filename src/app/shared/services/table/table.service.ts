@@ -21,11 +21,21 @@ export class TableService {
   }
 
   getData(configTable : TableConfig):Observable<Object[]>{
-    return this.http.get<Object[]>(`${environment.baseUrl}/${configTable.tools}`);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${token}`
+    );
+    return this.http.get<Object[]>(`${environment.baseUrl}/${configTable.tools}` , { headers : headers });
   }
 
   getDataById(configTable : TableConfig , id : string):Observable<Object>{
-    return this.http.get<Object>(`${environment.baseUrl}/${configTable.tools}/${id}`);
+    const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${token}`
+    );
+    return this.http.get<Object>(`${environment.baseUrl}/${configTable.tools}/${id}` , { headers : headers });
   }
 
   updateData(configTable : TableConfig ,dataBody :  Object ):Observable<any>{

@@ -104,7 +104,7 @@ export class AddEditAuteurComponent implements OnInit {
     }
 
     const error = (error : HttpErrorResponse) =>{
-      this.notif.showWarning(error.message,"Erreur de recuperation de Auteur")
+      this.utilsService.handleError(error.status , error.error.message , "Get auteur !")
     }
     this.auteurService.getAuteur(id).subscribe(success , error);
   }

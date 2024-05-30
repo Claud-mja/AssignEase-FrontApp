@@ -152,7 +152,7 @@ export class AddEditAssignmentComponent implements OnInit {
     }
 
     const error = (error : HttpErrorResponse)=>{
-      this.notif.showWarning(error.message , 'Get matieres error')
+      this.utilsService.handleError(error.status , error.error.message , "Get matieres assignment !")
       this.loading.matiere = false;
     }
 
@@ -168,7 +168,7 @@ export class AddEditAssignmentComponent implements OnInit {
     }
 
     const error = (error : HttpErrorResponse)=>{
-      this.notif.showWarning(error.message , 'Get auteurs error')
+      this.utilsService.handleError(error.status , error.error.message , "Get auteurs assignment !")
       this.loading.auteur = false;
     }
 

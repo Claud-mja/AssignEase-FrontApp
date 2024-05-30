@@ -18,15 +18,30 @@ export class AuteurService {
   }
 
   getAuteurs(){
-    return this.http.get<ResponseListPaginate>(`${this.auteur_uri}`);
+     const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${token}`
+    );
+    return this.http.get<ResponseListPaginate>(`${this.auteur_uri}` , { headers : headers });
   }
 
   getStudents(): Observable<Auteur[]> {
-    return this.http.get<Auteur[]>(`${environment.baseUrl}/auteur`);
+     const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${token}`
+    );
+    return this.http.get<Auteur[]>(`${environment.baseUrl}/auteur` , { headers : headers });
   }
 
   getAuteur(id :string): Observable<any> {
-    return this.http.get<any>(`${environment.baseUrl}/auteur/${id}`);
+     const token = localStorage.getItem('token');
+    const headers = new HttpHeaders().set(
+      'Authorization',
+      `Bearer ${token}`
+    );
+    return this.http.get<any>(`${environment.baseUrl}/auteur/${id}` , { headers : headers });
   }
 
   createAuteur(dataCreate: { nom: string}): Observable<any> {

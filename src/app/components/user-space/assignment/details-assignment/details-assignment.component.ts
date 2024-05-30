@@ -86,7 +86,7 @@ export class DetailsAssignmentComponent implements OnInit {
     }
 
     const error = (error : HttpErrorResponse)=>{
-      this.notif.showWarning(error.message , "Get Assignment Error !");
+      this.utilsService.handleError(error.status , error.error.message , "Get assignment !")
       this.loading = false;
     }
 

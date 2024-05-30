@@ -23,12 +23,12 @@ export class TeacherService {
   }
 
   getTeacherById(idTeacher:any): Observable<any> {
-    // const jwt = localStorage.getItem('token');
-    // const headers = new HttpHeaders({
-    //   'Authorization': `Bearer ${jwt}`
-    // });
+    const jwt = localStorage.getItem('token');
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${jwt}`
+    });
 
-    return this.http.get<any>(`${environment.baseUrl}/teacher/${idTeacher}`);
+    return this.http.get<any>(`${environment.baseUrl}/teacher/${idTeacher}` , { headers });
   }
 
   createTeacher(formdata: FormData): Observable<any> {

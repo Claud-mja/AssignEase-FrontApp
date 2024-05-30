@@ -108,9 +108,10 @@ Ce projet représente la partie frontend du Système de Gestion des Assignments,
   ```
 
 2. Déployer le dossier `dist/` sur Render.com.
+3. Branche stable et final `release/production`
 
-3. Lien front deployement https://assignease-frontapp.onrender.com
-4. Lien backend :
+4. Lien front deployement https://assignease-frontapp.onrender.com
+5. Lien backend :
   - Git (Readme) https://github.com/FranciscoNoam/AssignEase-BackOffice/tree/features/release-prod?tab=readme-ov-file#readme
   - deployement https://assignease-backend-b8rt.onrender.com (Necessaire d'être demmaré avant de tester l'app) 
 

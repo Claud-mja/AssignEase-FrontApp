@@ -3,7 +3,7 @@
 Ce projet représente la partie frontend du Système de Gestion des Assignments, développé avec Angular. Il fournit une interface utilisateur pour gérer les assignments, les matières, les professeurs et les auteurs.
 
 ## Table des matières
-- [Structure](#structure)
+- [Structure Projet](#structure-projet)
 - [Fonctionnalités](#fonctionnalités)
 - [Installation](#installation)
 - [Utilisation](#utilisation)

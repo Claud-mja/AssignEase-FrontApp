@@ -11,7 +11,9 @@ Ce projet représente la partie frontend du Système de Gestion des Assignments,
 - [Contributeurs](#contributeurs)
 
 ## Structure Projet 
-  AssignEase-FrontApp /
+ 
+
+    AssignEasE-FrontApp /
     .   / node_modules/
     .   src
         .   . / app/
@@ -34,6 +36,10 @@ Ce projet représente la partie frontend du Système de Gestion des Assignments,
     .   index.html
     .   main.ts
     .   styles.css
+
+
+
+
 
 ## Fonctionnalités
 - **Assignments**

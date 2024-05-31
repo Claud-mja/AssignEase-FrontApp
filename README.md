@@ -122,7 +122,7 @@ Ce projet représente la partie frontend du Système de Gestion des Assignments,
   - Configuration et déploiement de l'application frontend sur Render.com.
   
 - **Intégration de la page Assignment :**
-  - Création de la liste des assignments avec pagination et filtres (composants de cartes).
+  - Création de la liste des assignments avec pagination et filtres.
   - Implémentation de la fonctionnalité d'ajout de nouveaux assignments.
   - Développement de la fonctionnalité de modification des assignments.
   - Ajout de la fonctionnalité de suppression des assignments avec modal de confirmation.

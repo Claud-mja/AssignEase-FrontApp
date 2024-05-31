@@ -129,9 +129,10 @@ Ce projet représente la partie frontend du Système de Gestion des Assignments,
   - Création de la page de détails des assignments avec fonctionnalité de drag-and-drop pour marquer comme rendu et ajout des notes et remarques.
   - Intégration des services pour la communication avec l'API backend.
 
-- **Intégration du composant de table dynamique :**
+- **Intégration des composants :**
   - Développement et intégration d'un composant de table dynamique pour afficher les données de manière flexible.
-  - Création de services dynamiques pour la gestion des données et interactions avec l'API.
+  - Création de services dynamiques pour la gestion des données et interactions avec l'API (ajout, modification, suppression).
+  - Création d'un composant de téléchargement de fichiers pour une réutilisabilité accrue.
 
 - **Intégration de la page Matière :**
   - Utilisation du composant de table dynamique pour afficher les matières.

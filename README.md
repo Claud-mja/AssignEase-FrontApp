@@ -8,7 +8,7 @@ Ce projet représente la partie frontend du Système de Gestion des Assignments,
 - [Installation](#installation)
 - [Utilisation](#utilisation)
 - [Déploiement](#déploiement)
-- [Contributeurs](#contributeurs)
+- [Contributions](#contributions)
 
 ## Structure Projet 
  
@@ -114,9 +114,52 @@ Ce projet représente la partie frontend du Système de Gestion des Assignments,
   - Git (Readme) https://github.com/FranciscoNoam/AssignEase-BackOffice/tree/features/release-prod?tab=readme-ov-file#readme
   - deployement https://assignease-backend-b8rt.onrender.com (Necessaire d'être demmaré avant de tester l'app) 
 
-## Contributeurs
-  - TOMBOANJARA Claudio
-  - ANTOENJARA Noam Francisco
+## Contributions
+
+### TOMBOANJARA Claudio
+
+- **Déploiement Frontend :**
+  - Configuration et déploiement de l'application frontend sur Render.com.
+  
+- **Intégration de la page Assignment :**
+  - Création de la liste des assignments avec pagination et filtres (composants de cartes).
+  - Implémentation de la fonctionnalité d'ajout de nouveaux assignments.
+  - Développement de la fonctionnalité de modification des assignments.
+  - Ajout de la fonctionnalité de suppression des assignments avec modal de confirmation.
+  - Création de la page de détails des assignments avec fonctionnalité de drag-and-drop pour marquer comme rendu et ajout des notes et remarques.
+  - Intégration des services pour la communication avec l'API backend.
+
+- **Intégration du composant de table dynamique :**
+  - Développement et intégration d'un composant de table dynamique pour afficher les données de manière flexible.
+  - Création de services dynamiques pour la gestion des données et interactions avec l'API.
+
+- **Intégration de la page Matière :**
+  - Utilisation du composant de table dynamique pour afficher les matières.
+  - Implémentation des fonctionnalités d'ajout et de modification des matières.
+
+- **Améliorations de l'affichage :**
+  - Améliorations visuelles de la liste des assignments et des tableaux.
+  - Améliorations du design général et de la typographie de l'application.
+
+### ANTOENJARA Noam Francisco
+
+- **Déploiement Frontend :**
+  - Configuration et déploiement de l'application frontend sur Render.com.
+
+- **Intégration de la page Auteurs :**
+  - Utilisation du composant de table dynamique pour afficher les auteurs.
+  - Implémentation des fonctionnalités d'ajout, de modification et de suppression des auteurs.
+  - Intégration des services pour la communication avec l'API backend.
+
+- **Intégration de la page Professeurs :**
+  - Utilisation du composant de table dynamique pour afficher les professeurs.
+  - Implémentation des fonctionnalités d'ajout, de modification et de suppression des professeurs.
+  - Intégration des services pour la communication avec l'API backend.
+
+- **Intégration de l'authentification JWT :**
+  - Développement de la page de login avec gestion des tokens JWT.
+  - Implémentation des services pour la gestion de l'authentification et des autorisations.
+
 
 
 
